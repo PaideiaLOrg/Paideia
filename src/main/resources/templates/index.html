@@ -5,85 +5,38 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Responsivo</title>
-    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
-    <link rel="stylesheet"
-        href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
-    <style>
-        .navbar-collapse {
-            transition: all 1s ease;
-        }
-    </style>
+    <!-- <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+
 </head>
 
 <body>
-    <nav class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-blueGray-800"
-        style="background-color: #1C1C1C
-;">
-        <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
-            <div class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start ">
-                <a class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
-                    href="#">Paideia</a>
-                <button
-                    class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
-                    type="button" onclick="toggleNavbar('example-collapse-navbar')">
-                    <i class="text-white fas fa-bars"></i>
-                </button>
-            </div>
-            <div class="lg:flex flex-grow items-center bg-white lg:bg-opacity-0 lg:shadow-none hidden bg-blueGray-800"
-                id="example-collapse-navbar" style="background-color: #1C1C1C
-;">
 
-                <ul class="flex flex-col lg:flex-row list-none lg:ml-auto items-center">
-                    <li class="inline-block relative">
-                        <a class="lg:text-white lg:hover:text-blueGray-200 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                            href="#pablo">
-                            Home
-                        </a>
+    <div th:replace="~{fragments/navBar :: navBar}"></div>
 
-                    </li>
-                    <li class="inline-block relative">
-                        <a class="lg:text-white lg:hover:text-blueGray-200 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                            href="#pablo">
-                            Produto
-                        </a>
-
-                    </li>
-                    <li class="inline-block relative"></li>
-                    <a class="lg:text-white lg:hover:text-blueGray-200 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                        href="#pablo">
-                        Quem Somos
-                    </a>
-
-                    </li>
-                    <li class="flex items-center">
-                        <div
-                            class="border-2 border-purple-600 rounded-lg px-3 py-2 text-purple-400 cursor-pointer hover:bg-purple-600 hover:text-purple-200">
-                            <a href="#" target="_blank" class="text-white">
-                                Login
-                            </a>
-
-                        </div>
-
-                    </li>
-                    <br>
-                    <li class="flex items-center  ml-4">
-                        <div
-                            class="border-2 border-purple-600 rounded-lg px-3 py-2 text-purple-400  ml-4 cursor-pointer hover:bg-purple-600 hover:text-purple-200">
-                            <a href="#" target="_blank" class="text-white">
-                                Cadastro
-                            </a>
-
-                        </div>
-
-                    </li>
-                </ul>
-            </div>
+    <div
+        th:style="'background-image: url(' + '/images/stars-7249785_1280.jpg' + '); width: 100%; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; background-size: cover; background-position: center'">
+        <h1 class="text-white text-3xl md:text-5xl lg:text-6xl text-center">
+            Texto de título aqui
+        </h1>
+        <p class="text-white text-lg md:text-xl">
+            Uma descrição por aqui
+        </p>
+        <div class="bg-purple-600 rounded-lg px-3 py-2 text-purple-400 cursor-pointer  mt-12">
+            <a href="#" target="_blank" class="text-white">
+                Click aqui para cadastro
+            </a>
         </div>
-    </nav>
+    </div>
 
-    <!-- <img width="1000dp" th:src="@{/images/stars-7249785_1280.jpg}" alt="" /> -->
+    <div th:replace="~{fragments/session01 :: session01}"></div>
+    <div th:replace="~{fragments/session02 :: session02}"></div>
+    <div th:replace="~{fragments/session03 :: session03}"></div>
 
 
+    <div th:replace="~{fragments/footer :: footer}"></div>
     <script>
         function toggleNavbar(collapseID) {
             const navbar = document.getElementById(collapseID);

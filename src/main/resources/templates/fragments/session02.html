@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Responsivo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div th:fragment="session02" class="flex flex-col md:flex-row mb-12 px-4 md:px-8 mt-24">
+        <div class="w-full md:w-1/2 bg-white-500 p-4 overflow-hidden flex justify-center items-center">
+            <img width="60%" th:src="@{/images/foto3.png}" alt="">
+        </div>
+        <div
+            class="w-full md:w-1/2 bg-white-400 p-4 overflow-hidden flex flex-col justify-center items-start text-left">
+            <h1 class="text-black text-lg break-words mb-4">
+                Desafios na Organização Acadêmica dos Estudantes
+            </h1>
+            <p class="texte-black" style="font-size: 12px;">Os alunos enfrentam dificuldades em organizar suas
+                disciplinas e projetos de TCC.</p>
+            <p class="texte-black" style="font-size: 12px;">A sobrecarga de informações gera ansiedade e estresse na
+                vida acadêmica.
+            </p>
+            <p class="texte-black" style="font-size: 12px;">Gerenciar agendas se torna um desafio, afetando o desempenho
+                escolar.
+            </p>
+            <p class="texte-black" style="font-size: 12px;">A escolha do tema do TCC muitas vezes causa indecisão e
+                atrasos.
+            </p>
+            <p class="texte-black" style="font-size: 12px;">Faltam ferramentas eficazes para planejar e acompanhar o
+                progresso.
+            </p>
+            <p class="texte-black" style="font-size: 12px;">A interação entre disciplinas exige uma gestão cuidadosa do
+                tempo.
+            </p>
+            <p class="texte-black" style="font-size: 12px;">Uma solução viável é um organizador de disciplinas e TCC.
+            </p>
+            <p class="texte-black" style="font-size: 12px;">Esse organizador permite que os alunos insiram referências,
+                prazos e tarefas.
+            </p>
+            <p class="texte-black" style="font-size: 12px;">Com uma interface intuitiva, ajuda a visualizar
+                responsabilidades de forma integrada.
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

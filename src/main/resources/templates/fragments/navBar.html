@@ -1,61 +1,139 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
-    <link rel="stylesheet" href="../../../resources/static/style/style..css">
+    <title>Document</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .navbar-collapse {
+            transition: all 1s ease;
+        }
+    </style>
 </head>
 
 <body>
-    <div th:fragment="navbar">
-        <div class="header-blue">
-            <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
-                <div class="container"><a class="navbar-brand" href="#">Company Name</a><button class="navbar-toggler"
-                        data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle
-                            navigation</span><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navcol-1">
-                        <ul class="nav navbar-nav">
-                            <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Link</a></li>
-                            <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle"
-                                    data-toggle="dropdown" aria-expanded="false" href="#">Dropdown </a>
-                                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation"
-                                        href="#">First Item</a><a class="dropdown-item" role="presentation"
-                                        href="#">Second Item</a><a class="dropdown-item" role="presentation"
-                                        href="#">Third Item</a></div>
-                            </li>
-                        </ul>
-                        <form class="form-inline mr-auto" target="_self">
-                            <div class="form-group"><label for="search-field"><i class="fa fa-search"></i></label><input
-                                    class="form-control search-field" type="search" name="search" id="search-field">
-                            </div>
-                        </form><span class="navbar-text"> <a href="#" class="login">Log In</a></span><a
-                            class="btn btn-light action-button" role="button" href="#">Sign Up</a>
+    <nav th:fragment="navBar"
+        class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-blueGray-800"
+        style="background-color: #1C1C1C;">
+        <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
+            <div class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start ">
+                <a class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
+                    href="#">Paideia</a>
+                <button
+                    class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+                    type="button" id="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                    <i class="text-white fas fa-bars" id="menu-icon"></i>
+                </button>
+            </div>
+            <div class="lg:flex flex-grow items-center hidden lg:bg-opacity-0 lg:shadow-none"
+                id="example-collapse-navbar" style="background-color: #1C1C1C;">
+
+                <ul class="flex flex-col lg:flex-row list-none lg:ml-auto items-center justify-center flex-grow">
+                    <li class="inline-block relative">
+                        <a class="text-white px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                            href="#pablo">
+                            Home
+                        </a>
+                    </li>
+                    <li class="inline-block relative">
+                        <a class="text-white px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                            href="#pablo">
+                            Problema
+                        </a>
+                    </li>
+                    <li class="inline-block relative"></li>
+                    <a class="text-white px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold" href="#pablo">
+                        Solução
+                    </a>
+                    </li>
+                    <li class="inline-block relative">
+                        <a class="text-white px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                            href="#pablo">
+                            Sobre Paideia
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="flex justify-center tems-center ml-auto">
+                    <div
+                        class="border-2 border-purple-600 rounded-lg px-3 py-2 text-purple-400 cursor-pointer hover:bg-purple-600 hover:text-purple-200 ml-2">
+                        <a href="#" target="_blank" class="text-white">
+                            Login
+                        </a>
                     </div>
-                </div>
-            </nav>
-            <div class="container hero">
-                <div class="row">
-                    <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
-                        <h1>The revolution is here.</h1>
-                        <p>Mauris egestas tellus non ex condimentum, ac ullamcorper sapien dictum. Nam consequat neque
-                            quis sapien viverra convallis. In non tempus lorem. </p><button
-                            class="btn btn-light btn-lg action-button" type="button">Learn More</button>
-                    </div>
-                    <div class="col-md-5 col-lg-5 offset-lg-1 offset-xl-0 d-none d-lg-block phone-holder">
-                        <div class="iphone-mockup"><img src="assets/img/iphone.svg" class="device">
-                            <div class="screen"></div>
-                        </div>
+                    <div
+                        class="border-2 border-purple-600 rounded-lg px-3 py-2 text-purple-400 cursor-pointer hover:bg-purple-600 hover:text-purple-200 ml-2">
+                        <a href="#" target="_blank" class="text-white">
+                            Cadastro
+                        </a>
                     </div>
                 </div>
             </div>
+
+            <!-- Menu Responsivo -->
+            <div class="lg:hidden fixed inset-0 z-40 bg-black bg-opacity-50 transition-opacity duration-300 ease-in-out"
+                id="overlay" style="display: none;"></div>
+            <div class="fixed left-0 top-0 w-64 h-full bg-gray-800 text-white transform -translate-x-full transition-transform duration-300 ease-in-out"
+                id="mobile-menu">
+                <div class="flex items-center justify-between p-4">
+                    <a class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
+                        href="#"><img width="100px" th:src="@{/images/logo.png}" alt=""></a>
+                    <button class="text-white" onclick="toggleMobileMenu()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <ul class="flex flex-col p-4">
+                    <li><a class="text-white py-2" href="#pablo">Home</a></li>
+                    <li><a class="text-white py-2" href="#pablo">Problema</a></li>
+
+                    <li><a class="text-white py-2" href="#pablo">Solução</a></li>
+                    <li><a class="text-white py-2" href="#pablo">Quem Somos</a></li>
+                    <li><a class="text-white py-2" href="#" target="_blank">Login</a></li>
+                    <li><a class="text-white py-2" href="#" target="_blank">Cadastro</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+    </nav>
+    <script>
+        function toggleNavbar(collapseID) {
+            const navbar = document.getElementById(collapseID);
+            navbar.classList.toggle('hidden'); // Alterna a classe 'hidden'
+            navbar.classList.toggle('block'); // Alterna a classe 'block'
+        }
+
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('overlay');
+            const isOpen = mobileMenu.classList.contains('translate-x-0');
+            const menuIcon = document.getElementById('menu-icon');
+
+            mobileMenu.classList.toggle('-translate-x-full', isOpen);
+            mobileMenu.classList.toggle('translate-x-0', !isOpen);
+            overlay.style.display = isOpen ? 'none' : 'block';
+
+            // Alterna entre o ícone de hambúrguer e o ícone de fechar
+            menuIcon.classList.toggle('fa-bars', isOpen);
+            menuIcon.classList.toggle('fa-times', !isOpen);
+        }
+
+        // Fecha o menu se clicar fora dele
+        window.addEventListener('click', (event) => {
+            const navbar = document.getElementById('example-collapse-navbar');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('overlay');
+
+            if (!navbar.contains(event.target) && !event.target.matches('button')) {
+                navbar.classList.add('hidden');
+                navbar.classList.remove('block');
+            }
+            if (!mobileMenu.contains(event.target) && overlay.style.display === 'block' && !event.target.matches('button')) {
+                toggleMobileMenu();
+            }
+        });
+    </script>
+
 </body>
 
 </html>

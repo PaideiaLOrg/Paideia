@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Responsivo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <div th:fragment="session01" class="flex flex-col md:flex-row px-4 md:px-24 mt-12">
+        <div
+            class="w-full md:w-1/2 bg-white-400 p-4 overflow-hidden flex flex-col justify-center items-center text-center">
+            <h1 class="text-left text-black text-lg break-words mb-4">
+                Desafios na Organização Acadêmica dos Estudantes
+            </h1>
+            <ul class="list-disc list-inside text-left">
+                <li class="texte-black" style="font-size: 12px;">Os alunos enfrentam dificuldades em organizar suas
+                    disciplinas e projetos de TCC.</li>
+                <li class="texte-black" style="font-size: 12px;">A sobrecarga de informações gera ansiedade e estresse
+                    na vida acadêmica.</li>
+                <li class="texte-black" style="font-size: 12px;">Gerenciar agendas se torna um desafio, afetando o
+                    desempenho escolar.</li>
+                <li class="texte-black" style="font-size: 12px;">A escolha do tema do TCC muitas vezes causa indecisão e
+                    atrasos.</li>
+                <li class="texte-black" style="font-size: 12px;">Faltam ferramentas eficazes para planejar e acompanhar
+                    o progresso.</li>
+                <li class="texte-black" style="font-size: 12px;">A interação entre disciplinas exige uma gestão
+                    cuidadosa do tempo.</li>
+            </ul>
+        </div>
+        <div class="w-full md:w-1/2 bg-white-500 p-4 overflow-hidden flex justify-center items-center">
+            <img th:src="@{/images/foto2.png}" class="fade-in" width="120%" alt="">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const image = document.querySelector('.fade-in');
+            image.classList.add('appear');
+        });
+    </script>
+</body>
+
+</html>
