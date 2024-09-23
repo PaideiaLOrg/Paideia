@@ -56,7 +56,7 @@ public class AuthController {
     }
 
     @GetMapping("/register")
-    public ModelAndView viewCadastro() {
+    public ModelAndView viewRegister() {
         ModelAndView mv = new ModelAndView("register-view");
         return mv;
 
