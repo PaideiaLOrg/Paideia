@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+        /* CSS para a animação de deslizamento */
+        .menu-slide {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .menu-slide.active {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav th:fragment="navbar" class="bg-gray-800 p-4">
+        <div class="container mx-auto flex items-center justify-between">
+            <!-- Logo -->
+            <a th:href="@{/home}" class="text-white text-lg font-bold">Paideia</a>
+
+            <!-- Hamburger Menu Button -->
+            <button id="menu-toggle" class="text-white lg:hidden">
+                <span class="hamburger"><i class="fas fa-bars"></i></span>
+                <span class="close hidden"><i class="fas fa-times"></i></span>
+            </button>
+
+            <!-- Menu (Desktop) -->
+            <ul id="menu" class="hidden lg:flex space-x-6 text-white">
+                <li><a th:href="@{/home}" class="hover:text-purple-400">Home</a></li>
+                <li><a th:href="@{/problema}" class="hover:text-purple-400">Problema</a></li>
+                <li><a th:href="@{/solucao}" class="hover:text-purple-400">Solução</a></li>
+                <li><a th:href="@{/sobre}" class="hover:text-purple-400">Sobre Paideia</a></li>
+            </ul>
+
+            <!-- Login / Cadastro Buttons (Desktop) -->
+            <div class="hidden lg:flex space-x-4">
+                <a th:href="@{/auth/login}"
+                    class="border-2 border-purple-600 px-3 py-2 rounded text-purple-400 hover:bg-purple-600 hover:text-white">Login</a>
+                <a th:href="@{/auth/register}"
+                    class="border-2 border-purple-600 px-3 py-2 rounded text-purple-400 hover:bg-purple-600 hover:text-white">Cadastro</a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="menu-slide lg:hidden fixed top-0 left-0 w-64 h-full bg-gray-800 text-white p-4 hidden">
+            <ul class="space-y-4 mt-4">
+                <li><a th:href="@{/home}" class="hover:text-purple-400">Home</a></li>
+                <li><a th:href="@{/problema}" class="hover:text-purple-400">Problema</a></li>
+                <li><a th:href="@{/solucao}" class="hover:text-purple-400">Solução</a></li>
+                <li><a th:href="@{/sobre}" class="hover:text-purple-400">Sobre Paideia</a></li>
+                <div class="flex space-x-4">
+                    <a th:href="@{/auth/login}"
+                        class="border-2 border-purple-600 px-3 py-2 rounded text-purple-400 hover:bg-purple-600 hover:text-white">Login</a>
+                    <a th:href="@{/auth/register}"
+                        class="border-2 border-purple-600 px-3 py-2 rounded text-purple-400 hover:bg-purple-600 hover:text-white">Cadastro</a>
+                </div>
+            </ul>
+        </div>
+    </nav>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = menuToggle.querySelector('.hamburger');
+            const closeIcon = menuToggle.querySelector('.close');
+
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('active');
+                    mobileMenu.classList.toggle('hidden'); // Alterna entre visível/invisível
+                    hamburgerIcon.classList.toggle('hidden');
+                    closeIcon.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

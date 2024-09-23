@@ -4,10 +4,12 @@ import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.api.paideia.domain.user.User;
 import com.api.paideia.dto.LoginRequestDTO;
@@ -51,6 +53,20 @@ public class AuthController {
 
         }
         return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/register")
+    public ModelAndView viewCadastro() {
+        ModelAndView mv = new ModelAndView("register-view");
+        return mv;
+
+    }
+
+    @GetMapping("/login")
+
+    public ModelAndView viewLogin() {
+        ModelAndView mv = new ModelAndView("login-view");
+        return mv;
     }
 
 }

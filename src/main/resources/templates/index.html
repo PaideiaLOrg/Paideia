@@ -14,7 +14,7 @@
 
 <body>
 
-    <div th:replace="~{fragments/navBar :: navBar}"></div>
+    <div th:replace="~{fragments/landing-page/navbar :: navbar}"></div>
 
     <div
         th:style="'background-image: url(' + '/images/stars-7249785_1280.jpg' + '); width: 100%; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; background-size: cover; background-position: center'">
@@ -31,33 +31,28 @@
         </div>
     </div>
 
-    <div th:replace="~{fragments/session01 :: session01}"></div>
-    <div th:replace="~{fragments/session02 :: session02}"></div>
-    <div th:replace="~{fragments/session03 :: session03}"></div>
+    <div th:replace="~{fragments/landing-page/session01 :: session01}"></div>
+    <div th:replace="~{fragments/landing-page/session02 :: session02}"></div>
+    <div th:replace="~{fragments/landing-page/session03 :: session03}"></div>
 
 
-    <div th:replace="~{fragments/footer :: footer}"></div>
+    <div th:replace="~{fragments/landing-page/footer :: footer}"></div>
+
     <script>
-        function toggleNavbar(collapseID) {
-            const navbar = document.getElementById(collapseID);
-            if (navbar.classList.contains('hidden')) {
-                navbar.classList.remove('hidden');
-                navbar.classList.add('block');
-            } else {
-                navbar.classList.remove('block');
-                navbar.classList.add('hidden');
-            }
-        }
+        document.addEventListener('DOMContentLoaded', function () {
+            // Toggle mobile menu visibility
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
 
-        // Fecha o menu se clicar fora dele
-        window.addEventListener('click', (event) => {
-            const navbar = document.getElementById('example-collapse-navbar');
-            if (!navbar.contains(event.target) && !event.target.matches('button')) {
-                navbar.classList.add('hidden');
-                navbar.classList.remove('block');
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
             }
         });
+
     </script>
+
 </body>
 
 </html>
