@@ -21,9 +21,9 @@
 
 <body class="min-h-screen bg-gray-900">
 
-    <!-- Component Start -->
-    <div th:fragment="sidebar" class="flex">
-        <div class="flex flex-col items-center w-16 min-h-screen overflow-hidden text-gray-400 bg-gray-500 ">
+
+    <div th:fragment="sidebar" class="flex h-screen fixed">
+        <div class="flex flex-col items-center w-16 h-screen h-full overflow-hidden text-gray-400 bg-gray-500 ">
             <a class="flex items-center justify-center mt-3" href="#">
                 <svg width="100%" height="auto" viewBox="0 0 339 140" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M337.009 23.2945C272.095 16.2756 208.197 42.1978 169.63 88.345" stroke="black"
@@ -39,35 +39,23 @@
             <div class="flex flex-col items-center mt-3 border-t border-gray-700">
                 <a th:href="@{#}" id="menu-toggle"
                     class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
-                    <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                    </svg>
+                    <img th:src="@{/images/icon-ref.svg}" alt="Menu Icon" width="70%" />
+                </a>
+
+                <a th:href="@{#}"
+                    class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
+                    <img th:src="@{/images/icon-course.svg}" alt="Menu Icon" width="70%" />
+
                 </a>
                 <a th:href="@{#}" id="menu-toggle"
                     class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
-                    <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                    </svg>
+                    <img th:src="@{/images/icon-home.svg}" alt="Menu Icon" width="70%" />
+
                 </a>
-                <a th:href="@{#}" id="menu-toggle"
+                <a th:href="@{#}"
                     class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
-                    <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                    </svg>
-                </a>
-                <a th:href="@{#}" id="menu-toggle"
-                    class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
-                    <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                    </svg>
+                    <img th:src="@{/images/icon-study-area.svg}" alt="Menu Icon" width="70%" />
+
                 </a>
             </div>
 
@@ -83,7 +71,7 @@
         </div>
 
 
-        <div id="mobile-menu" class="menu flex flex-col w-64 min-h-screen overflow-hidden text-gray-400 hidden"
+        <div id="mobile-menu" class="menu flex flex-col mb-32 w-64 min-h-screen overflow-hidden text-gray-400 hidden"
             th:style="'background-color: coral'">
             <h1 class="ml-4 mt-4 mb-2 pl-2 mr-4 rounded  text-black text-lg">Referências</h1>
             <h1 class="ml-4 mt-4 mb-2 pl-2 mr-4 rounded  text-black text-lg">Cursos</h1>
@@ -114,13 +102,6 @@
                 <h5><a th:href="@{/aluno/home}">Area3</a></h5>
 
             </div>
-
-
-
-
-
-
-
         </div>
     </div>
 

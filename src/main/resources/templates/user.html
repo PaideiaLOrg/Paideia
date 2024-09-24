@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Msivo</title>
-    <!-- <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 
@@ -19,32 +18,27 @@
             transform: translateX(0);
         }
     </style>
-    </style>
 </head>
 
-<body>
-    <div class="flex">
-        <div th:insert="~{/fragments/sidebar :: sidebar}"></div>
+<body class="bg-gray-100"> <!-- Adicione a classe bg-gray-100 aqui para o fundo do corpo -->
 
+    <div class="flex h-screen"> <!-- Usar flexbox para colocar os fragmentos lado a lado -->
+        <div th:insert="~{/fragments/sidebar :: sidebar}" class="w-1/15"></div> <!-- Ajuste a largura do sidebar -->
 
-
+        <div th:insert="~{/fragments/reference/reference :: ref}" class="flex-grow"></div>
+        <!-- O segundo fragmento ocupa o resto da tela -->
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const menuToggles = document.querySelectorAll('#menu-toggle');
             const mobileMenu = document.getElementById('mobile-menu');
             if (menuToggles && mobileMenu) {
-
                 menuToggles.forEach(toogle => {
                     toogle.addEventListener('click', function () {
-
                         mobileMenu.classList.toggle('active');
                         mobileMenu.classList.toggle('hidden'); // Alterna entre visível/invisível
                     });
-                })
-
-
-
+                });
             }
         });
     </script>
