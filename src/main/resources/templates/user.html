@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Msivo</title>
+    <!-- <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+        .menu {
+            transform: translateX(-100%);
+            transition: transform 10000000s ease-in-out;
+        }
+
+        .menu.active {
+            transform: translateX(0);
+        }
+    </style>
+    </style>
+</head>
+
+<body>
+    <div class="flex">
+        <div th:insert="~{/fragments/sidebar :: sidebar}"></div>
+
+
+
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggles = document.querySelectorAll('#menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (menuToggles && mobileMenu) {
+
+                menuToggles.forEach(toogle => {
+                    toogle.addEventListener('click', function () {
+
+                        mobileMenu.classList.toggle('active');
+                        mobileMenu.classList.toggle('hidden'); // Alterna entre visível/invisível
+                    });
+                })
+
+
+
+            }
+        });
+    </script>
+
+</body>
+
+</html>

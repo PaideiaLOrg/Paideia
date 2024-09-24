@@ -12,7 +12,7 @@
         /* CSS para a animação de deslizamento */
         .menu-slide {
             transform: translateX(-100%);
-            transition: transform 0.3s ease-in-out;
+            transition: transform 100000s ease-in-out;
         }
 
         .menu-slide.active {
@@ -71,18 +71,20 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const menuToggle = document.getElementById('menu-toggle');
+            const menuToggles = document.querySelectorAll('#menu-toggle');
             const mobileMenu = document.getElementById('mobile-menu');
-            const hamburgerIcon = menuToggle.querySelector('.hamburger');
-            const closeIcon = menuToggle.querySelector('.close');
+            if (menuToggles && mobileMenu) {
 
-            if (menuToggle && mobileMenu) {
-                menuToggle.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('active');
-                    mobileMenu.classList.toggle('hidden'); // Alterna entre visível/invisível
-                    hamburgerIcon.classList.toggle('hidden');
-                    closeIcon.classList.toggle('hidden');
-                });
+                menuToggles.forEach(toogle => {
+                    toogle.addEventListener('click', function () {
+
+                        mobileMenu.classList.toggle('active');
+                        mobileMenu.classList.toggle('hidden'); // Alterna entre visível/invisível
+                    });
+                })
+
+
+
             }
         });
     </script>
