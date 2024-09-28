@@ -1,0 +1,52 @@
+<div th:fragment="course-components" id="main-content" class="flex-1 ml-16 transition-all duration-300">
+
+    <div th:insert="~{/fragments/navbar-user :: navbar-user}"></div>
+
+
+    <div class="flex flex-wrap w-full justify-center">
+
+        <div th:insert="~{/fragments/description :: description}"></div>
+
+        <div th:each="entry : ${semesterCourses}">
+            <div class="w-full  justify-center">
+                <a href="">
+
+                    <h1 class="text-center pt-0 text-lg text-white bg-blue-500" th:text="${entry.key}">
+
+                    </h1>
+                </a>
+            </div>
+            <div class="flex flex-wrap justify-center">
+
+                <div class="teste rounded-md mb-2 flex" th:each="discipline, iterStat : ${entry.value}">
+
+                    <div th:style="'background-color: ' + ${discipline.color} + '; background-size: cover; background-position: center;'"
+                        th:class="'flex items-center justify-center rounded-3xl h-32 w-32 mt-4 ml-2 mr-2 shadow-md class-' + (${iterStat.index + 1})">
+
+                        <h1 class="text-lg font-bold text-white text-outline text-center " th:text="${discipline.name}">
+                        </h1>
+                    </div>
+
+                </div>
+
+                <div class="teste rounded-md mb-2 flex" th:if="${entry.value.size() < 10}"
+                    th:each="i : ${#numbers.sequence(entry.value.size() + 1, 10)}">
+                    <div th:style="'background-color: red; background-size: cover; background-position: center;'"
+                        class="flex items-center justify-center rounded-3xl h-32 w-32 mt-4 ml-2 mr-2 shadow-md ">
+                        <h1 class="text-lg font-bold text-white text-outline text-center  p-2">
+                            <img th:src="@{/images/plus.png}" width="20px" alt="">
+                        </h1>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+        <div th:insert="/fragments/landing-page/footer :: footer"></div>
+
+    </div>
+
+
+
+</div>

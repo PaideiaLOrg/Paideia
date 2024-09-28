@@ -17,31 +17,76 @@
         .menu.active {
             transform: translateX(0);
         }
+
+        /* Estiliza a barra de rolagem */
+        #dropdown-menu::-webkit-scrollbar {
+            width: 8px;
+            /* Largura do scrollbar */
+        }
+
+        /* Estiliza a barra de rolagem (fundo) */
+        #dropdown-menu::-webkit-scrollbar-track {
+            background: #2d3748;
+            /* Cor de fundo do scrollbar */
+            border-radius: 10px;
+        }
+
+        /* Estiliza o "polegar" da barra de rolagem */
+        #dropdown-menu::-webkit-scrollbar-thumb {
+            background-color: #4a5568;
+            /* Cor do thumb */
+            border-radius: 10px;
+            /* Borda arredondada */
+            border: 3px solid transparent;
+            /* Espaço entre o track e o thumb */
+        }
+
+        /* Ao passar o mouse sobre o scrollbar */
+        #dropdown-menu::-webkit-scrollbar-thumb:hover {
+            background-color: #a0aec0;
+            /* Cor ao passar o mouse */
+        }
+
+        /* Para Firefox */
+        #dropdown-menu {
+            scrollbar-width: thin;
+            scrollbar-color: #4a5568 #2d3748;
+        }
     </style>
 </head>
 
-<body class="bg-gray-100"> <!-- Adicione a classe bg-gray-100 aqui para o fundo do corpo -->
+<body class="bg-gray-100  flex">
+    <!-- Adicione a classe bg-gray-100 aqui para o fundo do corpo -->
 
-    <div class="flex h-screen"> <!-- Usar flexbox para colocar os fragmentos lado a lado -->
-        <div th:insert="~{/fragments/sidebar :: sidebar}" class="w-1/15"></div> <!-- Ajuste a largura do sidebar -->
+    <div th:insert="~{/fragments/sidebar :: sidebar}"></div>
 
-        <div th:insert="~{/fragments/reference/reference :: ref}" class="flex-grow"></div>
-        <!-- O segundo fragmento ocupa o resto da tela -->
-    </div>
+
+
+
+    <!-- Ajuste a largura do sidebar -->
+
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const menuToggles = document.querySelectorAll('#menu-toggle');
             const mobileMenu = document.getElementById('mobile-menu');
+            const contents = document.querySelectorAll('.content'); // Seleciona todos os elementos com a classe .content
+
             if (menuToggles && mobileMenu) {
-                menuToggles.forEach(toogle => {
-                    toogle.addEventListener('click', function () {
+                menuToggles.forEach(toggle => {
+                    toggle.addEventListener('click', function () {
                         mobileMenu.classList.toggle('active');
-                        mobileMenu.classList.toggle('hidden'); // Alterna entre visível/invisível
+                        mobileMenu.classList.toggle('hidden');
+
+                        // Para cada content encontrado, ajusta a margem
+
                     });
                 });
             }
         });
     </script>
+
 
 </body>
 
