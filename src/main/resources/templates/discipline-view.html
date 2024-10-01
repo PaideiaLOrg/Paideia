@@ -15,10 +15,10 @@
 <body class="bg-gray-100">
     <!-- Adicione a classe bg-gray-100 aqui para o fundo do corpo -->
 
-    <div class="flex" id="tela">
+    <div class="flex">
         <div class="bg-custom-blue" th:insert="~{/fragments/sidebar :: sidebar}"></div>
 
-        <div th:insert="~{/fragments/frags-course/course-components :: course-components}">
+        <div th:insert="/fragments/frags-discipline/discipline-components :: discipline-components">
 
         </div>
 
@@ -31,7 +31,6 @@
             const dropdownMenu = document.getElementById('dropdown-menu');
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const sidebar = document.querySelector('.sidebar');
-            const menu = document.getElementById('tela');
             const mainContent = document.getElementById('main-content'); // Selecione o conteúdo principal
             const kkk = {
                 '1': 'O-1',
@@ -78,12 +77,6 @@
             mobileMenuButton.addEventListener('click', () => {
                 sidebar.classList.toggle('menu-active');
             });
-
-            window.addEventListener('click', (e) => {
-                if (e.target == menu) {
-                    dropdownMenu.classList.add('hidden');
-                }
-            })
         });
         // tailwind.config.js
 

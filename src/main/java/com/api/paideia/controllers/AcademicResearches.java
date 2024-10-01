@@ -10,13 +10,12 @@ import com.api.paideia.domain.course.Course;
 
 @Controller
 @RequestMapping("/aluno/course")
-public class DisciplineController {
-
-    @GetMapping("/discipline")
+public class AcademicResearches {
+    @GetMapping("/researchesview")
     public ModelAndView getDiscipline(Model model) {
         Course.adicionarCursosNoModel(model);
 
-        ModelAndView mv = new ModelAndView("discipline-view");
+        ModelAndView mv = new ModelAndView("academic-researches-view");
 
         return mv;
     }
