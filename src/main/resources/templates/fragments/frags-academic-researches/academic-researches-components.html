@@ -9,30 +9,33 @@
 
 
         <div class="border-2  border-blue-500 w-full h-12 mr-16 ml-16 flex">
-            <button class="border-r-2 w-1/4  focus:text-white active:text-white focus:bg-blue-500 active:bg-blue-700">
+            <button id="overview-button"
+                class="border-r-2 w-1/3 focus:text-white active:text-white focus:bg-blue-500 active:bg-blue-700">
                 Visão Geral
             </button>
-            <button class="border-r-2 w-1/4  focus:text-white active:text-white focus:bg-blue-500 active:bg-blue-700">
+            <button id="reference-button"
+                class="border-r-2 w-1/3 focus:text-white active:text-white focus:bg-blue-500 active:bg-blue-700">
                 Referencias
             </button>
-            <button class="border-r-2 w-1/4  focus:text-white active:text-white focus:bg-blue-500 active:bg-blue-700">
+            <button id="notebook-button"
+                class="border-r-2 w-1/3 focus:text-white active:text-white focus:bg-blue-500 active:bg-blue-700">
                 Anotações
-            </button>
-            <button class="border-r-2 w-1/4  focus:text-white active:text-white focus:bg-blue-500 active:bg-blue-700">
-                Tarefas
             </button>
         </div>
 
         <div class="w-full mr-16 ml-16 flex mt-2 mb-2">
 
 
-            <div th:insert="~{/fragments/overview-academic-researches :: overview-part1}">
+            <div class="overview " th:insert="~{/fragments/overview-academic-researches :: overview-part1}">
 
             </div>
-            <div th:insert="~{/fragments/overview-academic-researches :: overview-part2}">
+            <div class="overview " th:insert="~{/fragments/overview-academic-researches :: overview-part2}">
 
             </div>
 
+            <div th:insert="~{/fragments/reference-component :: reference-component('Referencias cadastradas nessa pesquisa')}"
+                class="reference hidden"></div>
+            <div th:insert="~{/fragments/notebook-component :: notebook-component}" class="notebook hidden"></div>
 
         </div>
 
@@ -42,4 +45,41 @@
 
 
 
-</div>
+
+<script th:fragment="academic-researches-components">
+    document.addEventListener('DOMContentLoaded', () => {
+        const button1 = document.getElementById("overview-button");
+        const button2 = document.getElementById("reference-button");
+        const button3 = document.getElementById("notebook-button");
+        const overviews = document.querySelectorAll(".overview");
+
+        const reference = document.querySelector(".reference");
+        const notebook = document.querySelector(".notebook");
+
+        button1.addEventListener('click', () => {
+
+            reference.classList.add('hidden')
+            notebook.classList.add('hidden')
+            overviews.forEach(element => {
+                element.classList.toggle('hidden');
+            });
+        });
+
+        button2.addEventListener('click', () => {
+            overviews.forEach(element => {
+                element.classList.add('hidden');
+            });
+            reference.classList.toggle('hidden')
+            notebook.classList.add('hidden');
+
+        })
+        button3.addEventListener('click', () => {
+            overviews.forEach(element => {
+                element.classList.add('hidden');
+            });
+            reference.classList.add('hidden')
+            notebook.classList.toggle('hidden')
+
+        })
+    });
+</script>

@@ -36,7 +36,12 @@
                     <a th:href="@{${discipline.link}}">
 
                         <div th:style="'background-color: ' + ${discipline.color} + '; background-size: cover; background-position: center;'"
-                            th:class="'flex items-center justify-center rounded-3xl h-32 w-32 mt-4 ml-2 mr-2 shadow-md'">
+                            th:class="'flex items-center justify-center rounded-3xl h-32 w-32 mt-4 ml-2 mr-2 shadow-md relative'">
+                            <button
+                                class="absolute top-0 right-0 text-gray-600 bg-red-500 rounded-full w-8 h-8 flex items-center justify-center">
+                                <i class="fa-solid fa-xmark text-white"></i>
+                            </button>
+
 
                             <h1 class="text-lg font-bold text-white text-outline text-center "
                                 th:text="${discipline.name}">
@@ -72,14 +77,19 @@
         <div th:class="'flex flex-wrap justify-center transition-all duration-300'">
 
             <div class="rounded-md mb-2 flex" th:each="academicResearche: ${academicResearches}">
+                <a th:href="@{${academicResearche.link}}">
 
-                <div th:style="'background-color: ' + ${academicResearche.color} + '; background-size: cover; '"
-                    th:class="'flex items-center justify-center rounded-3xl h-32 w-32 mt-4 ml-2 mr-2 shadow-md'">
-
-                    <h1 class="text-lg font-bold text-white text-outline text-center "
-                        th:text="${academicResearche.name}">
-                    </h1>
-                </div>
+                    <div th:style="'background-color: ' + ${academicResearche.color} + '; background-size: cover; '"
+                        th:class="'flex items-center relative justify-center rounded-3xl h-32 w-32 mt-4 ml-2 mr-2 shadow-md'">
+                        <button
+                            class="absolute top-0 right-0 text-gray-600 bg-red-500 rounded-full w-8 h-8 flex items-center justify-center">
+                            <i class="fa-solid fa-xmark text-white"></i>
+                        </button>
+                        <h1 class="text-lg font-bold text-white text-outline text-center "
+                            th:text="${academicResearche.name}">
+                        </h1>
+                    </div>
+                </a>
 
             </div>
             <div class="rounded-md mb-2 flex transition-all duration-300">
