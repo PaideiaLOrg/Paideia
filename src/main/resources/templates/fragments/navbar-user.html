@@ -1,5 +1,5 @@
 <div th:fragment="navbar-user" style="background-color: #9ACFEE;" class="w-full flex ">
-    <a href="#" class="ml-12">
+    <a th:href="@{/aluno/home}" class="ml-12">
         <svg width="40%" height="auto" viewBox="0 0 339 140" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M337.009 23.2945C272.095 16.2756 208.197 42.1978 169.63 88.345" stroke="black" stroke-width="3"
                 stroke-linecap="round" />
@@ -10,9 +10,11 @@
                 fill="black" />
         </svg>
     </a>
-    <div class="flex justify-end">
+    <a th:href="@{/aluno/perfil}">
+        <div class="flex justify-end">
 
-        <img th:src="@{/images/missao.png}" width="8%" class="rounded" alt="">
+            <img th:src="@{/images/missao.png}" width="8%" class="rounded" alt="">
 
-    </div>
+        </div>
+    </a>
 </div>

@@ -4,12 +4,16 @@ import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.api.paideia.domain.user.User;
 import com.api.paideia.dto.LoginRequestDTO;
@@ -18,9 +22,11 @@ import com.api.paideia.dto.ResponseUserDTO;
 import com.api.paideia.infrastructure.security.TokenService;
 import com.api.paideia.repositories.user.UserRepository;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 
-@RestController
+@Controller
 @RequestMapping("auth")
 @AllArgsConstructor
 public class AuthController {
@@ -39,26 +45,55 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody RegisterDTO body) {
+    public RedirectView register(@ModelAttribute RegisterDTO body, Model model, HttpServletResponse response) {
         Optional<User> user = userRepository.findByEmail(body.email());
+        System.out.println("Received RegisterDTO: " + body);
 
         if (user.isEmpty()) {
-            User newUSer = new User();
-            newUSer.setName(body.name());
-            newUSer.setEmail(body.email());
-            newUSer.setPassword(passwordEncoder.encode(body.password()));
-            String token = tokenService.generateToken(newUSer);
-            this.userRepository.save(newUSer);
-            return ResponseEntity.ok(new ResponseUserDTO(newUSer.getName(), token));
+            if (body.password() == null || body.password().isEmpty()) {
+                System.out.println("Received RegisterDTO: " + body);
+                boolean success = false; // This can be any condition
+                model.addAttribute("alert", success ? "success" : "error");
 
+                return new RedirectView("/auth/register");
+            }
+
+            User newUser = new User();
+            newUser.setName(body.name());
+            newUser.setEmail(body.email());
+            newUser.setPassword(passwordEncoder.encode(body.password())); // Verificar se body.password() não é null
+                                                                          // aqui
+            this.userRepository.save(newUser);
+            String token = tokenService.generateToken(newUser);
+            boolean success = true; // This can be any condition
+
+            response.addHeader("Authorization", "Bearer " + token);
+
+            Cookie jwtCookie = new Cookie("jwt", token);
+            jwtCookie.setHttpOnly(true);
+            jwtCookie.setPath("/");
+            jwtCookie.setMaxAge(60 * 60 * 24); // 1
+            response.addCookie(jwtCookie);
+
+            model.addAttribute("alert", success ? "success" : "error");
+
+            return new RedirectView("/aluno/home");
         }
-        return ResponseEntity.badRequest().build();
+
+        boolean success = false; // This can be any condition
+        model.addAttribute("alert", success ? "success" : "error");
+
+        return new RedirectView("/auth/register");
+
     }
 
     @GetMapping("/register")
-    public ModelAndView viewRegister() {
-        ModelAndView mv = new ModelAndView("register-view");
-        return mv;
+    public String viewRegister(Model model) {
+
+        model.addAttribute("success", false);
+        model.addAttribute("body", new RegisterDTO(null, null, null));
+
+        return "register-view";
 
     }
 

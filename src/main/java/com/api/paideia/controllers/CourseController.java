@@ -3,6 +3,8 @@ package com.api.paideia.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,18 +14,33 @@ import org.springframework.web.servlet.ModelAndView;
 import com.api.paideia.domain.academicResearches.AcademicResearches;
 import com.api.paideia.domain.course.Course;
 import com.api.paideia.domain.discipline.Discipline;
+import com.api.paideia.domain.user.User;
+import com.api.paideia.repositories.user.UserRepository;
+
+import lombok.AllArgsConstructor;
 
 import lombok.val;
 
 @Controller
+@AllArgsConstructor
 @RequestMapping("/aluno")
 public class CourseController {
+
+    final UserRepository userRepository;
 
     @GetMapping("/home")
     public String home(Model model) {
 
         Course.adicionarCursosNoModel(model);
-        return "user";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            String username = authentication.getName(); // Geralmente o nome de usuário ou e-mail
+
+            // Se você tiver um serviço para buscar o usuário completo:
+            model.addAttribute(username);
+        }
+
+        return "user"; // Nome da view a ser renderizada
     }
 
     @GetMapping("/course")

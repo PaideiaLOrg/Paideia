@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 
+    <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.all.min.js
+    "></script>
+    <link href="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css
+    " rel="stylesheet">
+
 
 </head>
 
@@ -18,7 +25,6 @@
 
 
     <div th:insert="~{/fragments/register/forms :: form-register}"></div>
-
 
     <div th:insert="~{/fragments/landing-page/footer :: footer} "></div>
     <script>
@@ -32,9 +38,18 @@
                     mobileMenu.classList.toggle('hidden'); // Alterna entre visível/invisível
                 });
             }
+
+
         });
     </script>
-
+    <script th:if="${alert} == 'error'">
+        Swal.fire({
+            title: 'Error!',
+            text: 'There was an error!',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    </script>
 </body>
 
 </html>

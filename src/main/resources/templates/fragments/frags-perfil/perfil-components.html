@@ -1,0 +1,36 @@
+<div th:fragment="perfil-components" id="main-content" class="flex-1 ml-16 transition-all duration-300">
+
+    <div th:insert="~{/fragments/navbar-user :: navbar-user}"></div>
+
+    <div class="flex flex-wrap w-full justify-center mt-8">
+        <div
+            class="border-2 border-blue-500 w-full sm:mr-4 p-4 ml-4 mr-4 sm:ml-4 flex flex-col sm:flex-row items-center">
+
+            <img th:src="@{/images/software-developer-6521720_640.jpg}" class="w-32 h-48 sm:w-64 sm:h-64 rounded-full"
+                alt="">
+
+            <div class="w-full h-full ml-4 p-2 flex flex-col justify-between">
+                <div style="background-color: rgb(127, 178, 255);"
+                    class="w-full h-12 flex justify-center items-center rounded-md">
+                    <h1 class="text-2xl text-white" th:text="${user.name}"
+                        style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
+                        Bianca Jesus Lima
+                    </h1>
+                </div>
+                <div style="background-color: rgb(127, 178, 255);"
+                    class="mt-2 w-full h-12 flex justify-center items-center rounded-md">
+                    <h1 class="text-2xl text-white" th:text="${user.email}"
+                        style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
+                        meuemail@gmail.com
+                    </h1>
+                </div>
+                <div class="mt-2 w-full h-12 flex justify-center items-center">
+                    <button class="w-full sm:w-1/2 h-full bg-purple-600 text-white rounded-full">
+                        Click para Editar Perfil
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

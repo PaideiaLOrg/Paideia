@@ -29,12 +29,12 @@ public class Discipline {
 
         // Primeiro semestre
         List<Discipline> firstSemester = new ArrayList<>();
-        firstSemester.add(new Discipline("Design Digital", "#1E2749", "/aluno/course/discipline"));
-        firstSemester.add(new Discipline("Web 2", "#1768AC", "/aluno/course/discipline"));
-        firstSemester.add(new Discipline("Mobile 2", "#06BEE1", "/aluno/course/discipline"));
-        firstSemester.add(new Discipline("Gestão de Projetos", "#1E2749", "/aluno/course/discipline"));
-        firstSemester.add(new Discipline("Web 1", "#1768AC", "/aluno/course/discipline"));
-        firstSemester.add(new Discipline("Engenharia de Software", "#06BEE1", "/aluno/course/discipline"));
+        firstSemester.add(new Discipline("Design Digital", "#1E3A8A", "/aluno/course/discipline"));
+        firstSemester.add(new Discipline("Web 2", "#1E40AF", "/aluno/course/discipline"));
+        firstSemester.add(new Discipline("Mobile 2", "#1D4ED8", "/aluno/course/discipline"));
+        firstSemester.add(new Discipline("Design Digital", "#1E3A8A", "/aluno/course/discipline"));
+        firstSemester.add(new Discipline("Web 2", "#1E40AF", "/aluno/course/discipline"));
+        firstSemester.add(new Discipline("Mobile 2", "#1D4ED8", "/aluno/course/discipline"));
 
         // Segundo semestre
         List<Discipline> secondSemester = new ArrayList<>();

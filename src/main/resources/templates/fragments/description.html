@@ -1,9 +1,10 @@
-<div th:fragment="description(title, description)" class="justify-center bg-blue-500 mt-4 w-full mb-2 rounded-md">
-    <h1 class="p-4 text-xl" th:text="${title}">
+<div th:fragment="description(title, description)" style="border-color: black;"
+    class="justify-center border-0 border-b-2 border-[#1c1c1c] mt-1 w-full mb-2 ">
+    <h1 class="p-4 text-3xl" th:text="${title}">
 
     </h1>
 
-    <p class="p-4 pb-4" th:text="${description}">
+    <p class="p-4 pb-16" th:text="${description}">
 
     </p>
 </div>

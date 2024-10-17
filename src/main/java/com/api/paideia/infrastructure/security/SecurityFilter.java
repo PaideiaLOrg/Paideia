@@ -2,6 +2,7 @@ package com.api.paideia.infrastructure.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,21 @@ public class SecurityFilter extends OncePerRequestFilter {
     }
 
     private String recoverToken(HttpServletRequest request) {
+        // Tenta recuperar o token do cabeçalho Authorization primeiro
         var authHeader = request.getHeader("Authorization");
-        if (authHeader == null)
-            return null;
-        return authHeader.replace("Bearer ", "");
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            return authHeader.replace("Bearer ", "");
+        }
+
+        // Se não estiver no cabeçalho, tenta recuperar do cookie
+        if (request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if ("jwt".equals(cookie.getName())) {
+                    return cookie.getValue();
+                }
+            }
+        }
+        return null;
     }
+
 }

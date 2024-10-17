@@ -1,6 +1,5 @@
 <div th:fragment="course-components" id="main-content" class="flex-1 ml-16 transition-all duration-300">
 
-    <div th:insert="~{/fragments/navbar-user :: navbar-user}"></div>
 
 
     <div class="flex flex-wrap w-full justify-center">
@@ -17,8 +16,8 @@
         <div th:each="entry, iterStat : ${semesterCourses}" class="flex flex-col w-full ml-16 mr-16 mt-4 mb-4 ">
 
 
-            <div style="background-color: #A6CCE2;" th:id="(${iterStat.index + 1})"
-                class="w-full p-4 drop-toggle flex flex-col rounded-xl">
+            <div th:id="(${iterStat.index + 1})" style="border-color: black;"
+                class="w-full p-4 drop-toggle flex flex-col border-2 border-[#1c1c1c] ">
                 <div class="flex justify-between items-center">
                     <h1 class="text-lg text-black" th:text="${entry.key}"></h1>
                     <i class="fa-solid fa-angle-right"></i>
@@ -36,9 +35,9 @@
                     <a th:href="@{${discipline.link}}">
 
                         <div th:style="'background-color: ' + ${discipline.color} + '; background-size: cover; background-position: center;'"
-                            th:class="'flex items-center justify-center rounded-3xl h-32 w-32 mt-4 ml-2 mr-2 shadow-md relative'">
+                            th:class="'flex items-center justify-center rounded-md h-32 w-32 mt-4 ml-2 mr-2 shadow-md relative'">
                             <button
-                                class="absolute top-0 right-0 text-gray-600 bg-red-500 rounded-full w-8 h-8 flex items-center justify-center">
+                                class="absolute top-0 right-0 text-gray-600  rounded-full w-8 h-8 flex items-center justify-center">
                                 <i class="fa-solid fa-xmark text-white"></i>
                             </button>
 
@@ -55,7 +54,7 @@
                 <div class="teste rounded-md mb-2 flex transition-all duration-300" th:if="${entry.value.size() < 10}"
                     th:each="i : ${#numbers.sequence(entry.value.size() + 1, 10)}">
                     <div th:style="'background-color: #E4D9FF; background-size: cover; background-position: center;'"
-                        class="flex items-center justify-center rounded-3xl h-32 w-32 mt-4 ml-2 mr-2 shadow-md ">
+                        class="flex items-center justify-center rounded-md h-32 w-32 mt-4 ml-2 mr-2 shadow-md ">
                         <h1 class="text-lg font-bold text-white text-outline text-center  p-2">
                             <img th:src="@{/images/plus.png}" width="20px" alt="">
                         </h1>
@@ -80,9 +79,9 @@
                 <a th:href="@{${academicResearche.link}}">
 
                     <div th:style="'background-color: ' + ${academicResearche.color} + '; background-size: cover; '"
-                        th:class="'flex items-center relative justify-center rounded-3xl h-32 w-32 mt-4 ml-2 mr-2 shadow-md'">
+                        th:class="'flex items-center relative justify-center rounded-md h-32 w-32 mt-4 ml-2 mr-2 shadow-md'">
                         <button
-                            class="absolute top-0 right-0 text-gray-600 bg-red-500 rounded-full w-8 h-8 flex items-center justify-center">
+                            class="absolute top-0 right-0 text-gray-600  rounded-full w-8 h-8 flex items-center justify-center">
                             <i class="fa-solid fa-xmark text-white"></i>
                         </button>
                         <h1 class="text-lg font-bold text-white text-outline text-center "
@@ -95,7 +94,7 @@
             <div class="rounded-md mb-2 flex transition-all duration-300">
                 <div id="openModalBtn"
                     th:style="'background-color: #E4D9FF; background-size: cover; background-position: center;'"
-                    class="flex items-center justify-center rounded-3xl h-32 w-32 mt-4 ml-2 mr-2 shadow-md ">
+                    class="flex items-center justify-center rounded-md h-32 w-32 mt-4 ml-2 mr-2 shadow-md ">
                     <h1 class="text-lg font-bold text-white text-outline text-center  p-2">
                         <img th:src="@{/images/plus.png}" width="20px" alt="">
                     </h1>

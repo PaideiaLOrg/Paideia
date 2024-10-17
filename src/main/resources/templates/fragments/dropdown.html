@@ -1,5 +1,5 @@
-<div th:fragment="dropdown" class="flex flex-col items-center mt-3 border-t border-gray-700">
-    <a th:href="@{#}"
+<div th:fragment="dropdown" class="flex flex-col items-center mt-3 border-t ">
+    <a th:href="@{/aluno/home}"
         class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 ">
         <img th:src="@{/images/icon-home.svg}" alt="Menu Icon" width="70%" />
     </a>
@@ -9,7 +9,7 @@
     </a>
     <div id="dropdown-menu"
         class=" absolute flex flex-col pb-16 h-full items-start   transition-all duration-300 max-h-64 overflow-y-auto"
-        style="top: 0px; left: 100%;background-color: #074778;">
+        style="top: 0px; left: 100%; background-color: #1768AC; ">
 
         <div id="O-1" class="ww hidden w-32 transition-all duration-300 ">
             <h1 class="block w-full pl-2 pt-2 text-xl text-gray-300 ">
@@ -48,11 +48,11 @@
 
     </div>
 
-    <a id="1" th:href="@{#}"
+    <a id="1"
         class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 dropdown-toggle">
         <img th:src="@{/images/icon-course.svg}" alt="Menu Icon" width="70%" />
     </a>
-    <a id="2" th:href="@{#}"
+    <a id="2"
         class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 dropdown-toggle">
         <img th:src="@{/images/icon-study-area.svg}" alt="Menu Icon" width="70%" />
     </a>

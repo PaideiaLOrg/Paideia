@@ -1,0 +1,16 @@
+<div th:fragment="home-components" id="main-content" class="flex-1 ml-16 transition-all duration-300">
+
+    <div th:insert="~{/fragments/navbar-user :: navbar-user}"></div>
+
+    <div class="flex flex-wrap w-full  mt-8 bg-red-500">
+        <div th:each="course : ${courses}" class="m-4">
+            <div class="bg-blue-500 w-32 h-24 mr-2">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="coisa">
+        oi
+    </div>
+</div>
