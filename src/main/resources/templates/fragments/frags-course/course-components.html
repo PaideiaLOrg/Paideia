@@ -4,7 +4,7 @@
 
     <div class="flex flex-wrap w-full justify-center">
 
-        <div class="m-4" th:insert="~{/fragments/description :: description('CURSO DSM', 'Este é um curso de Desenvolvimento de Software Móvel, Desenvolvimento de Desktop,
+        <div class="p-4 text-white" style="width: 100%; background-color: #087DD8;  box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.3);" th:insert="~{/fragments/description :: description('CURSO DSM', 'Este é um curso de Desenvolvimento de Software Móvel, Desenvolvimento de Desktop,
         Desenvolvimento Web e Tecnologias novas para o mercado de tabalho')}"></div>
 
         <div class="flex flex-col w-full ml-16 mr-16 mt-4 mb-4 ">
@@ -17,7 +17,7 @@
 
 
             <div th:id="(${iterStat.index + 1})" style="border-color: black;"
-                class="w-full p-4 drop-toggle flex flex-col border-2 border-[#1c1c1c] ">
+                class="w-full p-4 drop-toggle flex flex-col border-2 border-[#1c1c1c] rounded-full">
                 <div class="flex justify-between items-center">
                     <h1 class="text-lg text-black" th:text="${entry.key}"></h1>
                     <i class="fa-solid fa-angle-right"></i>
