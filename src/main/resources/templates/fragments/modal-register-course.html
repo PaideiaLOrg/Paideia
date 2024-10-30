@@ -1,0 +1,82 @@
+<div th:fragment="modal-register-course" id="modal-course" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full overflow-y-auto " id="modalContent"
+            style="height: 500px;">
+            <!-- Título do Modal -->
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-xl font-bold ">Cadastro</h2>
+                <button id="closeModalBtnCourse" class="px-4 py-2 bg-red-500 text-white rounded">
+                    <i class="fa-solid fa-x"></i>
+                </button>
+            </div>
+
+            <p class="mb-6">Este é o conteúdo do modal. Aqui você pode adicionar texto, imagens ou formulários.</p>
+
+            <div class="max-w-md mx-auto">
+                <form th:action="@{/aluno/course/register}" th:object="${course}" method="post">
+
+                    <label for="course_name" class="block text-sm font-medium text-gray-700">Nome do Curso</label>
+                    <input type="text" id="course_name" name="course_name" th:field="*{course_name}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+                    <label for="country" class="block text-sm font-medium text-gray-700">Selecione o Tipo de
+                        Grau</label>
+                    <select id="degreeProgram" th:field="*{degreeProgram}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option value="" disabled selected>Selecione o status</option>
+
+                        <option th:each="degreeProgram : ${degreeProgramOptions}" th:value="${degreeProgram}"
+                            th:text="${degreeProgram.getDegreeProgramEnum()}">
+                        </option>
+                    </select>
+
+                    <label for="emphasis_area" class="block text-sm font-medium text-gray-700">Qual area que é?</label>
+                    <input type="text" id="emphasis_area" name="emphasis_area" th:field="*{emphasis_area}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+                    <label for="entry_date" class="block text-sm font-medium text-gray-700">Data Inicio</label>
+                    <input type="date" id="entry_date" name="entry_date" th:field="*{entry_date}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+                    <label for="completion_date" class="block text-sm font-medium text-gray-700">Data Fim</label>
+                    <input type="date" id="completion_date" name="completion_date" th:field="*{completion_date}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+                    <label for="country" class="block text-sm font-medium text-gray-700">Selecione o Status do
+                        Curso</label>
+                    <select id="course_status" th:field="*{course_status}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option value="" disabled selected>Selecione o status</option>
+
+                        <option th:each="course_status : ${course_statusOptions}" th:value="${course_status}"
+                            th:text="${course_status.getCourseStatusEnum()}">
+                        </option>
+                    </select>
+                    <label for="country" class="block text-sm font-medium text-gray-700">Selecione a Area Relacionado do
+                        Curso</label>
+                    <select id="knowledge_area" th:field="*{knowledge_area}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option value="" disabled selected>Selecione o status</option>
+
+                        <option th:each="knowledge_area : ${knowledge_areaOptions}" th:value="${knowledge_area}"
+                            th:text="${knowledge_area.getKnowledgeAreaEnum()}">
+                        </option>
+                    </select>
+                    <label for="institution" class="block text-sm font-medium text-gray-700">Instituição</label>
+                    <input type="text" id="institution" name="institution" th:field="*{institution}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+                    <label for="institute" class="block text-sm font-medium text-gray-700">Instituto</label>
+                    <input type="text" id="institute" name="institute" th:field="*{institute}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+
+                    <button class="w-full bg-purple-600 px-3 py-2 rounded-md mt-2 text-white"
+                        type="submit">Cadastrar</button>
+                </form>
+            </div>
+            <!-- Botão para fechar o modal -->
+        </div>
+    </div>
+</div>
+</div>

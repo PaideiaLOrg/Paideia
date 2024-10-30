@@ -13,7 +13,6 @@ import com.api.paideia.domain.course.Course;
 public class AcademicResearches {
     @GetMapping("/researchesview")
     public ModelAndView getDiscipline(Model model) {
-        Course.adicionarCursosNoModel(model);
 
         ModelAndView mv = new ModelAndView("academic-researches-view");
 

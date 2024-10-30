@@ -19,7 +19,7 @@ import lombok.Setter;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String id_user;
     private String name;
     private String email;
     private String password;
@@ -27,7 +27,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + id_user +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 '}';
