@@ -1,4 +1,4 @@
-<div th:fragment="navbar-user" style="background-color: #9ACFEE;" class="w-full flex ">
+<div th:fragment="navbar-user" style="background-color: #9ACFEE;" class="w-full flex">
     <a th:href="@{/aluno/home}" class="ml-12">
         <svg width="40%" height="auto" viewBox="0 0 339 140" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M337.009 23.2945C272.095 16.2756 208.197 42.1978 169.63 88.345" stroke="black" stroke-width="3"
@@ -12,9 +12,37 @@
     </a>
     <a th:href="@{/aluno/perfil}">
         <div class="flex justify-end">
-
             <img th:src="@{/images/missao.png}" width="8%" class="rounded" alt="">
-
         </div>
     </a>
+    <button id="menu-toggle" class="text-white md:hidden">
+        <span class="hamburger"><i class="fas fa-bars"></i></span>
+        <span class="close hidden"><i class="fas fa-times"></i></span>
+    </button>
 </div>
+
+
+<script th:fragment="navbar-user">
+    const mainPage = document.getElementById('main-content');
+    const menuToggles = document.querySelectorAll('#menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    document.addEventListener('DOMContentLoaded', function () {
+
+        if (menuToggles && mobileMenu) {
+
+            menuToggles.forEach(toogle => {
+                toogle.addEventListener('click', function () {
+                    if (window.innerWidth <= 768) {
+                        mainPage.classList.toggle('ml-16');
+                        mobileMenu.classList.toggle('hidden');
+                        menuToggles.classList.toggle('hidden');
+                    } else if (window.innerWidth > 768) {
+                        mobileMenu.classList.remove('hidden');
+                        mainPage.classList.add('lg:ml-16');
+                    }
+
+                });
+            })
+        }
+    });
+</script>
