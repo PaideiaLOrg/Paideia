@@ -8,14 +8,14 @@ public enum KnowledgeAreaEnum {
     CIENCIAS_SOCIAIS_APLICADAS("Ciencias Sociais Aplicadas"), ENGENHARIA("Engenharia"), LINGUISTICA("Linguistica"),
     LETRAS("Letras"), ARTES("Artes");
 
-    private String knowledge_area = "";
+    private String knowledgeArea = "";
 
-    private KnowledgeAreaEnum(String knowledge_area) {
-        this.knowledge_area = knowledge_area;
+    private KnowledgeAreaEnum(String knowledgeArea) {
+        this.knowledgeArea = knowledgeArea;
     }
 
     public String getKnowledgeAreaEnum() {
-        return this.knowledge_area;
+        return this.knowledgeArea;
     }
 
 }

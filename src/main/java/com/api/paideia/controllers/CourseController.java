@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.api.paideia.domain.academicResearches.AcademicResearches;
 import com.api.paideia.domain.course.Course;
 import com.api.paideia.domain.discipline.Discipline;
 import com.api.paideia.domain.user.User;
@@ -60,7 +59,6 @@ public class CourseController {
         Course course = courseRepository.findByCourseName(courseName);
         List<Course> courseList = courseRepository.findByUser(user);
 
-        AcademicResearches.adicionarCursosNoModel(model);
         model.addAttribute("course", new CourseDTO());
         model.addAttribute("courseAll", course);
         model.addAttribute("courseList", courseList);
@@ -78,12 +76,12 @@ public class CourseController {
 
         Course newCourse = new Course();
         newCourse.setCourseName(courseDTO.getCourseName());
-        newCourse.setDegree_program(courseDTO.getDegreeProgram());
-        newCourse.setEmphasis_area(courseDTO.getEmphasis_area());
-        newCourse.setEntry_date(courseDTO.getEntry_date());
-        newCourse.setCompletion_date(courseDTO.getCompletion_date());
-        newCourse.setCourse_status(courseDTO.getCourse_status());
-        newCourse.setKnowledge_area(courseDTO.getKnowledge_area());
+        newCourse.setDegreeProgram(courseDTO.getDegreeProgram());
+        newCourse.setEmphasisArea(courseDTO.getEmphasisArea());
+        newCourse.setEntryDate(courseDTO.getEntryDate());
+        newCourse.setCompletionDate(courseDTO.getCompletionDate());
+        newCourse.setCourseStatus(courseDTO.getCourseStatus());
+        newCourse.setKnowledgeArea(courseDTO.getKnowledgeArea());
         newCourse.setInstitution(courseDTO.getInstitution());
         newCourse.setInstitute(courseDTO.getInstitute());
         newCourse.setDescription(courseDTO.getDescription());

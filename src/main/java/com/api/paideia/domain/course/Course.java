@@ -28,24 +28,24 @@ import lombok.Setter;
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id_course;
+    private String idCourse;
 
     private String courseName;
     private String description;
     @Enumerated(EnumType.STRING)
-    private DegreeProgramEnum degree_program;
+    private DegreeProgramEnum degreeProgram;
 
-    private String emphasis_area;
+    private String emphasisArea;
 
-    private String entry_date;
+    private String entryDate;
 
-    private String completion_date;
-
-    @Enumerated(EnumType.STRING)
-    private CourseStatusEnum course_status;
+    private String completionDate;
 
     @Enumerated(EnumType.STRING)
-    private KnowledgeAreaEnum knowledge_area;
+    private CourseStatusEnum courseStatus;
+
+    @Enumerated(EnumType.STRING)
+    private KnowledgeAreaEnum knowledgeArea;
 
     private String institution;
 

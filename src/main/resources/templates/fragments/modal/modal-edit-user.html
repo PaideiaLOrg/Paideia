@@ -1,0 +1,39 @@
+<div th:fragment="modal-edit-user" id="modal-edit-user-button"
+    class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full overflow-y-auto " style="height: 500px;"
+            id="modalContent">
+            <!-- Título do Modal -->
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-xl font-bold ">Perfil</h2>
+
+                <button id="closeModalBtnDiscipline" class="px-4 py-2 bg-red-500 text-white rounded"><i
+                        class="fa-solid fa-x"></i></button>
+                <!-- Corpo do Modal -->
+
+            </div>
+
+            <p class="mb-6">Altere suas informações de perfil.</p>
+
+            <div class="max-w-md mx-auto">
+                <form th:action="@{/aluno/course/register}" th:object="${course}" method="post">
+
+                    <label for="userName" class="block text-sm font-medium text-gray-700">Nome</label>
+                    <input type="text" id="userName" name="userName" th:field="*{courseName}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+
+                    <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
+                    <input type="email" id="email" name="email" th:field="*{courseName}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+
+                    <button class="w-full bg-purple-600 px-3 py-2 rounded-md mt-2 text-white" type="submit">Editar
+                        Perfil</button>
+                </form>
+            </div>
+            <!-- Botão para fechar o modal -->
+        </div>
+    </div>
+</div>
+</div>

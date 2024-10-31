@@ -26,7 +26,7 @@
                         rows="3">
 
                         </textarea>
-                    <label for="country" class="block text-sm font-medium text-gray-700">Selecione o Tipo de
+                    <label for="degreeProgram" class="block text-sm font-medium text-gray-700">Selecione o Tipo de
                         Grau</label>
                     <select id="degreeProgram" th:field="*{degreeProgram}"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -37,36 +37,37 @@
                         </option>
                     </select>
 
-                    <label for="emphasis_area" class="block text-sm font-medium text-gray-700">Qual area que é?</label>
-                    <input type="text" id="emphasis_area" name="emphasis_area" th:field="*{emphasis_area}"
+                    <label for="emphasisArea" class="block text-sm font-medium text-gray-700">Qual area que é?</label>
+                    <input type="text" id="emphasisArea" name="emphasisArea" th:field="*{emphasisArea}"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         required>
-                    <label for="entry_date" class="block text-sm font-medium text-gray-700">Data Inicio</label>
-                    <input type="date" id="entry_date" name="entry_date" th:field="*{entry_date}"
+                    <label for="entryDate" class="block text-sm font-medium text-gray-700">Data Inicio</label>
+                    <input type="date" id="entryDate" name="entryDate" th:field="*{entryDate}"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         required>
-                    <label for="completion_date" class="block text-sm font-medium text-gray-700">Data Fim</label>
-                    <input type="date" id="completion_date" name="completion_date" th:field="*{completion_date}"
+                    <label for="completionDate" class="block text-sm font-medium text-gray-700">Data Fim</label>
+                    <input type="date" id="completionDate" name="completionDate" th:field="*{completionDate}"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         required>
-                    <label for="country" class="block text-sm font-medium text-gray-700">Selecione o Status do
+                    <label for="courseStatus" class="block text-sm font-medium text-gray-700">Selecione o Status do
                         Curso</label>
-                    <select id="course_status" th:field="*{course_status}"
+                    <select id="courseStatus" th:field="*{courseStatus}"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                         <option value="" disabled selected>Selecione o status</option>
 
-                        <option th:each="course_status : ${course_statusOptions}" th:value="${course_status}"
-                            th:text="${course_status.getCourseStatusEnum()}">
+                        <option th:each="courseStatus : ${course_statusOptions}" th:value="${courseStatus}"
+                            th:text="${courseStatus.getCourseStatusEnum()}">
                         </option>
                     </select>
-                    <label for="country" class="block text-sm font-medium text-gray-700">Selecione a Area Relacionado do
+                    <label for="knowledgeArea" class="block text-sm font-medium text-gray-700">Selecione a Area
+                        Relacionado do
                         Curso</label>
-                    <select id="knowledge_area" th:field="*{knowledge_area}"
+                    <select id="knowledgeArea" th:field="*{knowledgeArea}"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                         <option value="" disabled selected>Selecione o status</option>
 
-                        <option th:each="knowledge_area : ${knowledge_areaOptions}" th:value="${knowledge_area}"
-                            th:text="${knowledge_area.getKnowledgeAreaEnum()}">
+                        <option th:each="knowledgeArea : ${knowledgeAreaOptions}" th:value="${knowledgeArea}"
+                            th:text="${knowledgeArea.getKnowledgeAreaEnum()}">
                         </option>
                     </select>
                     <label for="institution" class="block text-sm font-medium text-gray-700">Instituição</label>

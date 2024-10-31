@@ -90,7 +90,8 @@
                 <h1 class="text-3xl text-black ">Pesquisas</h1>
             </div>
         </div>
-        <div th:class="'flex flex-wrap justify-center transition-all duration-300'">
+        <div th:if="${academicResearches != null}"
+            th:class="'flex flex-wrap justify-center transition-all duration-300'">
 
             <div class="rounded-md mb-2 flex" th:each="academicResearche: ${academicResearches}">
                 <div th:href="@{${academicResearche.link}}" class="flex flex-col">

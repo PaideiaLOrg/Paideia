@@ -26,17 +26,17 @@ public class CourseDTO {
     @Enumerated(EnumType.STRING)
     private DegreeProgramEnum degreeProgram;
 
-    private String emphasis_area;
+    private String emphasisArea;
 
-    private String entry_date;
+    private String entryDate;
 
-    private String completion_date;
-
-    @Enumerated(EnumType.STRING)
-    private CourseStatusEnum course_status;
+    private String completionDate;
 
     @Enumerated(EnumType.STRING)
-    private KnowledgeAreaEnum knowledge_area;
+    private CourseStatusEnum courseStatus;
+
+    @Enumerated(EnumType.STRING)
+    private KnowledgeAreaEnum knowledgeArea;
 
     private String institution;
 

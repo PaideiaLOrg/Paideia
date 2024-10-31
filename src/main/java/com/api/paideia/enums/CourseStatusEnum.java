@@ -4,13 +4,13 @@ public enum CourseStatusEnum {
 
     CURSANDO("Cursando"), CONCLUIDO("Concluido"), TRANCADO("Trancado");
 
-    private String course_status = "";
+    private String courseStatus = "";
 
-    private CourseStatusEnum(String course_status) {
-        this.course_status = course_status;
+    private CourseStatusEnum(String courseStatus) {
+        this.courseStatus = courseStatus;
     }
 
     public String getCourseStatusEnum() {
-        return this.course_status;
+        return this.courseStatus;
     }
 }
