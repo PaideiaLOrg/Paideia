@@ -30,8 +30,8 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id_course;
 
-    private String course_name;
-
+    private String courseName;
+    private String description;
     @Enumerated(EnumType.STRING)
     private DegreeProgramEnum degree_program;
 

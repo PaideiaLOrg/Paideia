@@ -20,7 +20,8 @@ import lombok.Setter;
 @Setter
 public class CourseDTO {
 
-    private String course_name;
+    private String courseName;
+    private String description;
 
     @Enumerated(EnumType.STRING)
     private DegreeProgramEnum degreeProgram;

@@ -4,8 +4,9 @@
 
     <div class="flex flex-wrap w-full justify-center">
 
-        <div class="m-4" th:insert="~{/fragments/description :: description(${course.name}, 'Este é um curso de Desenvolvimento de Software Móvel, Desenvolvimento de Desktop,
-        Desenvolvimento Web e Tecnologias novas para o mercado de tabalho')}"></div>
+        <div class="m-4"
+            th:insert="~{/fragments/description :: description(${courseAll.courseName}, ${courseAll.description})}">
+        </div>
 
         <div class="flex flex-col w-full ml-16 mr-16 mt-4 mb-4 ">
             <div class="w-full p-2 drop-toggle flex flex-col rounded-xl">
@@ -13,7 +14,10 @@
             </div>
         </div>
 
-        <div th:each="entry, iterStat : ${semesterCourses}" class="flex flex-col w-full ml-16 mr-16 mt-4 mb-4 ">
+
+
+        <div th:if="${semesterCourses != null}" th:each="entry, iterStat : ${semesterCourses}"
+            class="flex flex-col w-full ml-16 mr-16 mt-4 mb-4 ">
 
 
             <div th:id="(${iterStat.index + 1})" style="border-color: black;"
@@ -65,6 +69,19 @@
             </div>
 
         </div>
+        <div th:if="${semesterCourses == null}"
+            class="flex flex-col w-full justify-center items-center ml-16 mr-16 mt-4 mb-4 text-center">
+            <div class="rounded-md mb-2 flex flex-col items-center transition-all duration-300">
+                <h1 class="text-3xl mb-4 text-white font-bold text-xl text-gray-700">
+                    Insira novos semestres e suas disciplinas
+                </h1>
+                <div id="openModalBtnDiscipline"
+                    class="flex items-center justify-center rounded-md h-32 w-32 mt-4 shadow-md"
+                    th:style="'background-color: #E4D9FF; background-size: cover; background-position: center;'">
+                    <img th:src="@{/images/plus.png}" width="20px" alt="">
+                </div>
+            </div>
+        </div>
 
 
 
@@ -76,21 +93,21 @@
         <div th:class="'flex flex-wrap justify-center transition-all duration-300'">
 
             <div class="rounded-md mb-2 flex" th:each="academicResearche: ${academicResearches}">
-                <a th:href="@{${academicResearche.link}}">
-
+                <div th:href="@{${academicResearche.link}}" class="flex flex-col">
                     <div th:style="'background-color: ' + ${academicResearche.color} + '; background-size: cover; '"
                         th:class="'flex items-center relative justify-center rounded-md h-32 w-32 mt-4 ml-2 mr-2 shadow-md'">
-                        <button
-                            class="absolute top-0 right-0 text-gray-600  rounded-full w-8 h-8 flex items-center justify-center">
+                        <div id="openModalBtnDeleteResearch"
+                            class="absolute top-0 right-0 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer">
                             <i class="fa-solid fa-xmark text-white"></i>
-                        </button>
-                        <h1 class="text-lg font-bold text-white text-outline text-center "
-                            th:text="${academicResearche.name}">
-                        </h1>
+                        </div>
+                        <h1 class="text-lg font-bold text-white text-outline text-center"
+                            th:text="${academicResearche.name}"></h1>
                     </div>
-                </a>
+                </div>
+
 
             </div>
+
             <div class="rounded-md mb-2 flex transition-all duration-300">
                 <div id="openModalBtn"
                     th:style="'background-color: #E4D9FF; background-size: cover; background-position: center;'"
@@ -105,130 +122,148 @@
 
 
 
-
     </div>
 
+    <div id="openModalBtnDeleteCourse"
+        th:class="'bg-red-500 flex flex-wrap justify-center transition-all duration-300'">
+        <h1>
+            Deletar Curso
+        </h1>
 
-
+    </div>
     <!-- Botão para abrir o modal -->
 
+    <div th:insert="~{/fragments/modal/modal-register-discipline :: modal-register-discipline}"></div>
+    <div th:insert="~{/fragments/modal/modal-register-research :: modal-register-research}"></div>
+    <div th:insert="~{/fragments/modal/modal-delete-research :: modal-delete-research}"></div>
+    <div th:insert="~{/fragments/modal/modal-delete-course :: modal-delete-course}"></div>
 
 
 
 
-    <div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden z-50">
-        <div class="flex items-center justify-center min-h-screen">
-            <div class="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full" id="modalContent">
-                <!-- Título do Modal -->
-                <div class="flex justify-between items-center mb-2">
-                    <h2 class="text-xl font-bold ">Cadastro</h2>
-
-                    <button id="closeModalBtn" class="px-4 py-2 bg-red-500 text-white rounded"><i
-                            class="fa-solid fa-x"></i></button>
-                    <!-- Corpo do Modal -->
-
-                </div>
-
-                <p class="mb-6">Este é o conteúdo do modal. Aqui você pode adicionar texto, imagens ou formulários.</p>
-
-                <div class="max-w-md mx-auto">
-                    <form th:action="@{/forms}" method="post">
-
-                        <label for="email" class="block text-sm font-medium text-gray-700">Titulo da Pesquisa</label>
-                        <input type="" id="email" name="email"
-                            class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-
-                        <label for="email" class="block text-sm font-medium text-gray-700">Assunto da pesquisa</label>
-
-                        <input type="email" id="email" name="email"
-                            class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        <label for="email" class="block text-sm font-medium text-gray-700">Resumo da Pesquisa</label>
-                        <textarea
-                            class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                            name="textarea" rows="3">
-
-                        </textarea>
-                        <label for="country" class="block text-sm font-medium text-gray-700">Selecione o tipo de
-                            pesquisa</label>
-                        <select id="country" name="country"
-                            class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                            <option>Artigo Cientifico</option>
-                            <option>TCC</option>
-                            <option>IC</option>
-                            <option>Mestrado</option>
-                            <option>Doutorado</option>
-                            <option>Pós Doutorado</option>
-                        </select>
-                        <label for="email" class="block text-sm font-medium text-gray-700">Orientador</label>
-                        <input type="" id="email" name="email"
-                            class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        <button class="w-full bg-purple-600 px-3 py-2 rounded-md mt-2 text-white"
-                            type="submit">Cadastrar</button>
-                    </form>
-                </div>
-                <!-- Botão para fechar o modal -->
-            </div>
-        </div>
-    </div>
-</div>
 
 
 
-</di>
-<script th:fragment="course-components">
-    document.addEventListener('DOMContentLoaded', () => {
-        const ggg = {
-            '1': 'drops-1',
-            '2': 'drops-2',
-            '3': 'drops-3',
-            '4': 'drops-4'
-        };
 
-        document.addEventListener('click', (e) => {
-            const button = e.target.closest('.drop-toggle');
-            if (button) {
-                const buttonId = button.id;
-                const show = ggg[buttonId];
-                const toShow = document.getElementById(show);
-                const icon = button.querySelector("i")
 
-                // Alternar a visibilidade do conteúdo
-                if (toShow) {
-                    toShow.classList.toggle('hidden');
+    </di>
+    <script th:fragment="course-components">
+        document.addEventListener('DOMContentLoaded', () => {
+            const ggg = {
+                '1': 'drops-1',
+                '2': 'drops-2',
+                '3': 'drops-3',
+                '4': 'drops-4'
+            };
 
-                    if (toShow.classList.contains('hidden')) {
-                        icon.classList.remove("fa-angle-down");
-                        icon.classList.add("fa-angle-right");
+            document.addEventListener('click', (e) => {
+                const button = e.target.closest('.drop-toggle');
+                if (button) {
+                    const buttonId = button.id;
+                    const show = ggg[buttonId];
+                    const toShow = document.getElementById(show);
+                    const icon = button.querySelector("i")
+
+                    // Alternar a visibilidade do conteúdo
+                    if (toShow) {
+                        toShow.classList.toggle('hidden');
+
+                        if (toShow.classList.contains('hidden')) {
+                            icon.classList.remove("fa-angle-down");
+                            icon.classList.add("fa-angle-right");
+                        } else {
+                            icon.classList.remove("fa-angle-right");
+                            icon.classList.add("fa-angle-down");
+                        }
+
+
                     } else {
-                        icon.classList.remove("fa-angle-right");
-                        icon.classList.add("fa-angle-down");
+                        console.log('Elemento com o id ' + show + ' não encontrado.');
                     }
-
-
-                } else {
-                    console.log('Elemento com o id ' + show + ' não encontrado.');
                 }
+            });
+        });
+
+
+        // Abrir modal ao clicar no botão
+        document.getElementById('openModalBtn').addEventListener('click', function () {
+            document.getElementById('modal').classList.remove('hidden');
+        });
+
+        // Fechar modal ao clicar no botão de fechar
+        document.getElementById('closeModalBtnResearch').addEventListener('click', function () {
+            document.getElementById('modal').classList.add('hidden');
+        });
+
+        // Fechar modal ao clicar fora do conteúdo
+        document.getElementById('modal').addEventListener('click', function (e) {
+            if (e.target === this) {  // Verifica se o clique foi fora do conteúdo do modal
+                this.classList.add('hidden');
             }
         });
-    });
 
 
-    // Abrir modal ao clicar no botão
-    document.getElementById('openModalBtn').addEventListener('click', function () {
-        document.getElementById('modal').classList.remove('hidden');
-    });
+        document.getElementById('openModalBtnDiscipline').addEventListener('click', function () {
+            document.getElementById('modal-discipline').classList.remove('hidden');
+        });
 
-    // Fechar modal ao clicar no botão de fechar
-    document.getElementById('closeModalBtn').addEventListener('click', function () {
-        document.getElementById('modal').classList.add('hidden');
-    });
+        // Fechar modal ao clicar no botão de fechar
+        document.getElementById('closeModalBtnDiscipline').addEventListener('click', function () {
+            document.getElementById('modal-discipline').classList.add('hidden');
+        });
 
-    // Fechar modal ao clicar fora do conteúdo
-    document.getElementById('modal').addEventListener('click', function (e) {
-        if (e.target === this) {  // Verifica se o clique foi fora do conteúdo do modal
-            this.classList.add('hidden');
-        }
-    });
+        // Fechar modal ao clicar fora do conteúdo
+        document.getElementById('modal-discipline').addEventListener('click', function (e) {
+            if (e.target === this) {  // Verifica se o clique foi fora do conteúdo do modal
+                this.classList.add('hidden');
+            }
+        });
 
 
-</script>
+        // Para abrir o modal ao clicar no botão de exclusão
+        const deleteButtons = document.querySelectorAll("#openModalBtnDeleteResearch");
+
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function (event) {
+                event.stopPropagation(); // Impede que o evento de clique suba e acione o link
+                event.preventDefault();  // Previne a ação padrão (redirecionamento)
+
+                document.getElementById('modal-delete-research-button').classList.remove('hidden'); // Abre o modal
+            });
+        });
+
+        // Fechar modal ao clicar no botão de fechar
+        document.getElementById('closeModalBtnDeleteResearch').addEventListener('click', function () {
+            document.getElementById('modal-delete-research-button').classList.add('hidden'); // Fecha o modal
+        });
+
+        // Fechar modal ao clicar fora do conteúdo
+        document.getElementById('modal-delete-research-button').addEventListener('click', function (e) {
+            if (e.target === this) {  // Verifica se o clique foi fora do conteúdo do modal
+                this.classList.add('hidden'); // Fecha o modal
+            }
+        });
+
+
+
+
+
+        document.getElementById('openModalBtnDeleteCourse').addEventListener('click', function () {
+            document.getElementById('modal-delete-course-button').classList.remove('hidden');
+        });
+
+        // Fechar modal ao clicar no botão de fechar
+        document.getElementById('closeModalBtnDeleteCourse').addEventListener('click', function () {
+            document.getElementById('modal-delete-course-button').classList.add('hidden');
+        });
+
+        // Fechar modal ao clicar fora do conteúdo
+        document.getElementById('modal-delete-course-button').addEventListener('click', function (e) {
+            if (e.target === this) {  // Verifica se o clique foi fora do conteúdo do modal
+                this.classList.add('hidden');
+            }
+        });
+
+
+
+    </script>

@@ -22,13 +22,13 @@
             </div>
 
             <div th:each="course : ${courseList}">
-                <a th:href="@{/aluno/course}"
+                <a th:href="@{|/aluno/course/${course.courseName}|}"
                     class="block w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 relative">
                     <div>
                         <img width="100%" th:src="@{/images/software-developer-6521720_640.jpg}" class="rounded-lg">
                     </div>
                     <span class="absolute inset-0 flex items-center justify-center text-white text-sm font-bold"
-                        th:text="${course.course_name}"></span>
+                        th:text="${course.courseName}"></span>
                 </a>
             </div>
 
@@ -52,13 +52,13 @@
                         <img width="100%" th:src="@{/images/software-developer-6521720_640.jpg}" class="rounded-lg">
                     </div>
                     <span class="absolute inset-0 flex items-center justify-center text-white text-sm font-bold"
-                        th:text="${course.course_name}"></span>
+                        th:text="${course.courseName}"></span>
                 </a>
             </div>
 
         </div>
 
-        <div th:insert="~{/fragments/modal-register-course :: modal-register-course}"></div>
+        <div th:insert="~{/fragments/modal/modal-register-course :: modal-register-course}"></div>
 
 
         <!-- Repita o bloco acima para os outros links -->

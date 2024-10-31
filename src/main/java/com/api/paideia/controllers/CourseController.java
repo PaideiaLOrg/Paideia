@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
@@ -20,6 +21,8 @@ import com.api.paideia.enums.KnowledgeAreaEnum;
 import com.api.paideia.infrastructure.security.TokenService;
 import com.api.paideia.repositories.course.CourseRepository;
 import java.util.List;
+import java.util.Optional;
+
 import lombok.AllArgsConstructor;
 
 @Controller
@@ -50,13 +53,17 @@ public class CourseController {
         return "user"; // Nome da view a ser renderizada
     }
 
-    @GetMapping("/course")
-    public String course(Model model) {
+    @GetMapping("/course/{courseName}")
+    public String course(@PathVariable String courseName, Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); // ou de onde você
 
-        Discipline.adicionarCursosNoModel(model);
+        Course course = courseRepository.findByCourseName(courseName);
+        List<Course> courseList = courseRepository.findByUser(user);
 
         AcademicResearches.adicionarCursosNoModel(model);
         model.addAttribute("course", new CourseDTO());
+        model.addAttribute("courseAll", course);
+        model.addAttribute("courseList", courseList);
 
         model.addAttribute("degreeProgramOptions", DegreeProgramEnum.values()); // Passa o enum para o Thymeleaf
         model.addAttribute("course_statusOptions", CourseStatusEnum.values());
@@ -70,7 +77,7 @@ public class CourseController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); // ou de onde você
 
         Course newCourse = new Course();
-        newCourse.setCourse_name(courseDTO.getCourse_name());
+        newCourse.setCourseName(courseDTO.getCourseName());
         newCourse.setDegree_program(courseDTO.getDegreeProgram());
         newCourse.setEmphasis_area(courseDTO.getEmphasis_area());
         newCourse.setEntry_date(courseDTO.getEntry_date());
@@ -79,6 +86,7 @@ public class CourseController {
         newCourse.setKnowledge_area(courseDTO.getKnowledge_area());
         newCourse.setInstitution(courseDTO.getInstitution());
         newCourse.setInstitute(courseDTO.getInstitute());
+        newCourse.setDescription(courseDTO.getDescription());
         newCourse.setUser(user);
 
         this.courseRepository.save(newCourse);
