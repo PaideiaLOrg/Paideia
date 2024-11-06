@@ -1,5 +1,5 @@
 <div th:fragment="card(title, description, date, bg)"
-    th:style="'box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); background-color: ' + ${bg}"
+    th:style="'z-index:-1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); background-color: ' + ${bg}"
     class="relative h-48 w-32 mb-4 mt-0 m-2 rounded-md text-center items-center flex flex-col justify-between shadow-3xl">
 
     <!-- Botão X no canto superior direito -->
@@ -13,7 +13,7 @@
         <h1 th:text="${description}"></h1>
     </div>
 
-    <div class="bg-purple-600  w-full h-12 rounded-b-md flex justify-center items-center">
+    <div style="background-color: #087DD8;" class="w-full h-12 rounded-b-md flex justify-center items-center">
         <i class="fa-solid fa-eye  w-1/2 text-white"></i>
         <i class="fa-solid fa-pen-to-square w-1/2 text-white"></i>
     </div>

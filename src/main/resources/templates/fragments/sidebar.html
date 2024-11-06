@@ -1,4 +1,4 @@
-<div th:fragment="sidebar" class="fixed flex flex-row">
+<div th:fragment="sidebar" id="mobile-menu" class="fixed  flex flex-row">
     <!-- Botão do menu hambúrguer para dispositivos móveis -->
 
     <!-- Sidebar -->
@@ -14,8 +14,10 @@
         <a id="menu-toggle-config"
             class="flex items-center justify-center w-16 h-16 mt-auto bg-gray-800 hover:bg-gray-700 hover:text-gray-300"
             href="#">
-            <img th:src="@{/images/settings.svg}" alt="Menu Icon" width="70%" />
+            <img id="menu-settings-icon" class="transform transition-transform duration-500 rotate-0"
+                th:src="@{/images/settings.svg}" alt="Menu Icon" width="70%" />
         </a>
+
 
         <!-- Menu flutuante -->
         <div id="menu-dropdown-config"
@@ -41,10 +43,21 @@
 <script th:fragment="sidebar">
     const menuToggle = document.getElementById('menu-toggle-config');
     const menuDropdown = document.getElementById('menu-dropdown-config');
+    const menuIcon = document.getElementById('menu-settings-icon');
 
     menuToggle.addEventListener('click', (e) => {
         e.preventDefault();
         menuDropdown.classList.toggle('hidden');
+
+        // Alterna a classe de rotação entre rotate-0 e rotate-45
+        if (menuIcon.classList.contains("rotate-0")) {
+            menuIcon.classList.remove("rotate-0");
+            menuIcon.classList.add("rotate-90");
+        } else {
+            menuIcon.classList.remove("rotate-90");
+            menuIcon.classList.add("rotate-0");
+        }
     });
+
 
 </script>
