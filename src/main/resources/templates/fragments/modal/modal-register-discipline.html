@@ -1,0 +1,74 @@
+<div th:fragment="modal-register-discipline" id="modal-discipline"
+    class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full overflow-y-auto " style="height: 500px;"
+            id="modalContent">
+            <!-- Título do Modal -->
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-xl font-bold ">Disciplina</h2>
+
+                <button id="closeModalBtnDiscipline" class="px-4 py-2 bg-red-500 text-white rounded"><i
+                        class="fa-solid fa-x"></i></button>
+                <!-- Corpo do Modal -->
+
+            </div>
+
+            <p class="mb-6">Cadastre as informações de uma Disciplina.</p>
+
+            <div class="max-w-md mx-auto">
+                <form th:action="@{/aluno/course/register}" th:object="${course}" method="post">
+
+                    <label for="disciplineName" class="block text-sm font-medium text-gray-700">Nome da
+                        Disciplina</label>
+                    <input type="text" id="disciplineName" name="disciplineName" th:field="*{courseName}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+
+                    <label for="disciplineProfessor" class="block text-sm font-medium text-gray-700">Professor</label>
+                    <input type="text" id="disciplineProfessor" name="disciplineProfessor" th:field="*{courseName}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+
+                    <label for="syllabus" class="block text-sm font-medium text-gray-700">Ementa</label>
+                    <textarea id="syllabus" name="syllabus" th:field="*{description}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        rows="3">
+                    </textarea>
+
+                    <label for="disciplineType" class="block text-sm font-medium text-gray-700">Tipo da
+                        Disciplina</label>
+                    <select id="disciplineType" name="disciplineType"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option>Obrigatória</option>
+                        <option>Optativa</option>
+                        <option>Eletiva</option>
+                    </select>
+
+                    <label for="department" class="block text-sm font-medium text-gray-700">Departamento</label>
+                    <input type="text" id="department" name="department" th:field="*{courseName}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+
+                    <label for="disciplineStatus" class="block text-sm font-medium text-gray-700">Status</label>
+                    <select id="disciplineStatus" name="disciplineStatus"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option>Cursada</option>
+                        <option>Não cursada</option>
+                        <option>Aprovado</option>
+                        <option>Reprovado</option>
+                    </select>
+
+                    <label for="grade" class="block text-sm font-medium text-gray-700">Nota</label>
+                    <input type="text" id="grade" name="grade" th:field="*{courseName}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+
+                    <button class="w-full bg-purple-600 px-3 py-2 rounded-md mt-2 text-white" type="submit">Cadastrar
+                        Disciplina</button>
+                </form>
+            </div>
+            <!-- Botão para fechar o modal -->
+        </div>
+    </div>
+</div>
+</div>

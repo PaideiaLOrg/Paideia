@@ -14,7 +14,6 @@ public class DisciplineController {
 
     @GetMapping("/discipline")
     public ModelAndView getDiscipline(Model model) {
-        Course.adicionarCursosNoModel(model);
 
         ModelAndView mv = new ModelAndView("discipline-view");
 

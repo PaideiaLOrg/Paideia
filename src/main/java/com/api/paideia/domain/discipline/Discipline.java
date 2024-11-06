@@ -1,5 +1,6 @@
 package com.api.paideia.domain.discipline;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -8,65 +9,53 @@ import java.util.Map;
 
 import org.springframework.ui.Model;
 
+import com.api.paideia.domain.course.Course;
+import com.api.paideia.domain.user.User;
+import com.api.paideia.enums.DisciplineStatus;
+import com.api.paideia.enums.DisciplineTypeEnum;
+
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "disciplines")
 public class Discipline {
 
-    private String name;
-    private String color;
-    private String link;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String idDiscipline;
+    private String disciplineName;
+    private String disciplineProfessor;
+    private String syllabus;
+    @Enumerated(EnumType.STRING)
+    private DisciplineTypeEnum disciplineTypeEnum;
+    private String department;
+    @Enumerated(EnumType.STRING)
+    private DisciplineStatus disciplineStatus;
+    @Column(nullable = false, precision = 15, scale = 2) // Configura o BigDecimal no banco de dados
+    private BigDecimal grade;
+    private String disciplineNotebook;
+    @ManyToOne
+    @JoinColumn(name = "id_course")
+    private Course course;
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 
-    public static void adicionarCursosNoModel(Model model) {
-        // Mapa para associar o título com as disciplinas de cada semestre
-        Map<String, List<Discipline>> semesterCourses = new LinkedHashMap<>();
-
-        // Primeiro semestre
-        List<Discipline> firstSemester = new ArrayList<>();
-        firstSemester.add(new Discipline("Design Digital", "#1E3A8A", "/aluno/course/discipline"));
-        firstSemester.add(new Discipline("Web 2", "#1E40AF", "/aluno/course/discipline"));
-        firstSemester.add(new Discipline("Mobile 2", "#1D4ED8", "/aluno/course/discipline"));
-        firstSemester.add(new Discipline("Design Digital", "#1E3A8A", "/aluno/course/discipline"));
-        firstSemester.add(new Discipline("Web 2", "#1E40AF", "/aluno/course/discipline"));
-        firstSemester.add(new Discipline("Mobile 2", "#1D4ED8", "/aluno/course/discipline"));
-
-        // Segundo semestre
-        List<Discipline> secondSemester = new ArrayList<>();
-        secondSemester.add(new Discipline("Mobile 1", "#1E2749", "/aluno/course/discipline"));
-        secondSemester.add(new Discipline("Análise de Sistemas", "#1768AC", "/aluno/course/discipline"));
-        secondSemester.add(new Discipline("Banco de Dados", "#06BEE1", "/aluno/course/discipline"));
-        secondSemester.add(new Discipline("Engenharia de Software", "#1E2749", "/aluno/course/discipline"));
-        secondSemester.add(new Discipline("Metodologias Ágeis", "#1768AC", "/aluno/course/discipline"));
-
-        // Terceiro semestre
-        List<Discipline> thirdSemester = new ArrayList<>();
-        thirdSemester.add(new Discipline("Arquitetura de Software", "#1E2749", "/aluno/course/discipline"));
-        thirdSemester.add(new Discipline("Segurança da Informação", "#1768AC", "/aluno/course/discipline"));
-        thirdSemester.add(new Discipline("Desenvolvimento Mobile", "#06BEE1", "/aluno/course/discipline"));
-        thirdSemester.add(new Discipline("Programação Avançada", "#1E2749", "/aluno/course/discipline"));
-        thirdSemester.add(new Discipline("Cloud Computing", "#1768AC", "/aluno/course/discipline"));
-
-        // Quarto semestre
-        List<Discipline> fourthSemester = new ArrayList<>();
-        fourthSemester.add(new Discipline("Inteligência Artificial", "#1E2749", "/aluno/course/discipline"));
-        fourthSemester.add(new Discipline("Data Science", "#1768AC", "/aluno/course/discipline"));
-        fourthSemester.add(new Discipline("DevOps", "#06BEE1", "/aluno/course/discipline"));
-        fourthSemester.add(new Discipline("Blockchain", "#1E2749", "/aluno/course/discipline"));
-        fourthSemester.add(new Discipline("Design de Interfaces", "#1768AC", "/aluno/course/discipline"));
-
-        // Adiciona os semestres ao mapa com seus títulos
-        semesterCourses.put("Semestre 1", firstSemester);
-        semesterCourses.put("Semestre 2", secondSemester);
-        semesterCourses.put("Semestre 3", thirdSemester);
-        semesterCourses.put("Semestre 4", fourthSemester);
-
-        // Adiciona o mapa ao model
-        model.addAttribute("semesterCourses", semesterCourses);
-    }
 }

@@ -1,0 +1,83 @@
+<div th:fragment="modal-register-reference" id="modal-reference"
+    class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full overflow-y-auto " style="height: 500px;"
+            id="modalContent">
+            <!-- Título do Modal -->
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-xl font-bold ">Referência</h2>
+
+                <button id="closeModalBtnReference" class="px-4 py-2 bg-red-500 text-white rounded"><i
+                        class="fa-solid fa-x"></i></button>
+                <!-- Corpo do Modal -->
+
+            </div>
+
+            <p class="mb-6">Cadastre as informações de uma Referência.</p>
+
+            <div class="max-w-md mx-auto">
+                <form th:action="@{/forms}" method="post">
+
+                    <label for="referenceAuthors" class="block text-sm font-medium text-gray-700">Autore(s) do
+                        Texto</label>
+                    <input type="text" id="referenceAuthors" name="referenceAuthors"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+
+                    <label for="referenceTitle" class="block text-sm font-medium text-gray-700">Título do Texto</label>
+                    <input type="text" id="referenceTitle" name="referenceTitle"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+
+                    <label for="referenceSubtitle" class="block text-sm font-medium text-gray-700">Subtítulo do
+                        Texto</label>
+                    <input type="text" id="referenceSubtitle" name="referenceSubtitle"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+
+                    <label for="referenceType" class="block text-sm font-medium text-gray-700">Selecione o tipo da
+                        Referência</label>
+                    <select id="referenceType" name="referenceType"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option>Livro</option>
+                        <option>Capítulo de livro</option>
+                        <option>Artigo de revista</option>
+                        <option>Webpage</option>
+                        <option>Outro</option>
+                    </select>
+
+                    <label for="referenceAbstract" class="block text-sm font-medium text-gray-700">Resumo</label>
+                    <textarea
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        name="textarea" rows="3">
+                    </textarea>
+
+                    <label for="referenceKeywords"
+                        class="block text-sm font-medium text-gray-700">Palavras-chave</label>
+                    <input type="text" id="referenceKeywords" name="referenceKeywords"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+
+                    <label for="publicationAuthors" class="block text-sm font-medium text-gray-700">Autore(s) da
+                        Publicação</label>
+                    <input type="text" id="publicationAuthors" name="publicationAuthors"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+
+                    <label for="publicationTitle" class="block text-sm font-medium text-gray-700">Título da
+                        Publicação</label>
+                    <input type="text" id="publicationTitle" name="publicationTitle"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+
+                    <label for="email" class="block text-sm font-medium text-gray-700">Ano de Publicação</label>
+                    <input type="date" id="email" name="email"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+
+                    <label for="link" class="block text-sm font-medium text-gray-700">Link</label>
+                    <input type="text" id="link" name="link"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+
+                    <button class="w-full bg-purple-600 px-3 py-2 rounded-md mt-2 text-white" type="submit">Cadastrar
+                        Referência</button>
+                </form>
+            </div>
+            <!-- Botão para fechar o modal -->
+        </div>
+    </div>
+</div>
+</div>
