@@ -1,8 +1,5 @@
 package com.api.paideia.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -14,12 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.api.paideia.domain.academicResearches.AcademicResearches;
 import com.api.paideia.domain.course.Course;
 import com.api.paideia.domain.discipline.Discipline;
-import com.api.paideia.domain.user.User;
+import com.api.paideia.domain.reference.References;
 import com.api.paideia.repositories.user.UserRepository;
 
 import lombok.AllArgsConstructor;
-
-import lombok.val;
 
 @Controller
 @AllArgsConstructor
@@ -53,6 +48,17 @@ public class CourseController {
         AcademicResearches.adicionarCursosNoModel(model);
 
         ModelAndView mv = new ModelAndView("course-view");
+
+        return mv;
+
+    }
+
+    @GetMapping("/references")
+    public ModelAndView reference(Model model) {
+
+        References.getReference(model);
+
+        ModelAndView mv = new ModelAndView("references-view");
 
         return mv;
 
