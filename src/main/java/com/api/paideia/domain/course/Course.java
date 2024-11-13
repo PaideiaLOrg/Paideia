@@ -1,5 +1,7 @@
 package com.api.paideia.domain.course;
 
+import org.springframework.ui.Model;
+
 import com.api.paideia.domain.user.User;
 import com.api.paideia.enums.CourseStatusEnum;
 import com.api.paideia.enums.DegreeProgramEnum;
@@ -57,5 +59,10 @@ public class Course {
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
+
+    public static void adicionarCursosNoModel(Model model) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'adicionarCursosNoModel'");
+    }
 
 }

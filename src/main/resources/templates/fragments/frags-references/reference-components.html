@@ -1,0 +1,9 @@
+<div th:fragment="reference-components(refId, title, dateAdded)" id="main-content" class="flex-1 transition-all duration-300">
+    <div class="flex flex-col">
+        <div class="flex flex-col border-t-2 py-5">
+            <p class="text-xs font-semibold" th:text="${refId}"></p>
+            <h3 class="font-bold mb-5" th:text="${title}"></h3>
+            <h6 class="italic text-xs" th:text="${dateAdded}"></h6>
+        </div>
+    </div>
+</div>

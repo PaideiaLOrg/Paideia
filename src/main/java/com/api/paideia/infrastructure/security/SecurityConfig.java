@@ -39,6 +39,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/aluno/home").authenticated()
                         .requestMatchers(HttpMethod.GET, "/aluno/course").permitAll()
                         .requestMatchers(HttpMethod.GET, "/aluno/course/discipline").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/aluno/references").permitAll()
                         .requestMatchers(HttpMethod.GET, "/aluno/course/researchesview").permitAll()
                         .requestMatchers(HttpMethod.GET, "/aluno/perfil").permitAll()
 

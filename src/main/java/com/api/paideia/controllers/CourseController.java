@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.api.paideia.domain.course.Course;
+import com.api.paideia.domain.reference.References;
 import com.api.paideia.domain.user.User;
 import com.api.paideia.dto.AcademicResearchDTO;
 import com.api.paideia.dto.CourseDTO;
@@ -24,7 +26,6 @@ import com.api.paideia.enums.ResearchTypeEnum;
 import com.api.paideia.infrastructure.security.TokenService;
 import com.api.paideia.repositories.course.CourseRepository;
 import java.util.List;
-import java.util.Optional;
 
 import lombok.AllArgsConstructor;
 
@@ -78,6 +79,18 @@ public class CourseController {
         model.addAttribute("knowledge_areaOptions", KnowledgeAreaEnum.values());
         return "course-view";
 
+    }
+
+    @GetMapping("/references")
+    public ModelAndView reference(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); // ou de onde você
+
+        List<Course> courseList = courseRepository.findByUser(user);
+        model.addAttribute("course", new CourseDTO());
+        model.addAttribute("courseList", courseList);
+        ModelAndView mv = new ModelAndView("references-view");
+
+        return mv;
     }
 
     @PostMapping("/course/register")
