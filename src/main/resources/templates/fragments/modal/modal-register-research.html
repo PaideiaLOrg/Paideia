@@ -1,0 +1,76 @@
+<div th:fragment="modal-register-research" id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full overflow-y-auto " style="height: 500px;"
+            id="modalContent">
+            <!-- Título do Modal -->
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-xl font-bold ">Pesquisa</h2>
+
+                <button id="closeModalBtnResearch" class="px-4 py-2 bg-red-500 text-white rounded"><i
+                        class="fa-solid fa-x"></i></button>
+                <!-- Corpo do Modal -->
+
+            </div>
+
+            <p class="mb-6">Cadastre as informações de uma Pesquisa.</p>
+
+            <div class="max-w-md mx-auto">
+                <form th:action="@{|/aluno/course/${idCourse}/research/register|}" th:object="${academicResearchDTO}"
+                    method="post">
+                    <label for="researchAuthor" class="block text-sm font-medium text-gray-700">Nome do Autor</label>
+                    <input type="text" id="researchAuthor" name="researchAuthor" th:field="*{researchAuthor}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+
+                    <label for="supervisor" class="block text-sm font-medium text-gray-700">Nome do Orientador</label>
+                    <input type="text" id="supervisor" name="supervisor" th:field="*{supervisor}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+
+                    <label for="researchTypeEnum" class="block text-sm font-medium text-gray-700">Selecione o tipo de
+
+
+                        pesquisa</label>
+                    <select id="researchTypeEnum" name="researchTypeEnum"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black">
+                        <option value="" disabled selected class="text-black">Selecione o tipo de
+                            pesquisa</option>
+
+                        <option th:each="researchTypeEnum : ${researchTypeEnum}" th:value="${researchTypeEnum}"
+                            th:text="${researchTypeEnum.getResearchTypeEnum()}" style="color: black;">
+                        </option>
+                    </select>
+
+
+
+
+                    <label for="researchTitle" class="block text-sm font-medium text-gray-700">Título da
+                        Pesquisa</label>
+                    <input type="text" id="researchTitle" name="researchTitle" th:field="*{researchTitle}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+
+                    <label for="researchSubject" class="block text-sm font-medium text-gray-700">Assunto da
+                        Pesquisa</label>
+                    <input type="text" id="researchSubject" name="researchSubject" th:field="*{researchSubject}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+
+                    <label for="researchAbstract" class="block text-sm font-medium text-gray-700">Resumo da
+                        Pesquisa</label>
+                    <textarea th:field="*{researchAbstract}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        name="researchAbstract" rows="3">
+                    </textarea>
+
+                    <label for="researchPublication" class="block text-sm font-medium text-gray-700">Data
+                        Publicação</label>
+                    <input type="date" id="researchPublication" name="researchPublication"
+                        th:field="*{researchPublication}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+
+                    <button class="w-full bg-purple-600 px-3 py-2 rounded-md mt-2 text-white" type="submit">Cadastrar
+                        Pesquisa</button>
+                </form>
+            </div>
+            <!-- Botão para fechar o modal -->
+        </div>
+    </div>
+</div>
+</div>

@@ -19,7 +19,6 @@ public class References {
     private String link;
 
     public static void getReference(Model model) {
-        Course.adicionarCursosNoModel(model);
 
         model.addAttribute("references");
     }

@@ -27,7 +27,12 @@
                     <a href="#" class="block px-4 py-2 hover:bg-gray-100">Perfil</a>
                 </li>
                 <li>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-100">Sair</a>
+                    <form id="logout-form" action="/auth/logoff" method="POST">
+                        <input type="hidden" name="_csrf" th:value="${token}" />
+                        <!-- CSRF token para segurança -->
+                        <button type="submit" class="block px-4 py-2 hover:bg-gray-100">Sair</button>
+                    </form>
+
                 </li>
             </ul>
         </div>

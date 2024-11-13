@@ -23,16 +23,23 @@
             <h1 class="block w-full pl-2 pt-2 text-xl text-gray-300 ">
                 Cursos Cadastrados
             </h1>
-            <div th:each="course : ${courses}">
-                <a th:href="@{${course.link}}"
+            <div id="openModalBtnCourse" class="bg-gray-800 w-full h-12 text-center flex align-center justify-center">
+                <h1 class="text-center ">
+                    +
+                </h1>
+            </div>
+
+            <div th:each="course : ${courseList}">
+                <a th:href="@{|/aluno/course/${course.idCourse}|}"
                     class="block w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 relative">
                     <div>
-                        <img width="100%" th:src="@{${course.imageUrl}}" class="rounded-lg">
+                        <img width="100%" th:src="@{/images/software-developer-6521720_640.jpg}" class="rounded-lg">
                     </div>
                     <span class="absolute inset-0 flex items-center justify-center text-white text-sm font-bold"
-                        th:text="${course.name}"></span>
+                        th:text="${course.courseName}"></span>
                 </a>
             </div>
+
 
         </div>
         <!-- Primeiro link -->
@@ -40,20 +47,49 @@
             <h1 class="block w-full px-4 py-2 text-xl text-gray-300 hover:bg-gray-700">
                 Area Interesse
             </h1>
-            <div th:each="course : ${courses}">
-                <a th:href="@{${course.link}}"
-                    class="block w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 relative">
+
+            <div id="openModalBtnCourse" class="bg-gray-800 w-full h-12 text-center flex align-center justify-center">
+                <h1 class="text-center ">
+                    +
+                </h1>
+            </div>
+
+            <div th:each="course : ${courseList}">
+                <a class="block w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 relative">
                     <div>
-                        <img width="100%" th:src="@{${course.imageUrl}}" class="rounded-lg">
+                        <img width="100%" th:src="@{/images/software-developer-6521720_640.jpg}" class="rounded-lg">
                     </div>
                     <span class="absolute inset-0 flex items-center justify-center text-white text-sm font-bold"
-                        th:text="${course.name}"></span>
+                        th:text="${course.courseName}"></span>
                 </a>
             </div>
 
         </div>
+
+        <div th:insert="~{/fragments/modal/modal-register-course :: modal-register-course}"></div>
+
+
         <!-- Repita o bloco acima para os outros links -->
 
     </div>
 
+
+    <script>
+        document.getElementById('openModalBtnCourse').addEventListener('click', function () {
+            document.getElementById('modal-course').classList.remove('hidden');
+        });
+
+        // Fechar modal ao clicar no botão de fechar
+        document.getElementById('closeModalBtnCourse').addEventListener('click', function () {
+            document.getElementById('modal-course').classList.add('hidden');
+        });
+
+        // Fechar modal ao clicar fora do conteúdo
+        document.getElementById('modal-course').addEventListener('click', function (e) {
+            if (e.target === this) {  // Verifica se o clique foi fora do conteúdo do modal
+                this.classList.add('hidden');
+            }
+        });
+
+    </script>
 </div>

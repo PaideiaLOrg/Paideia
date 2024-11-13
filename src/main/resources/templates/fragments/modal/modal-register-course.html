@@ -1,0 +1,99 @@
+<div th:fragment="modal-register-course" id="modal-course" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full overflow-y-auto " style="height: 500px;"
+            id="modalContent">
+            <!-- Título do Modal -->
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-xl font-bold" style="color: black;">Curso</h2>
+
+                <button id="closeModalBtnCourse" class="px-4 py-2 bg-red-500 text-white rounded"><i
+                        class="fa-solid fa-x"></i></button>
+                <!-- Corpo do Modal -->
+
+            </div>
+
+            <p class="mb-6" style="color: black;">Cadastre as informações de um Curso.</p>
+
+            <div class="max-w-md mx-auto">
+                <form th:action="@{/aluno/course/register}" th:object="${course}" method="post">
+
+                    <label for="courseName" class="block text-sm font-medium text-gray-700">Nome do Curso</label>
+                    <input type="text" id="courseName" name="courseName" th:field="*{courseName}" style="color: black;"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+
+                    <label for="description" class="block text-sm font-medium text-gray-700">Descrição</label>
+                    <textarea id="description" name="description" th:field="*{description}" style="color: black;"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        rows="3">
+                    </textarea>
+
+                    <label for="degreeProgram" class="block text-sm font-medium text-gray-700">Grau Acadêmico</label>
+                    <select id="degreeProgram" name="degreeProgram"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black">
+                        <option value="" class="text-gray-700" disabled selected style="color: black;">Selecione o grau
+                        </option>
+
+                        <option th:each="degreeProgram : ${degreeProgramOptions}" th:value="${degreeProgram}"
+                            th:text="${degreeProgram.getDegreeProgramEnum()}" style="color: black;">
+                        </option>
+                    </select>
+
+                    <label for="emphasisArea" class="block text-sm font-medium text-gray-700">Habilitação/Ênfase</label>
+                    <input type="text" id="emphasisArea" name="emphasisArea" th:field="*{emphasisArea}"
+                        style="color: black;"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+
+                    <label for="entryDate" class="block text-sm font-medium text-gray-700">Data de Ingresso</label>
+                    <input type="date" id="entryDate" name="entryDate" th:field="*{entryDate}" style="color: black;"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+
+                    <label for="completionDate" class="block text-sm font-medium text-gray-700">Data de Formação /
+                        Previsão de Formação</label>
+                    <input type="date" id="completionDate" name="completionDate" th:field="*{completionDate}"
+                        style="color: black;"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+
+                    <label for="courseStatus" class="block text-sm font-medium text-gray-700">Status do Curso</label>
+                    <select id="courseStatus" name="courseStatus"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black">
+                        <option value="" disabled selected class="text-black">Selecione o status</option>
+
+                        <option th:each="courseStatus : ${course_statusOptions}" th:value="${courseStatus}"
+                            th:text="${courseStatus.getCourseStatusEnum()}" style="color: black;">
+                        </option>
+                    </select>
+
+                    <label for="knowledgeArea" class="block text-sm font-medium text-gray-700">Área do
+                        Conhecimento</label>
+                    <select id="knowledgeArea" name="knowledgeArea"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black">
+                        <option value="" disabled selected class="text-black">Selecione a área</option>
+
+                        <option th:each="knowledgeArea : ${knowledge_areaOptions}" th:value="${knowledgeArea}"
+                            th:text="${knowledgeArea.getKnowledgeAreaEnum()}" style="color: black;">
+                        </option>
+                    </select>
+
+                    <label for="institution" class="block text-sm font-medium text-gray-700">Instituição</label>
+                    <input type="text" id="institution" name="institution" th:field="*{institution}"
+                        style="color: black;"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+
+                    <label for="institute" class="block text-sm font-medium text-gray-700">Instituto</label>
+                    <input type="text" id="institute" name="institute" th:field="*{institute}" style="color: black;"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required>
+
+                    <button class="w-full bg-purple-600 px-3 py-2 rounded-md mt-2 text-white" type="submit">Cadastrar
+                        Curso</button>
+                </form>
+            </div>
+            <!-- Botão para fechar o modal -->
+        </div>
+    </div>
+</div>
