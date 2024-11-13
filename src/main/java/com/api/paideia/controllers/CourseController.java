@@ -64,7 +64,6 @@ public class CourseController {
         Course course = courseRepository.findByIdCourse(idCourse);
         List<Course> courseList = courseRepository.findByUser(user);
         System.out.println(idCourse);
-        model.addAttribute("course", new CourseDTO());
         model.addAttribute("courseAll", course);
         model.addAttribute("idCourse", idCourse);
         model.addAttribute("courseList", courseList);
