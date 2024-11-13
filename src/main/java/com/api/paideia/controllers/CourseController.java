@@ -11,12 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.api.paideia.domain.course.Course;
-import com.api.paideia.domain.discipline.Discipline;
 import com.api.paideia.domain.user.User;
+import com.api.paideia.dto.AcademicResearchDTO;
 import com.api.paideia.dto.CourseDTO;
+import com.api.paideia.dto.DisciplineDTO;
 import com.api.paideia.enums.CourseStatusEnum;
 import com.api.paideia.enums.DegreeProgramEnum;
+import com.api.paideia.enums.DisciplineStatus;
+import com.api.paideia.enums.DisciplineTypeEnum;
 import com.api.paideia.enums.KnowledgeAreaEnum;
+import com.api.paideia.enums.ResearchTypeEnum;
 import com.api.paideia.infrastructure.security.TokenService;
 import com.api.paideia.repositories.course.CourseRepository;
 import java.util.List;
@@ -52,16 +56,22 @@ public class CourseController {
         return "user"; // Nome da view a ser renderizada
     }
 
-    @GetMapping("/course/{courseName}")
-    public String course(@PathVariable String courseName, Model model) {
+    @GetMapping("/course/{idCourse}")
+    public String course(@PathVariable String idCourse, Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); // ou de onde você
 
-        Course course = courseRepository.findByCourseName(courseName);
+        Course course = courseRepository.findByIdCourse(idCourse);
         List<Course> courseList = courseRepository.findByUser(user);
-
+        System.out.println(idCourse);
         model.addAttribute("course", new CourseDTO());
         model.addAttribute("courseAll", course);
+        model.addAttribute("idCourse", idCourse);
         model.addAttribute("courseList", courseList);
+        model.addAttribute("disciplineDTO", new DisciplineDTO());
+        model.addAttribute("academicResearchDTO", new AcademicResearchDTO());
+        model.addAttribute("disciplineTypes", DisciplineTypeEnum.values());
+        model.addAttribute("disciplineStatus", DisciplineStatus.values());
+        model.addAttribute("researchTypeEnum", ResearchTypeEnum.values());
 
         model.addAttribute("degreeProgramOptions", DegreeProgramEnum.values()); // Passa o enum para o Thymeleaf
         model.addAttribute("course_statusOptions", CourseStatusEnum.values());

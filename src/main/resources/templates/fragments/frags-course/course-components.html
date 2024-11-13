@@ -4,8 +4,10 @@
 
     <div class="flex flex-wrap w-full justify-center">
 
-        <div class="p-4 text-white" style="width: 100%; background-color: #087DD8;  box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.3);" th:insert="~{/fragments/description :: description('CURSO DSM', 'Este é um curso de Desenvolvimento de Software Móvel, Desenvolvimento de Desktop,
-        Desenvolvimento Web e Tecnologias novas para o mercado de tabalho')}"></div>
+        <div class="p-4 text-white"
+            style="width: 100%; background-color: #087DD8;  box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.3);"
+            th:insert="~{/fragments/description :: description(${courseAll.courseName}, ${courseAll.description})}">
+        </div>
 
 
 
@@ -117,7 +119,18 @@
             </div>
 
         </div>
-
+        <div th:if="${academicResearches == null}"
+            class="flex flex-col w-full justify-center items-center ml-16 mr-16 mt-4 mb-4 text-center">
+            <div class="rounded-md mb-2 flex flex-col items-center transition-all duration-300">
+                <h1 class="text-3xl mb-4 text-white font-bold text-xl text-gray-700">
+                    Insira novas Pesquisas
+                </h1>
+                <div id="openModalBtn" class="flex items-center justify-center rounded-md h-32 w-32 mt-4 shadow-md"
+                    th:style="'background-color: #E4D9FF; background-size: cover; background-position: center;'">
+                    <img th:src="@{/images/plus.png}" width="20px" alt="">
+                </div>
+            </div>
+        </div>
 
 
     </div>
@@ -133,7 +146,7 @@
 
     <div th:insert="~{/fragments/modal/modal-register-discipline :: modal-register-discipline}"></div>
     <div th:insert="~{/fragments/modal/modal-register-research :: modal-register-research}"></div>
-    <div th:insert="~{/fragments/modal/modal-delete-research :: modal-delete-research}"></div>
+    <!-- <div th:insert="~{/fragments/modal/modal-delete-research :: modal-delete-research}"></div> -->
     <div th:insert="~{/fragments/modal/modal-delete-course :: modal-delete-course}"></div>
 
 
@@ -143,9 +156,7 @@
 
 
 
-
-    </di>
-    <script th:fragment="course-components">
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             const ggg = {
                 '1': 'drops-1',
@@ -201,7 +212,8 @@
         });
 
 
-        document.getElementById('openModalBtnDiscipline').addEventListener('click', function () {
+        document.getElementById('openModalBtnDiscipline').addEventListener('click', function (e) {
+            console.log(e);
             document.getElementById('modal-discipline').classList.remove('hidden');
         });
 
@@ -218,29 +230,29 @@
         });
 
 
-        // Para abrir o modal ao clicar no botão de exclusão
-        const deleteButtons = document.querySelectorAll("#openModalBtnDeleteResearch");
+        // // Para abrir o modal ao clicar no botão de exclusão
+        // const deleteButtons = document.querySelectorAll("#openModalBtnDeleteResearch");
 
-        deleteButtons.forEach(button => {
-            button.addEventListener("click", function (event) {
-                event.stopPropagation(); // Impede que o evento de clique suba e acione o link
-                event.preventDefault();  // Previne a ação padrão (redirecionamento)
+        // deleteButtons.forEach(button => {
+        //     button.addEventListener("click", function (event) {
+        //         event.stopPropagation(); // Impede que o evento de clique suba e acione o link
+        //         event.preventDefault();  // Previne a ação padrão (redirecionamento)
 
-                document.getElementById('modal-delete-research-button').classList.remove('hidden'); // Abre o modal
-            });
-        });
+        //         document.getElementById('modal-delete-research-button').classList.remove('hidden'); // Abre o modal
+        //     });
+        // });
 
-        // Fechar modal ao clicar no botão de fechar
-        document.getElementById('closeModalBtnDeleteResearch').addEventListener('click', function () {
-            document.getElementById('modal-delete-research-button').classList.add('hidden'); // Fecha o modal
-        });
+        // // Fechar modal ao clicar no botão de fechar
+        // document.getElementById('closeModalBtnDeleteResearch').addEventListener('click', function () {
+        //     document.getElementById('modal-delete-research-button').classList.add('hidden'); // Fecha o modal
+        // });
 
-        // Fechar modal ao clicar fora do conteúdo
-        document.getElementById('modal-delete-research-button').addEventListener('click', function (e) {
-            if (e.target === this) {  // Verifica se o clique foi fora do conteúdo do modal
-                this.classList.add('hidden'); // Fecha o modal
-            }
-        });
+        // // Fechar modal ao clicar fora do conteúdo
+        // document.getElementById('modal-delete-research-button').addEventListener('click', function (e) {
+        //     if (e.target === this) {  // Verifica se o clique foi fora do conteúdo do modal
+        //         this.classList.add('hidden'); // Fecha o modal
+        //     }
+        // });
 
 
 
@@ -265,3 +277,5 @@
 
 
     </script>
+
+</div>

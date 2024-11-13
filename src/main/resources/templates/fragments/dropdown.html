@@ -30,7 +30,7 @@
             </div>
 
             <div th:each="course : ${courseList}">
-                <a th:href="@{|/aluno/course/${course.courseName}|}"
+                <a th:href="@{|/aluno/course/${course.idCourse}|}"
                     class="block w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 relative">
                     <div>
                         <img width="100%" th:src="@{/images/software-developer-6521720_640.jpg}" class="rounded-lg">
@@ -73,14 +73,6 @@
 
     </div>
 
-    <a id="1"
-        class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 dropdown-toggle">
-        <img th:src="@{/images/icon-course.svg}" alt="Menu Icon" width="70%" />
-    </a>
-    <a id="2"
-        class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 dropdown-toggle">
-        <img th:src="@{/images/icon-study-area.svg}" alt="Menu Icon" width="70%" />
-    </a>
 
     <script>
         document.getElementById('openModalBtnCourse').addEventListener('click', function () {

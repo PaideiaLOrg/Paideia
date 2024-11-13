@@ -1,4 +1,4 @@
-package com.api.paideia.domain.academicResearches;
+package com.api.paideia.domain.academicResearch;
 
 import java.time.LocalDate;
 import java.util.List;

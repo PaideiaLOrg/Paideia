@@ -31,6 +31,7 @@
             const dropdownMenu = document.getElementById('dropdown-menu');
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const sidebar = document.querySelector('.sidebar');
+            const menu = document.getElementById('tela');
             const mainContent = document.getElementById('main-content'); // Selecione o conteúdo principal
             const kkk = {
                 '1': 'O-1',
@@ -48,19 +49,17 @@
                     const h1ToShow = document.getElementById(h1ToShowId);
 
                     // Toggle o dropdown-menu
-                    dropdownMenu.classList.toggle('hidden');
+                    dropdownMenu.classList.toggle('seek');
 
                     // Adiciona ou remove a classe para mover o conteúdo
-                    if (!dropdownMenu.classList.contains('hidden')) {
-                        mainContent.classList.remove('ml-16');  // Remove classes anteriores se houver
-                        mainContent.classList.add('ml-48');  // Move o conteúdo 8rem para a direita (ajuste conforme necessário)
+                    if (!dropdownMenu.classList.contains('seek')) {
+                        dropdownMenu.style.left = '-100%';  // Defina diretamente a propriedade 'left'
                     } else {
-                        mainContent.classList.remove('ml-48')
-                        mainContent.classList.add('ml-16');
+                        dropdownMenu.style.left = '100%';  // Defina diretamente a propriedade 'left'
                     }
 
                     // Esconder todos os blocos e mostrar apenas o relacionado ao botão clicado
-                    document.querySelectorAll('#dropdown-menu .ww').forEach(h1 => {
+                    document.querySelectorAll('.ww').forEach(h1 => {
                         h1.classList.add('hidden');
                     });
 
@@ -77,6 +76,12 @@
             mobileMenuButton.addEventListener('click', () => {
                 sidebar.classList.toggle('menu-active');
             });
+
+            window.addEventListener('click', (e) => {
+                if (e.target == menu) {
+                    dropdownMenu.classList.add('hidden');
+                }
+            })
         });
         // tailwind.config.js
 

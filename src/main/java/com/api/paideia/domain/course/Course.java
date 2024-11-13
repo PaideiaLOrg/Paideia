@@ -5,6 +5,7 @@ import com.api.paideia.enums.CourseStatusEnum;
 import com.api.paideia.enums.DegreeProgramEnum;
 import com.api.paideia.enums.KnowledgeAreaEnum;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -31,7 +32,9 @@ public class Course {
     private String idCourse;
 
     private String courseName;
+    @Column(length = 1000)
     private String description;
+
     @Enumerated(EnumType.STRING)
     private DegreeProgramEnum degreeProgram;
 
