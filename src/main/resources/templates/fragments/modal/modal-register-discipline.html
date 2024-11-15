@@ -16,14 +16,23 @@
             <p class="mb-6">Cadastre as informações de uma Disciplina.</p>
 
             <div class="max-w-md mx-auto">
-                <form th:action="@{|/aluno/course/${idCourse}/discipline/register|}" th:object="${disciplineDTO}"
-                    method="post">
+                <form
+                    th:action="@{|/aluno/course${discipline == null ? '/' + idCourse : ''}/discipline/${discipline != null ? 'edit/' + discipline.idDiscipline : 'register'}|}"
+                    th:object="${disciplineDTO}" method="post">
+                    <div th:if="${discipline != null}">
+
+                        <input type="hidden" name="_method" value="PUT" />
+                        <input type="hidden" name="user" th:field="*{user}" />
+                        <input type="hidden" name="course" th:field="*{course}" />
+
+                    </div>
 
                     <label for="disciplineName" class="block text-sm font-medium text-gray-700">Nome da
                         Disciplina</label>
                     <input type="text" id="disciplineName" name="disciplineName" th:field="*{disciplineName}"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         required>
+
 
                     <label for="disciplineProfessor" class="block text-sm font-medium text-gray-700">Professor</label>
                     <input type="text" id="disciplineProfessor" name="disciplineProfessor"
@@ -39,12 +48,12 @@
 
                     <label for="disciplineTypeEnum" class="block text-sm font-medium text-gray-700">Tipo da
                         Disciplina</label>
-                    <select id="disciplineTypeEnum" name="disciplineTypeEnum"
+                    <select th:field="*{disciplineTypeEnum}" id="disciplineTypeEnum" name="disciplineTypeEnum"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                         <option value="" disabled selected class="text-black">Selecione o tipo de disciplina</option>
 
-                        <option th:each="disciplineTypeEnum : ${disciplineTypes}" th:value="${disciplineTypeEnum}"
-                            th:text="${disciplineTypeEnum.getDisciplineTypeEnum()}" style="color: black;">
+                        <option th:each="disciplineType: ${disciplineTypes}" th:value="${disciplineType}"
+                            th:text="${disciplineType.getDisciplineTypeEnum()}" style="color: black;">
                         </option>
 
 
@@ -57,12 +66,11 @@
 
 
                     <label for="disciplineStatus" class="block text-sm font-medium text-gray-700">Status</label>
-                    <select id="disciplineStatus" name="disciplineStatus"
+                    <select th:field="*{disciplineStatus}" id="disciplineStatus" name="disciplineStatus"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black">
-                        <option value="" disabled selected class="text-black">Selecione o Status</option>
-
-                        <option th:each="disciplineStatus : ${disciplineStatus}" th:value="${disciplineStatus}"
-                            th:text="${disciplineStatus.getDisciplineStatus()}" style="color: black;">
+                        <option value="" disabled class="text-black">Selecione o Status</option>
+                        <option th:each="status : ${disciplineStatus}" th:value="${status}"
+                            th:text="${status.getDisciplineStatus()}" style="color: black;">
                         </option>
                     </select>
 

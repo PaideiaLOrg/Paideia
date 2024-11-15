@@ -2,11 +2,13 @@
 
 
     <div class="w-full pt-1 pb-1  m-2 ml-0 flex flex-col justify-center rounded-md">
-        <h1 class=" text-center  text-2xl text-black">Titulo da Pesquisa</h1>
+        <h1 class=" text-center  text-2xl text-black" th:text="${academicResearch.researchTitle}">Titulo da Pesquisa
+        </h1>
 
     </div>
     <div class=" m-2  ml-0 w-full  flex flex-col justify-center pt-2 pb-2 pl-4 pr-4">
-        <h1 class=" text-left text-md text-black">Resumo da Pesquisa Resumo da Pesquisa Resumo da
+        <h1 class=" text-left text-md text-black" th:text="${academicResearch.researchAbstract}">Resumo da Pesquisa
+            Resumo da Pesquisa Resumo da
             Hoje eu acordei com vontade de comer uma cebola verde musgo. Resumo da Pesquisa Resumo da Pesquisa Resumo da
             Hoje eu acordei com vontade de comer uma cebola verde musgo.Resumo da Pesquisa Resumo da Pesquisa Resumo da
             Hoje eu acordei com vontade de comer uma cebola verde musgo.
@@ -63,17 +65,17 @@
 
 <div class=" w-48 flex h-full flex-col pt-3 gap-y-1 ml-auto border-l-2" th:fragment="overview-part2">
     <div class=" ml-4 m-2 mr-0 flex">
-        <h1 class="text-center">
+        <h1 class="text-center" th:text="${academicResearch.supervisor}">
             Orientador
         </h1>
     </div>
     <div class=" ml-4 m-2 mr-0 flex">
-        <h1 class="text-center">
+        <h1 class="text-center" th:text="${academicResearch.researchSubject}">
             Assuto
         </h1>
     </div>
     <div class=" ml-4 m-2 mr-0 mb-0 flex">
-        <h1 class="text-center">
+        <h1 class="text-center" th:text="${academicResearch.getCourse().getCourseName()}">
             Nome Curso
         </h1>
     </div>

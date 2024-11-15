@@ -9,101 +9,62 @@
             th:insert="~{/fragments/description :: description(${courseAll.courseName}, ${courseAll.description})}">
         </div>
 
-
-
-        <div class="flex flex-col w-full ml-16 mr-16 mt-4 mb-4 ">
+        <div class="flex flex-col w-full ml-16 mr-16 mt-4 ">
             <div class="w-full p-2 drop-toggle flex flex-col rounded-xl">
-                <h1 class="text-3xl text-black ">Disciplinas </h1>
+                <h1 class="text-3xl text-black ">Disciplinas</h1>
             </div>
         </div>
+        <div th:if="${disciplineList != null}" th:class="'flex flex-wrap justify-center transition-all duration-300'">
 
-
-
-        <div th:if="${semesterCourses != null}" th:each="entry, iterStat : ${semesterCourses}"
-            class="flex flex-col w-full ml-16 mr-16 mt-4 mb-4 ">
-
-
-            <div th:id="(${iterStat.index + 1})" style="border-color: black;"
-                class="w-full p-4 drop-toggle flex flex-col border-2 border-[#1c1c1c] rounded-full">
-                <div class="flex justify-between items-center">
-                    <h1 class="text-lg text-black" th:text="${entry.key}"></h1>
-                    <i class="fa-solid fa-angle-right"></i>
-                </div>
-            </div>
-
-            <div th:id="'drops-'+(${iterStat.index + 1})"
-                th:class="'ww flex flex-wrap justify-center hidden transition-all duration-300'">
-
-                <div class="teste rounded-md mb-2 flex" th:each="discipline : ${entry.value}">
-                    <a th:href="@{${discipline.link}}">
-
-                        <div th:style="'background-color: ' + ${discipline.color} + '; background-size: cover; background-position: center;'"
-                            th:class="'flex items-center justify-center rounded-md h-32 w-32 mt-4 ml-2 mr-2 shadow-md relative'">
-                            <button
-                                class="absolute top-0 right-0 text-gray-600  rounded-full w-8 h-8 flex items-center justify-center">
-                                <i class="fa-solid fa-xmark text-white"></i>
-                            </button>
-
-
-                            <h1 class="text-lg font-bold text-white text-outline text-center "
-                                th:text="${discipline.name}">
-                            </h1>
+            <div class="rounded-md mb-2 flex" th:each="disciplineList: ${disciplineList}">
+                <a th:href="@{|/aluno/course/discipline/${disciplineList.idDiscipline}|}" class="flex flex-col">
+                    <div style="background-color: #087DD8; background-size: cover;"
+                        th:class="'flex items-center relative justify-center rounded-md h-32 w-32 mt-4 ml-2 mr-2 shadow-md'">
+                        <div id="openModalBtnDeleteDiscipline"
+                            class="absolute top-0 right-0 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer">
+                            <i class="fa-solid fa-xmark text-white"></i>
                         </div>
-
-                    </a>
-
-                </div>
-
-                <div class="teste rounded-md mb-2 flex transition-all duration-300" th:if="${entry.value.size() < 10}"
-                    th:each="i : ${#numbers.sequence(entry.value.size() + 1, 10)}">
-                    <div th:style="'background-color: #E4D9FF; background-size: cover; background-position: center;'"
-                        class="flex items-center justify-center rounded-md h-32 w-32 mt-4 ml-2 mr-2 shadow-md ">
-                        <h1 class="text-lg font-bold text-white text-outline text-center  p-2">
-                            <img th:src="@{/images/plus.png}" width="20px" alt="">
-                        </h1>
+                        <h1 class="text-lg font-bold text-white text-outline text-center"
+                            th:text="${disciplineList.disciplineName}"></h1>
                     </div>
-                </div>
+                </a>
 
 
             </div>
 
-        </div>
-        <div th:if="${semesterCourses == null}"
-            class="flex flex-col w-full justify-center items-center ml-16 mr-16 mt-4 mb-4 text-center">
-            <div class="rounded-md mb-2 flex flex-col items-center transition-all duration-300">
-                <h1 class="text-3xl mb-4 text-white font-bold text-xl text-gray-700">
-                    Insira novos semestres e suas disciplinas
-                </h1>
+            <div class="rounded-md mb-2 flex transition-all duration-300">
                 <div id="openModalBtnDiscipline"
-                    class="flex items-center justify-center rounded-md h-32 w-32 mt-4 shadow-md"
-                    th:style="'background-color: #E4D9FF; background-size: cover; background-position: center;'">
-                    <img th:src="@{/images/plus.png}" width="20px" alt="">
+                    th:style="'background-color: #E4D9FF; background-size: cover; background-position: center;'"
+                    class="flex items-center justify-center rounded-md h-32 w-32 mt-4 ml-2 mr-2 shadow-md ">
+                    <h1 class="text-lg font-bold text-white text-outline text-center  p-2">
+                        <img th:src="@{/images/plus.png}" width="20px" alt="">
+                    </h1>
                 </div>
             </div>
+
         </div>
-
-
 
         <div class="flex flex-col w-full ml-16 mr-16 mt-4 ">
             <div class="w-full p-2 drop-toggle flex flex-col rounded-xl">
                 <h1 class="text-3xl text-black ">Pesquisas</h1>
             </div>
         </div>
-        <div th:if="${academicResearches != null}"
+        <div th:if="${academicResearchList != null}"
             th:class="'flex flex-wrap justify-center transition-all duration-300'">
 
-            <div class="rounded-md mb-2 flex" th:each="academicResearche: ${academicResearches}">
-                <div th:href="@{${academicResearche.link}}" class="flex flex-col">
-                    <div th:style="'background-color: ' + ${academicResearche.color} + '; background-size: cover; '"
+            <div class="rounded-md mb-2 flex" th:each="academicResearche: ${academicResearchList}">
+                <a th:href="@{|/aluno/course/researchesview/${academicResearche.idAcademicResearch}|}"
+                    class="flex flex-col">
+                    <div style="background-color: #087DD8; background-size: cover;"
                         th:class="'flex items-center relative justify-center rounded-md h-32 w-32 mt-4 ml-2 mr-2 shadow-md'">
                         <div id="openModalBtnDeleteResearch"
                             class="absolute top-0 right-0 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer">
                             <i class="fa-solid fa-xmark text-white"></i>
                         </div>
                         <h1 class="text-lg font-bold text-white text-outline text-center"
-                            th:text="${academicResearche.name}"></h1>
+                            th:text="${academicResearche.researchTitle}"></h1>
                     </div>
-                </div>
+                </a>
 
 
             </div>
@@ -119,7 +80,7 @@
             </div>
 
         </div>
-        <div th:if="${academicResearches == null}"
+        <!-- <div th:if="${academicResearches == null}"
             class="flex flex-col w-full justify-center items-center ml-16 mr-16 mt-4 mb-4 text-center">
             <div class="rounded-md mb-2 flex flex-col items-center transition-all duration-300">
                 <h1 class="text-3xl mb-4 text-white font-bold text-xl text-gray-700">
@@ -130,7 +91,7 @@
                     <img th:src="@{/images/plus.png}" width="20px" alt="">
                 </div>
             </div>
-        </div>
+        </div> -->
 
 
     </div>
@@ -145,8 +106,9 @@
     <!-- Botão para abrir o modal -->
 
     <div th:insert="~{/fragments/modal/modal-register-discipline :: modal-register-discipline}"></div>
+    <div th:insert="~{/fragments/modal/modal-delete-discipline :: modal-delete-discipline}"></div>
     <div th:insert="~{/fragments/modal/modal-register-research :: modal-register-research}"></div>
-    <!-- <div th:insert="~{/fragments/modal/modal-delete-research :: modal-delete-research}"></div> -->
+    <div th:insert="~{/fragments/modal/modal-delete-research :: modal-delete-research}"></div>
     <div th:insert="~{/fragments/modal/modal-delete-course :: modal-delete-course}"></div>
 
 
@@ -193,7 +155,6 @@
             });
         });
 
-
         // Abrir modal ao clicar no botão
         document.getElementById('openModalBtn').addEventListener('click', function () {
             document.getElementById('modal').classList.remove('hidden');
@@ -230,29 +191,58 @@
         });
 
 
-        // // Para abrir o modal ao clicar no botão de exclusão
-        // const deleteButtons = document.querySelectorAll("#openModalBtnDeleteResearch");
+        // Para abrir o modal ao clicar no botão de exclusão
+        const deleteButtons = document.querySelectorAll("#openModalBtnDeleteResearch");
 
-        // deleteButtons.forEach(button => {
-        //     button.addEventListener("click", function (event) {
-        //         event.stopPropagation(); // Impede que o evento de clique suba e acione o link
-        //         event.preventDefault();  // Previne a ação padrão (redirecionamento)
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function (event) {
+                event.stopPropagation(); // Impede que o evento de clique suba e acione o link
+                event.preventDefault();  // Previne a ação padrão (redirecionamento)
 
-        //         document.getElementById('modal-delete-research-button').classList.remove('hidden'); // Abre o modal
-        //     });
-        // });
+                document.getElementById('modal-delete-research-button').classList.remove('hidden'); // Abre o modal
+            });
+        });
 
-        // // Fechar modal ao clicar no botão de fechar
-        // document.getElementById('closeModalBtnDeleteResearch').addEventListener('click', function () {
-        //     document.getElementById('modal-delete-research-button').classList.add('hidden'); // Fecha o modal
-        // });
+        // Fechar modal ao clicar no botão de fechar
+        document.getElementById('closeModalBtnDeleteResearch').addEventListener('click', function () {
+            document.getElementById('modal-delete-research-button').classList.add('hidden'); // Fecha o modal
+        });
 
-        // // Fechar modal ao clicar fora do conteúdo
-        // document.getElementById('modal-delete-research-button').addEventListener('click', function (e) {
-        //     if (e.target === this) {  // Verifica se o clique foi fora do conteúdo do modal
-        //         this.classList.add('hidden'); // Fecha o modal
-        //     }
-        // });
+        // Fechar modal ao clicar fora do conteúdo
+        document.getElementById('modal-delete-research-button').addEventListener('click', function (e) {
+            if (e.target === this) {  // Verifica se o clique foi fora do conteúdo do modal
+                this.classList.add('hidden'); // Fecha o modal
+            }
+        });
+
+
+
+        const deleteButtonsDiscipline = document.querySelectorAll("#openModalBtnDeleteDiscipline");
+
+        deleteButtonsDiscipline.forEach(button => {
+            button.addEventListener("click", function (event) {
+                event.stopPropagation(); // Impede que o evento de clique suba e acione o link
+                event.preventDefault();  // Previne a ação padrão (redirecionamento)
+
+                document.getElementById('modal-delete-discipline-button').classList.remove('hidden'); // Abre o modal
+            });
+        });
+
+        // Fechar modal ao clicar no botão de fechar
+        document.getElementById('closeModalBtnDeleteDiscipline').addEventListener('click', function () {
+            document.getElementById('modal-delete-discipline-button').classList.add('hidden'); // Fecha o modal
+        });
+
+        // Fechar modal ao clicar fora do conteúdo
+        document.getElementById('modal-delete-discipline-button').addEventListener('click', function (e) {
+            if (e.target === this) {  // Verifica se o clique foi fora do conteúdo do modal
+                this.classList.add('hidden'); // Fecha o modal
+            }
+        });
+
+
+
+
 
 
 

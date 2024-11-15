@@ -14,10 +14,17 @@
 
             <p class="mb-6">Você está prestes a deletar um Curso. Gostaria de prosseguir?
             </p>
-
             <div class="max-w-md mx-auto">
-                <Button class="w-full bg-red-500 h-16 m-2 rounded">Deletar Curso</Button>
+
+                <form th:action="@{/aluno/course/{idCourse}(idCourse=${idCourse})}" method="post" class="w-full m-2">
+                    <input type="hidden" name="_method" value="delete" />
+                    <button type="submit" class="w-full bg-red-500 h-16 rounded">Deletar Curso</button>
+                </form>
+
+
             </div>
+
+
         </div>
     </div>
 </div>

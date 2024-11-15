@@ -10,6 +10,8 @@ import com.api.paideia.enums.DisciplineTypeEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,4 +33,10 @@ public class DisciplineDTO {
     @Column(nullable = false, precision = 15, scale = 2) // Configura o BigDecimal no banco de dados
     private BigDecimal grade;
     private String disciplineNotebook;
+    @ManyToOne
+    @JoinColumn(name = "id_course")
+    private Course course;
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 }

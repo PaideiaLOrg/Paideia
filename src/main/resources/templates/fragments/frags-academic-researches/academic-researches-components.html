@@ -6,7 +6,10 @@
 
     <div class="flex flex-wrap w-full justify-center mt-8">
 
-
+        <div id="openModalBtn"
+            class="border-2 border-blue-500 w-full bg-blue-500 h-12 mr-16 ml-16 flex mb-8 border-round text-center align-center justify-center">
+            <h1 class="text-center align-center">Editas Pesquisa</h1>
+        </div>
 
         <div class="border-2  border-blue-500 w-full h-12 mr-16 ml-16 flex">
             <button id="overview-button"
@@ -38,6 +41,7 @@
             <div th:insert="~{/fragments/notebook-component :: notebook-component}" class="notebook hidden"></div>
 
         </div>
+        <div th:insert="~{/fragments/modal/modal-register-research :: modal-register-research}"></div>
 
     </div>
 </div>
@@ -81,5 +85,22 @@
             notebook.classList.toggle('hidden')
 
         })
+    });
+
+    // Abrir modal ao clicar no botão
+    document.getElementById('openModalBtn').addEventListener('click', function () {
+        document.getElementById('modal').classList.remove('hidden');
+    });
+
+    // Fechar modal ao clicar no botão de fechar
+    document.getElementById('closeModalBtnResearch').addEventListener('click', function () {
+        document.getElementById('modal').classList.add('hidden');
+    });
+
+    // Fechar modal ao clicar fora do conteúdo
+    document.getElementById('modal').addEventListener('click', function (e) {
+        if (e.target === this) {  // Verifica se o clique foi fora do conteúdo do modal
+            this.classList.add('hidden');
+        }
     });
 </script>

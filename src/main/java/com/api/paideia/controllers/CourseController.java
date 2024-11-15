@@ -3,6 +3,7 @@ package com.api.paideia.controllers;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.api.paideia.domain.academicResearch.AcademicResearch;
 import com.api.paideia.domain.course.Course;
-import com.api.paideia.domain.reference.References;
+import com.api.paideia.domain.discipline.Discipline;
 import com.api.paideia.domain.user.User;
 import com.api.paideia.dto.AcademicResearchDTO;
 import com.api.paideia.dto.CourseDTO;
@@ -24,7 +26,10 @@ import com.api.paideia.enums.DisciplineTypeEnum;
 import com.api.paideia.enums.KnowledgeAreaEnum;
 import com.api.paideia.enums.ResearchTypeEnum;
 import com.api.paideia.infrastructure.security.TokenService;
+import com.api.paideia.repositories.academicResearch.AcademicResearchRepository;
 import com.api.paideia.repositories.course.CourseRepository;
+import com.api.paideia.repositories.discipline.DisciplineRepository;
+
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -35,6 +40,8 @@ import lombok.AllArgsConstructor;
 public class CourseController {
 
     final CourseRepository courseRepository;
+    final DisciplineRepository disciplineRepository;
+    final AcademicResearchRepository academicResearchRepository;
     final TokenService tokenService;
 
     @GetMapping("/home")
@@ -62,12 +69,16 @@ public class CourseController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); // ou de onde você
 
         Course course = courseRepository.findByIdCourse(idCourse);
+        List<AcademicResearch> academicResearchList = academicResearchRepository.findByCourse(course);
+        List<Discipline> disciplineList = disciplineRepository.findByCourse(course);
         List<Course> courseList = courseRepository.findByUser(user);
-        System.out.println(idCourse);
+
         model.addAttribute("course", new CourseDTO());
         model.addAttribute("courseAll", course);
         model.addAttribute("idCourse", idCourse);
         model.addAttribute("courseList", courseList);
+        model.addAttribute("academicResearchList", academicResearchList);
+        model.addAttribute("disciplineList", disciplineList);
         model.addAttribute("disciplineDTO", new DisciplineDTO());
         model.addAttribute("academicResearchDTO", new AcademicResearchDTO());
         model.addAttribute("disciplineTypes", DisciplineTypeEnum.values());
@@ -113,6 +124,16 @@ public class CourseController {
         this.courseRepository.save(newCourse);
 
         return new RedirectView("/aluno/home");
+    }
+
+    @DeleteMapping("/course/{idCourse}")
+    public RedirectView deleteCourse(@PathVariable String idCourse) {
+        if (courseRepository.existsById(idCourse)) {
+            courseRepository.deleteById(idCourse);
+            return new RedirectView("/aluno/home");
+        } else {
+            return new RedirectView("/aluno/home");
+        }
     }
 
 }
