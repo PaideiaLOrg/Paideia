@@ -12,4 +12,7 @@ public interface AcademicResearchRepository extends JpaRepository<AcademicResear
     List<AcademicResearch> findByCourse(Course course);
 
     AcademicResearch findByIdAcademicResearch(String idAcademicResearch);
+
+    void deleteByCourse(Course course);
+
 }

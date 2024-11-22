@@ -14,23 +14,41 @@
                     class="w-full h-12 flex justify-center items-center rounded-md">
                     <h1 class="text-2xl text-white" th:text="${user.name}"
                         style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
-                        Bianca Jesus Lima
                     </h1>
                 </div>
                 <div style="background-color: rgb(127, 178, 255);"
                     class="mt-2 w-full h-12 flex justify-center items-center rounded-md">
                     <h1 class="text-2xl text-white" th:text="${user.email}"
                         style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
-                        meuemail@gmail.com
                     </h1>
                 </div>
                 <div class="mt-2 w-full h-12 flex justify-center items-center">
-                    <button class="w-full sm:w-1/2 h-full bg-purple-600 text-white rounded-full">
+                    <button id="openModalBtnUserEditDiscipline"
+                        class="w-full sm:w-1/2 h-full bg-purple-600 text-white rounded-full">
                         Click para Editar Perfil
                     </button>
                 </div>
             </div>
 
         </div>
+        <div th:insert="~{/fragments/modal/modal-edit-user :: modal-edit-user}"></div>
+
     </div>
+    <script>
+        document.getElementById('openModalBtnUserEditDiscipline').addEventListener('click', function () {
+            document.getElementById('modal-edit-user-button').classList.remove('hidden');
+        });
+
+        // Fechar modal ao clicar no botão de fechar
+        document.getElementById('closeModalBtnDiscipline').addEventListener('click', function () {
+            document.getElementById('modal-edit-user-button').classList.add('hidden');
+        });
+
+        // Fechar modal ao clicar fora do conteúdo
+        document.getElementById('modal-edit-user-button').addEventListener('click', function (e) {
+            if (e.target === this) {  // Verifica se o clique foi fora do conteúdo do modal
+                this.classList.add('hidden');
+            }
+        });
+    </script>
 </div>

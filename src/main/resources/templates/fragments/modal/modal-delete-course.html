@@ -16,9 +16,10 @@
             </p>
             <div class="max-w-md mx-auto">
 
-                <form th:action="@{/aluno/course/{idCourse}(idCourse=${idCourse})}" method="post" class="w-full m-2">
-                    <input type="hidden" name="_method" value="delete" />
-                    <button type="submit" class="w-full bg-red-500 h-16 rounded">Deletar Curso</button>
+                <form th:if="${courseAll?.idCourse}" th:action="@{|/aluno/course/delete/${courseAll.idCourse}|}"
+                    method="post" class="w-full">
+                    <input type="hidden" name="_method" value="delete"> <!-- Para suportar DELETE -->
+                    <button type="submit" class="w-full bg-red-500 h-16 m-2 rounded">Deletar Curso</button>
                 </form>
 
 

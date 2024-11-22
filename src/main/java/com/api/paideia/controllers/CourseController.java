@@ -126,14 +126,14 @@ public class CourseController {
         return new RedirectView("/aluno/home");
     }
 
-    @DeleteMapping("/course/{idCourse}")
+    @DeleteMapping("/course/delete/{idCourse}")
     public RedirectView deleteCourse(@PathVariable String idCourse) {
-        if (courseRepository.existsById(idCourse)) {
-            courseRepository.deleteById(idCourse);
-            return new RedirectView("/aluno/home");
-        } else {
-            return new RedirectView("/aluno/home");
-        }
+        Course course = courseRepository.findByIdCourse(idCourse);
+
+        academicResearchRepository.deleteByCourse(course);
+        disciplineRepository.deleteByCourse(course);
+        courseRepository.deleteById(idCourse);
+        return new RedirectView("/aluno/home");
     }
 
 }

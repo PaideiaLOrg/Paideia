@@ -16,7 +16,12 @@
             </p>
 
             <div class="max-w-md mx-auto">
-                <Button class="w-full bg-red-500 h-16 m-2 rounded">Deletar Pesquisa</Button>
+                <form th:if="${academicResearch?.idAcademicResearch}"
+                    th:action="@{|/aluno/course/researchesview/delete/${academicResearch.idAcademicResearch}|}"
+                    method="post" class="w-full">
+                    <input type="hidden" name="_method" value="delete"> <!-- Para suportar DELETE -->
+                    <button type="submit" class="w-full bg-red-500 h-16 m-2 rounded">Deletar Pesquisa</button>
+                </form>
             </div>
         </div>
     </div>

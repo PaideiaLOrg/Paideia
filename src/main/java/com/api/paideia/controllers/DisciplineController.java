@@ -3,14 +3,13 @@ package com.api.paideia.controllers;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -94,6 +93,14 @@ public class DisciplineController {
         newDiscipline.setUser(user);
         disciplineRepository.save(newDiscipline);
         return new RedirectView("/aluno/course/{idCourse}");
+    }
+
+    @DeleteMapping("/discipline/delete/{idDiscipline}")
+    public RedirectView deleteDiscipline(@PathVariable String idDiscipline) {
+        Discipline discipline = disciplineRepository.findByIdDiscipline(idDiscipline);
+        String idCourse = discipline.getCourse().getIdCourse();
+        disciplineRepository.deleteById(idDiscipline);
+        return new RedirectView("/aluno/course/" + idCourse); // Ajuste o redirecionamento conforme necessário
     }
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,11 +17,9 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.api.paideia.domain.academicResearch.AcademicResearch;
 import com.api.paideia.domain.course.Course;
-import com.api.paideia.domain.discipline.Discipline;
 import com.api.paideia.domain.user.User;
 import com.api.paideia.dto.AcademicResearchDTO;
 import com.api.paideia.dto.CourseDTO;
-import com.api.paideia.dto.DisciplineDTO;
 import com.api.paideia.enums.CourseStatusEnum;
 import com.api.paideia.enums.DegreeProgramEnum;
 import com.api.paideia.enums.KnowledgeAreaEnum;
@@ -88,7 +87,7 @@ public class AcademicResearchController {
         return new ModelAndView("redirect:/aluno/course/researchesview/" + idAcademicResearch);
     }
 
-    @PostMapping("/{idCourse}/research/register")
+    @PostMapping("/{idCourse}/researchesview/register")
     public RedirectView registerDiscipline(@PathVariable String idCourse,
             @ModelAttribute AcademicResearchDTO academicResearchDTO,
             Model model) {
@@ -109,5 +108,13 @@ public class AcademicResearchController {
 
         academicResearchRepository.save(newAcademicResearch);
         return new RedirectView("/aluno/course/{idCourse}");
+    }
+
+    @DeleteMapping("/researchesview/delete/{idAcademicResearch}")
+    public RedirectView deleteResearch(@PathVariable String idAcademicResearch) {
+        AcademicResearch academicResearch = academicResearchRepository.findByIdAcademicResearch(idAcademicResearch);
+        String idCourse = academicResearch.getCourse().getIdCourse();
+        academicResearchRepository.deleteById(idAcademicResearch);
+        return new RedirectView("/aluno/course/" + idCourse);
     }
 }

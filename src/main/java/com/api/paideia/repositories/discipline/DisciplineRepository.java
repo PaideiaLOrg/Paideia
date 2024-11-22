@@ -15,4 +15,6 @@ public interface DisciplineRepository extends JpaRepository<Discipline, String> 
 
     Discipline findByIdDiscipline(String idDiscipline);
 
+    void deleteByCourse(Course course);
+
 }
