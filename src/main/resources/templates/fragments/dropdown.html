@@ -1,4 +1,5 @@
-<div th:fragment="dropdown" class="flex flex-col items-center mt-3 border-t " style="z-index:1;">
+<div th:fragment="dropdown" class="flex flex-col items-center mt-3 border-t" style="z-index:1;"
+    th:data-form-error="${formError != null && formError ? 'course' : ''}">
     <a th:href="@{/aluno/home}"
         class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 ">
         <img th:src="@{/images/icon-home.svg}" alt="Menu Icon" width="70%" />
@@ -75,19 +76,53 @@
 
 
     <script>
-        document.getElementById('openModalBtnCourse').addEventListener('click', function () {
-            document.getElementById('modal-course').classList.remove('hidden');
-        });
 
-        // Fechar modal ao clicar no botão de fechar
-        document.getElementById('closeModalBtnCourse').addEventListener('click', function () {
-            document.getElementById('modal-course').classList.add('hidden');
-        });
+        document.addEventListener("DOMContentLoaded", function () {
+            // Verifica se há erro no formulário e abre o modal automaticamente
+            const formErrorElement = document.querySelector('[data-form-error]');
+            if (formErrorElement !== 'course') {
+                document.getElementById('modal-course').classList.add('hidden');
 
-        // Fechar modal ao clicar fora do conteúdo
-        document.getElementById('modal-course').addEventListener('click', function (e) {
-            if (e.target === this) {  // Verifica se o clique foi fora do conteúdo do modal
-                this.classList.add('hidden');
+            }
+
+
+            // Abrir modal
+            document.getElementById('openModalBtnCourse').addEventListener('click', function () {
+                document.getElementById('modal-course').classList.remove('hidden');
+            });
+
+            // Fechar modal ao clicar no botão de fechar
+            document.getElementById('closeModalBtnCourse').addEventListener('click', function () {
+                closeModalAndResetForm();
+            });
+
+            // Fechar modal ao clicar fora do conteúdo
+            document.getElementById('modal-course').addEventListener('click', function (e) {
+                if (e.target === this) { // Verifica se o clique foi fora do conteúdo do modal
+                    closeModalAndResetForm();
+                }
+            });
+
+            // Função para fechar o modal e resetar o formulário
+            function closeModalAndResetForm() {
+                const modal = document.getElementById('modal-course');
+                const form = modal.querySelector('form');
+
+                // Esconde o modal
+                modal.classList.add('hidden');
+
+                // Reseta o formulário
+                form.reset();
+
+                // Remove mensagens de erro
+                const errorMessages = modal.querySelectorAll('.text-red-700');
+                errorMessages.forEach(error => error.textContent = '');
+
+                // Remove estados de erro nos inputs, se aplicável
+                const inputs = form.querySelectorAll('input, textarea, select');
+                inputs.forEach(input => {
+                    input.classList.remove('border-red-500'); // Remover classe de erro, se aplicável
+                });
             }
         });
 

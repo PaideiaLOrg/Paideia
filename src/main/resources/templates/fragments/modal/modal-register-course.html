@@ -19,8 +19,10 @@
 
                     <label for="courseName" class="block text-sm font-medium text-gray-700">Nome do Curso</label>
                     <input type="text" id="courseName" name="courseName" th:field="*{courseName}" style="color: black;"
-                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        required>
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <div class="text-red-700" th:each="error : ${errors}" th:if="${error.field == 'courseName'}"
+                        th:text="${error.defaultMessage}"></div>
+
 
                     <label for="description" class="block text-sm font-medium text-gray-700">Descrição</label>
                     <textarea id="description" name="description" th:field="*{description}" style="color: black;"
@@ -28,36 +30,51 @@
                         rows="3">
                     </textarea>
 
-                    <label for="degreeProgram" class="block text-sm font-medium text-gray-700">Grau Acadêmico</label>
+                    <div class="text-red-700" th:each="error : ${errors}" th:if="${error.field == 'description'}"
+                        th:text="${error.defaultMessage}"></div>
+
+                    <label for="degreeProgram" class="block text-sm font-medium text-gray-700">Grau
+                        Acadêmico</label>
                     <select id="degreeProgram" name="degreeProgram"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black">
-                        <option value="" class="text-gray-700" disabled selected style="color: black;">Selecione o grau
+                        <option value="" class="text-gray-700" disabled selected style="color: black;">Selecione o
+                            grau
                         </option>
 
                         <option th:each="degreeProgram : ${degreeProgramOptions}" th:value="${degreeProgram}"
                             th:text="${degreeProgram.getDegreeProgramEnum()}" style="color: black;">
                         </option>
                     </select>
+                    <div class="text-red-700" th:each="error : ${errors}" th:if="${error.field == 'degreeProgram'}"
+                        th:text="${error.defaultMessage}"></div>
+
 
                     <label for="emphasisArea" class="block text-sm font-medium text-gray-700">Habilitação/Ênfase</label>
                     <input type="text" id="emphasisArea" name="emphasisArea" th:field="*{emphasisArea}"
                         style="color: black;"
-                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        required>
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <div class="text-red-700" th:each="error : ${errors}" th:if="${error.field == 'emphasisArea'}"
+                        th:text="${error.defaultMessage}"></div>
+
 
                     <label for="entryDate" class="block text-sm font-medium text-gray-700">Data de Ingresso</label>
                     <input type="date" id="entryDate" name="entryDate" th:field="*{entryDate}" style="color: black;"
-                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        required>
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <div class="text-red-700" th:each="error : ${errors}" th:if="${error.field == 'entryDate'}"
+                        th:text="${error.defaultMessage}"></div>
+
 
                     <label for="completionDate" class="block text-sm font-medium text-gray-700">Data de Formação /
                         Previsão de Formação</label>
                     <input type="date" id="completionDate" name="completionDate" th:field="*{completionDate}"
                         style="color: black;"
-                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        required>
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <div class="text-red-700" th:each="error : ${errors}" th:if="${error.field == 'completionDate'}"
+                        th:text="${error.defaultMessage}"></div>
 
-                    <label for="courseStatus" class="block text-sm font-medium text-gray-700">Status do Curso</label>
+
+                    <label for="courseStatus" class="block text-sm font-medium text-gray-700">Status do
+                        Curso</label>
                     <select id="courseStatus" name="courseStatus"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black">
                         <option value="" disabled selected class="text-black">Selecione o status</option>
@@ -66,6 +83,8 @@
                             th:text="${courseStatus.getCourseStatusEnum()}" style="color: black;">
                         </option>
                     </select>
+                    <div class="text-red-700" th:each="error : ${errors}" th:if="${error.field == 'courseStatus'}"
+                        th:text="${error.defaultMessage}"></div>
 
                     <label for="knowledgeArea" class="block text-sm font-medium text-gray-700">Área do
                         Conhecimento</label>
@@ -77,18 +96,19 @@
                             th:text="${knowledgeArea.getKnowledgeAreaEnum()}" style="color: black;">
                         </option>
                     </select>
-
+                    <div class="text-red-700" th:each="error : ${errors}" th:if="${error.field == 'knowledgeArea'}"
+                        th:text="${error.defaultMessage}"></div>
                     <label for="institution" class="block text-sm font-medium text-gray-700">Instituição</label>
                     <input type="text" id="institution" name="institution" th:field="*{institution}"
                         style="color: black;"
-                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        required>
-
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <div class="text-red-700" th:each="error : ${errors}" th:if="${error.field == 'institution'}"
+                        th:text="${error.defaultMessage}"></div>
                     <label for="institute" class="block text-sm font-medium text-gray-700">Instituto</label>
                     <input type="text" id="institute" name="institute" th:field="*{institute}" style="color: black;"
-                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        required>
-
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <div class="text-red-700" th:each="error : ${errors}" th:if="${error.field == 'institute'}"
+                        th:text="${error.defaultMessage}"></div>
                     <button class="w-full bg-purple-600 px-3 py-2 rounded-md mt-2 text-white" type="submit">Cadastrar
                         Curso</button>
                 </form>

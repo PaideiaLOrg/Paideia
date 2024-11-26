@@ -1,4 +1,5 @@
 <div th:fragment="modal-register-discipline" id="modal-discipline"
+    th:data-form-error="${formErrorDiscipline != null && formErrorDiscipline ? 'discipline' : ''}"
     class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden z-50">
     <div class="flex items-center justify-center min-h-screen">
         <div class="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full overflow-y-auto " style="height: 500px;"
@@ -30,21 +31,26 @@
                     <label for="disciplineName" class="block text-sm font-medium text-gray-700">Nome da
                         Disciplina</label>
                     <input type="text" id="disciplineName" name="disciplineName" th:field="*{disciplineName}"
-                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        required>
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
 
+                    <div class="text-red-700" th:each="error : ${errors}" th:if="${error.field == 'disciplineName'}"
+                        th:text="${error.defaultMessage}"></div>
 
                     <label for="disciplineProfessor" class="block text-sm font-medium text-gray-700">Professor</label>
                     <input type="text" id="disciplineProfessor" name="disciplineProfessor"
                         th:field="*{disciplineProfessor}"
-                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        required>
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <div class="text-red-700" th:each="error : ${errors}"
+                        th:if="${error.field == 'disciplineProfessor'}" th:text="${error.defaultMessage}"></div>
 
                     <label for="syllabus" class="block text-sm font-medium text-gray-700">Ementa</label>
                     <textarea id="syllabus" name="syllabus" th:field="*{syllabus}"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         rows="3">
                     </textarea>
+                    <div class="text-red-700" th:each="error : ${errors}" th:if="${error.field == 'syllabus'}"
+                        th:text="${error.defaultMessage}"></div>
+
 
                     <label for="disciplineTypeEnum" class="block text-sm font-medium text-gray-700">Tipo da
                         Disciplina</label>
@@ -58,28 +64,40 @@
 
 
                     </select>
-
+                    <div class="text-red-700" th:each="error : ${errors}" th:if="${error.field == 'disciplineTypeEnum'}"
+                        th:text="${error.defaultMessage}"></div>
                     <label for="department" class="block text-sm font-medium text-gray-700">Departamento</label>
                     <input type="text" id="department" name="department" th:field="*{department}"
-                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        required>
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+
+                    <div class="text-red-700" th:each="error : ${errors}" th:if="${error.field == 'department'}"
+                        th:text="${error.defaultMessage}"></div>
 
 
                     <label for="disciplineStatus" class="block text-sm font-medium text-gray-700">Status</label>
                     <select th:field="*{disciplineStatus}" id="disciplineStatus" name="disciplineStatus"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black">
-                        <option value="" disabled class="text-black">Selecione o Status</option>
+                        <!-- Opção padrão -->
+                        <option value="" disabled th:selected="${disciplineStatus == null}" class="text-black">
+                            Selecione o Status
+                        </option>
+                        <!-- Opções de status -->
                         <option th:each="status : ${disciplineStatus}" th:value="${status}"
                             th:text="${status.getDisciplineStatus()}" style="color: black;">
                         </option>
                     </select>
 
 
+
+                    <div class="text-red-700" th:each="error : ${errors}" th:if="${error.field == 'disciplineStatus'}"
+                        th:text="${error.defaultMessage}"></div>
+
+
                     <label for="grade" class="block text-sm font-medium text-gray-700">Nota</label>
                     <input type="number" th:field="*{grade}" id="grade" name="grade" step="0.01"
-                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        required>
-
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <div class="text-red-700" th:each="error : ${errors}" th:if="${error.field == 'grade'}"
+                        th:text="${error.defaultMessage}"></div>
                     <button class="w-full bg-purple-600 px-3 py-2 rounded-md mt-2 text-white" type="submit">Cadastrar
                         Disciplina</button>
                 </form>

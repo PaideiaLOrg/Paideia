@@ -1,5 +1,7 @@
 package com.api.paideia.domain.course;
 
+import java.time.LocalDate;
+
 import org.springframework.ui.Model;
 
 import com.api.paideia.domain.user.User;
@@ -42,9 +44,9 @@ public class Course {
 
     private String emphasisArea;
 
-    private String entryDate;
+    private LocalDate entryDate;
 
-    private String completionDate;
+    private LocalDate completionDate;
 
     @Enumerated(EnumType.STRING)
     private CourseStatusEnum courseStatus;

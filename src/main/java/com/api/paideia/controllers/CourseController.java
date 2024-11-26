@@ -3,14 +3,13 @@ package com.api.paideia.controllers;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.api.paideia.domain.academicResearch.AcademicResearch;
 import com.api.paideia.domain.course.Course;
@@ -29,6 +28,9 @@ import com.api.paideia.infrastructure.security.TokenService;
 import com.api.paideia.repositories.academicResearch.AcademicResearchRepository;
 import com.api.paideia.repositories.course.CourseRepository;
 import com.api.paideia.repositories.discipline.DisciplineRepository;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -92,21 +94,24 @@ public class CourseController {
 
     }
 
-    @GetMapping("/references")
-    public ModelAndView reference(Model model) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); // ou de onde você
-
-        List<Course> courseList = courseRepository.findByUser(user);
-        model.addAttribute("course", new CourseDTO());
-        model.addAttribute("courseList", courseList);
-        ModelAndView mv = new ModelAndView("references-view");
-
-        return mv;
-    }
-
     @PostMapping("/course/register")
-    public RedirectView registerCourse(@ModelAttribute CourseDTO courseDTO, Model model) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); // ou de onde você
+    public String registerCourse(
+            @Valid @ModelAttribute("course") CourseDTO courseDTO,
+            BindingResult result,
+            Model model,
+            RedirectAttributes redirectAttributes,
+            HttpServletRequest request) {
+        String referer = request.getHeader("Referer"); // Captura a URL de onde veio a requisição
+
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("course", courseDTO);
+            redirectAttributes.addFlashAttribute("formError", true); // Flag para modal
+            redirectAttributes.addFlashAttribute("errors", result.getAllErrors());
+            return "redirect:" + (referer != null ? referer : "/aluno/home"); // Redireciona para a página anterior ou
+                                                                              // para o home
+        }
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Course newCourse = new Course();
         newCourse.setCourseName(courseDTO.getCourseName());
@@ -123,17 +128,8 @@ public class CourseController {
 
         this.courseRepository.save(newCourse);
 
-        return new RedirectView("/aluno/home");
-    }
-
-    @DeleteMapping("/course/delete/{idCourse}")
-    public RedirectView deleteCourse(@PathVariable String idCourse) {
-        Course course = courseRepository.findByIdCourse(idCourse);
-
-        academicResearchRepository.deleteByCourse(course);
-        disciplineRepository.deleteByCourse(course);
-        courseRepository.deleteById(idCourse);
-        return new RedirectView("/aluno/home");
+        return "redirect:" + (referer != null ? referer : "/aluno/home"); // Redireciona para a página anterior ou para
+                                                                          // o home
     }
 
 }

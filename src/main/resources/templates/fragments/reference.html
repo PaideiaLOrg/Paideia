@@ -3,10 +3,32 @@
 
     <div class="ml-16">
         <h1 class="my-5 font-medium">Referências</h1>
-        <div th:insert="~{/fragments/frags-references/reference-components :: reference-components('Ref ID: 5573','Bellamy, Alex J.(2020). World peace','Added January 27, 2022')}"></div>
-        <div th:insert="~{/fragments/frags-references/reference-components :: reference-components('Ref ID: 5573','Bellamy, Alex J.(2020). World peace','Added January 27, 2022')}"></div>
+        <div class="w-24 h-16 bg-blue-500  m-4" id="openModalBtnReference">Cadastrar</div>
+        <div
+            th:insert="~{/fragments/frags-references/reference-components :: reference-components('Ref ID: 5573','Bellamy, Alex J.(2020). World peace','Added January 27, 2022')}">
+        </div>
+        <div
+            th:insert="~{/fragments/frags-references/reference-components :: reference-components('Ref ID: 5573','Bellamy, Alex J.(2020). World peace','Added January 27, 2022')}">
+        </div>
 
     </div>
-</div>
+    <div th:insert="~{/fragments/modal/modal-register-reference :: modal-register-reference}"></div>
+    <script>
+        // Abrir modal ao clicar no botão
+        document.getElementById('openModalBtnReference').addEventListener('click', function () {
+            document.getElementById('modal-reference').classList.remove('hidden');
+        });
 
+        // Fechar modal ao clicar no botão de fechar
+        document.getElementById('closeModalBtnReference').addEventListener('click', function () {
+            document.getElementById('modal-reference').classList.add('hidden');
+        });
+
+        // Fechar modal ao clicar fora do conteúdo
+        document.getElementById('modal-reference').addEventListener('click', function (e) {
+            if (e.target === this) {  // Verifica se o clique foi fora do conteúdo do modal
+                this.classList.add('hidden');
+            }
+        });
+    </script>
 </div>

@@ -16,15 +16,15 @@
             <p class="mb-6">Cadastre as informações de uma Referência.</p>
 
             <div class="max-w-md mx-auto">
-                <form th:action="@{/forms}" method="post">
+                <form th:action="@{/aluno/reference/register}" method="post" th:object="${referenceDTO}">
 
                     <label for="referenceAuthors" class="block text-sm font-medium text-gray-700">Autore(s) do
                         Texto</label>
-                    <input type="text" id="referenceAuthors" name="referenceAuthors"
+                    <input type="text" id="referenceAuthors" name="referenceAuthors" th:field="*{referenceAuthors}"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
 
                     <label for="referenceTitle" class="block text-sm font-medium text-gray-700">Título do Texto</label>
-                    <input type="text" id="referenceTitle" name="referenceTitle"
+                    <input type="text" id="referenceTitle" name="referenceTitle" th:field="*{referenceTitle}"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
 
                     <label for="referenceSubtitle" class="block text-sm font-medium text-gray-700">Subtítulo do
@@ -64,9 +64,17 @@
                     <input type="text" id="publicationTitle" name="publicationTitle"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
 
-                    <label for="email" class="block text-sm font-medium text-gray-700">Ano de Publicação</label>
+
+                    <label for="referenceAuthors" class="block text-sm font-medium text-gray-700">Ano de
+                        Publicação</label>
+                    <input type="text" id="projectStartDate" name="projectStartDate" th:field="*{projectStartDate}"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+
+                    <!-- <label for="email" class="block text-sm font-medium text-gray-700">Ano de Publicação</label>
                     <input type="date" id="email" name="email"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+ -->
+
 
                     <label for="link" class="block text-sm font-medium text-gray-700">Link</label>
                     <input type="text" id="link" name="link"

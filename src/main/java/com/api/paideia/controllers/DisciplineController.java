@@ -1,8 +1,11 @@
 package com.api.paideia.controllers;
 
+import java.util.List;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,17 +14,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.api.paideia.domain.course.Course;
 import com.api.paideia.domain.discipline.Discipline;
 import com.api.paideia.domain.user.User;
+import com.api.paideia.dto.CourseDTO;
 import com.api.paideia.dto.DisciplineDTO;
+import com.api.paideia.enums.CourseStatusEnum;
+import com.api.paideia.enums.DegreeProgramEnum;
 import com.api.paideia.enums.DisciplineStatus;
 import com.api.paideia.enums.DisciplineTypeEnum;
+import com.api.paideia.enums.KnowledgeAreaEnum;
 import com.api.paideia.repositories.course.CourseRepository;
 import com.api.paideia.repositories.discipline.DisciplineRepository;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @Controller
@@ -43,6 +53,20 @@ public class DisciplineController {
 
         model.addAttribute("disciplineTypes", DisciplineTypeEnum.values());
         model.addAttribute("disciplineStatus", DisciplineStatus.values());
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); // ou de onde você
+
+        List<Course> courseList = courseRepository.findByUser(user);
+
+        model.addAttribute("courseList", courseList);
+        // obtém o usuário
+        model.addAttribute("user", user);
+
+        model.addAttribute("course", new CourseDTO());
+        model.addAttribute("degreeProgramOptions", DegreeProgramEnum.values()); // Passa o enum para o Thymeleaf
+        model.addAttribute("course_statusOptions", CourseStatusEnum.values());
+        model.addAttribute("knowledge_areaOptions", KnowledgeAreaEnum.values());
+
         ModelAndView mv = new ModelAndView("discipline-view");
 
         return mv;
@@ -68,8 +92,9 @@ public class DisciplineController {
     }
 
     @PostMapping("/{idCourse}/discipline/register")
-    public RedirectView registerDiscipline(@PathVariable String idCourse, @ModelAttribute DisciplineDTO disciplineDTO,
-            Model model) {
+    public RedirectView registerDiscipline(@PathVariable String idCourse,
+            @Valid @ModelAttribute("disciplineDTO") DisciplineDTO disciplineDTO, BindingResult result,
+            Model model, RedirectAttributes redirectAttributes) {
 
         System.out.println(idCourse);
         // User user = (User)
@@ -77,7 +102,14 @@ public class DisciplineController {
         // de onde você
 
         // Course course = courseRepository.findByCourseName(courseName);
-
+        if (result.hasErrors()) {
+            System.out.println(result.getAllErrors());
+            redirectAttributes.addFlashAttribute("disciplineDTO", new DisciplineDTO());
+            redirectAttributes.addFlashAttribute("formErrorDiscipline", true); // Flag para modal
+            redirectAttributes.addFlashAttribute("errors", result.getAllErrors());
+            return new RedirectView("/aluno/course/{idCourse}");
+            // para o home
+        }
         Discipline newDiscipline = new Discipline();
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); // ou de onde você
         Course course = courseRepository.findByIdCourse(idCourse);
