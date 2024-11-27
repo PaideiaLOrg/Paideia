@@ -19,6 +19,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.api.paideia.domain.course.Course;
 import com.api.paideia.domain.discipline.Discipline;
+import com.api.paideia.domain.reference.Reference;
 import com.api.paideia.domain.user.User;
 import com.api.paideia.dto.CourseDTO;
 import com.api.paideia.dto.DisciplineDTO;
@@ -29,8 +30,9 @@ import com.api.paideia.enums.DisciplineTypeEnum;
 import com.api.paideia.enums.KnowledgeAreaEnum;
 import com.api.paideia.repositories.course.CourseRepository;
 import com.api.paideia.repositories.discipline.DisciplineRepository;
+import com.api.paideia.repositories.reference.ReferenceRepository;
 
-import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
@@ -40,6 +42,7 @@ import lombok.AllArgsConstructor;
 public class DisciplineController {
     final CourseRepository courseRepository;
     final DisciplineRepository disciplineRepository;
+    final ReferenceRepository referenceRepository;
 
     @GetMapping("/discipline/{idDiscipline}")
     public ModelAndView getDiscipline(@PathVariable String idDiscipline, Model model) {
@@ -58,11 +61,15 @@ public class DisciplineController {
 
         List<Course> courseList = courseRepository.findByUser(user);
 
+        List<Reference> referenceList = referenceRepository.findAllByDisciplineId(idDiscipline);
+
         model.addAttribute("courseList", courseList);
         // obtém o usuário
         model.addAttribute("user", user);
 
         model.addAttribute("course", new CourseDTO());
+
+        model.addAttribute("referenceList", referenceList);
         model.addAttribute("degreeProgramOptions", DegreeProgramEnum.values()); // Passa o enum para o Thymeleaf
         model.addAttribute("course_statusOptions", CourseStatusEnum.values());
         model.addAttribute("knowledge_areaOptions", KnowledgeAreaEnum.values());
@@ -128,11 +135,27 @@ public class DisciplineController {
     }
 
     @DeleteMapping("/discipline/delete/{idDiscipline}")
+    @Transactional
     public RedirectView deleteDiscipline(@PathVariable String idDiscipline) {
         Discipline discipline = disciplineRepository.findByIdDiscipline(idDiscipline);
         String idCourse = discipline.getCourse().getIdCourse();
-        disciplineRepository.deleteById(idDiscipline);
-        return new RedirectView("/aluno/course/" + idCourse); // Ajuste o redirecionamento conforme necessário
-    }
 
+        List<Reference> references = referenceRepository.findAllByDisciplineId(idDiscipline);
+
+        referenceRepository.unlinkDiscipline(idDiscipline);
+
+        // Verifica se cada referência está órfã (sem disciplinas ou pesquisas
+        // acadêmicas)
+        for (Reference reference : references) {
+            boolean isOrphan = reference.getDisciplines().isEmpty()
+                    && reference.getAcademicResearches().isEmpty();
+            if (isOrphan) {
+                referenceRepository.deleteById(reference.getIdReference());
+            }
+        }
+        // Then delete the discipline itself
+        disciplineRepository.deleteById(idDiscipline);
+
+        return new RedirectView("/aluno/course/" + idCourse); // Adjust the redirection as needed
+    }
 }

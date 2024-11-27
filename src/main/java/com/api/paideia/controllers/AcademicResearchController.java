@@ -17,6 +17,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.api.paideia.domain.academicResearch.AcademicResearch;
 import com.api.paideia.domain.course.Course;
+import com.api.paideia.domain.reference.Reference;
 import com.api.paideia.domain.user.User;
 import com.api.paideia.dto.AcademicResearchDTO;
 import com.api.paideia.dto.CourseDTO;
@@ -27,7 +28,9 @@ import com.api.paideia.enums.ResearchTypeEnum;
 import com.api.paideia.infrastructure.security.TokenService;
 import com.api.paideia.repositories.academicResearch.AcademicResearchRepository;
 import com.api.paideia.repositories.course.CourseRepository;
+import com.api.paideia.repositories.reference.ReferenceRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 @Controller
@@ -37,6 +40,7 @@ public class AcademicResearchController {
     final CourseRepository courseRepository;
     final TokenService tokenService;
     final AcademicResearchRepository academicResearchRepository;
+    final ReferenceRepository referenceRepository;
 
     @GetMapping("/researchesview/{idAcademicResearch}")
     public ModelAndView getDiscipline(@PathVariable String idAcademicResearch, Model model) {
@@ -54,11 +58,13 @@ public class AcademicResearchController {
         String token = tokenService.generateToken(user);
 
         List<Course> courseList = courseRepository.findByUser(user);
+        List<Reference> referenceList = referenceRepository.findAllByAcademicResearchId(idAcademicResearch);
 
         model.addAttribute("courseList", courseList);
         // obtém o usuário
         model.addAttribute("user", user);
         model.addAttribute("token", token);
+        model.addAttribute("referenceList", referenceList);
 
         model.addAttribute("course", new CourseDTO());
         model.addAttribute("degreeProgramOptions", DegreeProgramEnum.values()); // Passa o enum para o Thymeleaf
@@ -111,10 +117,30 @@ public class AcademicResearchController {
     }
 
     @DeleteMapping("/researchesview/delete/{idAcademicResearch}")
-    public RedirectView deleteResearch(@PathVariable String idAcademicResearch) {
+    @Transactional
+    public RedirectView deleteAcademicResearch(@PathVariable String idAcademicResearch) {
+
         AcademicResearch academicResearch = academicResearchRepository.findByIdAcademicResearch(idAcademicResearch);
         String idCourse = academicResearch.getCourse().getIdCourse();
+
+        // Desvincula todas as referências associadas a essa pesquisa acadêmica
+        List<Reference> references = referenceRepository.findAllByAcademicResearchId(idAcademicResearch);
+        referenceRepository.unlinkAcademicResearch(idAcademicResearch);
+
+        // Verifica se cada referência está órfã (sem disciplinas ou pesquisas
+        // acadêmicas)
+        for (Reference reference : references) {
+            boolean isOrphan = reference.getDisciplines().isEmpty()
+                    && reference.getAcademicResearches().isEmpty();
+            if (isOrphan) {
+                referenceRepository.deleteById(reference.getIdReference());
+            }
+        }
+
+        // Por fim, exclui a pesquisa acadêmica
         academicResearchRepository.deleteById(idAcademicResearch);
+
         return new RedirectView("/aluno/course/" + idCourse);
     }
+
 }

@@ -34,24 +34,29 @@
 
                     <label for="referenceType" class="block text-sm font-medium text-gray-700">Selecione o tipo da
                         Referência</label>
-                    <select id="referenceType" name="referenceType"
-                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        <option>Livro</option>
-                        <option>Capítulo de livro</option>
-                        <option>Artigo de revista</option>
-                        <option>Webpage</option>
-                        <option>Outro</option>
+
+
+                    <select id="referenceTypeEnum" name="referenceTypeEnum"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black">
+                        <option value="" class="text-gray-700" disabled selected style="color: black;">Selecione o tipo
+                            de referencia
+                        </option>
+
+                        <option th:each="referenceTypeEnum : ${referenceTypeEnum}" th:value="${referenceTypeEnum}"
+                            th:text="${referenceTypeEnum.getReferenceTypeEnum()}" style="color: black;">
+                        </option>
                     </select>
+
+
 
                     <label for="referenceAbstract" class="block text-sm font-medium text-gray-700">Resumo</label>
                     <textarea
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        name="textarea" rows="3">
-                    </textarea>
+                        name="referenceAbstract" th:field="*{referenceAbstract}" rows="3"></textarea>
 
                     <label for="referenceKeywords"
                         class="block text-sm font-medium text-gray-700">Palavras-chave</label>
-                    <input type="text" id="referenceKeywords" name="referenceKeywords"
+                    <input type="text" id="referenceKeywords" name="referenceKeywords" th:field="*{referenceKeywords}"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
 
                     <label for="publicationAuthors" class="block text-sm font-medium text-gray-700">Autore(s) da
@@ -61,24 +66,39 @@
 
                     <label for="publicationTitle" class="block text-sm font-medium text-gray-700">Título da
                         Publicação</label>
-                    <input type="text" id="publicationTitle" name="publicationTitle"
+                    <input type="text" id="publicationTitle" name="publicationTitle" th:field="*{publicationTitle}"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
 
-
-                    <label for="referenceAuthors" class="block text-sm font-medium text-gray-700">Ano de
+                    <label for="projectStartDate" class="block text-sm font-medium text-gray-700">Ano de
                         Publicação</label>
                     <input type="text" id="projectStartDate" name="projectStartDate" th:field="*{projectStartDate}"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
 
-                    <!-- <label for="email" class="block text-sm font-medium text-gray-700">Ano de Publicação</label>
-                    <input type="date" id="email" name="email"
-                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
- -->
-
-
                     <label for="link" class="block text-sm font-medium text-gray-700">Link</label>
-                    <input type="text" id="link" name="link"
+                    <input type="text" id="link" name="link" th:field="*{link}"
                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+
+                    <!-- Select para as disciplinas -->
+                    <label for="disciplines" class="block text-sm font-medium text-gray-700">Selecione as
+                        Disciplinas</label>
+                    <select id="disciplines" name="disciplines" multiple
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <th:block th:each="discipline : ${disciplineList}">
+                            <option th:value="${discipline.idDiscipline}" th:text="${discipline.disciplineName}">
+                            </option>
+                        </th:block>
+                    </select>
+
+                    <!-- Select para as pesquisas acadêmicas -->
+                    <label for="academicResearches" class="block text-sm font-medium text-gray-700">Selecione as
+                        Pesquisas Acadêmicas</label>
+                    <select id="academicResearches" name="academicResearches" multiple
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <th:block th:each="research : ${academicResearchList}">
+                            <option th:value="${research.idAcademicResearch}" th:text="${research.researchTitle}">
+                            </option>
+                        </th:block>
+                    </select>
 
                     <button class="w-full bg-purple-600 px-3 py-2 rounded-md mt-2 text-white" type="submit">Cadastrar
                         Referência</button>
@@ -87,5 +107,4 @@
             <!-- Botão para fechar o modal -->
         </div>
     </div>
-</div>
 </div>

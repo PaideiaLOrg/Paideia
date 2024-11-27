@@ -12,20 +12,17 @@
         class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 dropdown-toggle">
         <img th:src="@{/images/icon-course.svg}" alt="Menu Icon" width="70%" />
     </a>
-    <a id="2"
-        class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 dropdown-toggle">
-        <img th:src="@{/images/icon-study-area.svg}" alt="Menu Icon" width="70%" />
-    </a>
     <div id="dropdown-menu"
-        class="absolute flex flex-col pb-16 h-full items-start  transition-all ease-out delay-150 duration-300 max-h-64 overflow-y-auto"
-        style="top: 0px; left: -100%; z-index: -1; background-color: #1768AC; ">
+        class="absolute flex flex-col pb-16 h-full items-start transition-all ease-out delay-150 duration-300 max-h-64 overflow-y-auto"
+        style="top: 0px; left: -100%; z-index: -1; background-color: #1768AC;">
 
-        <div id="O-1" class="ww hidden w-32 transition-all duration-300 ">
+        <!-- Lógica para "Cursos Cadastrados" -->
+        <div id="O-1" class="ww hidden w-32 transition-all duration-300 text-center align-center justify-center">
             <h1 class="block w-full pl-2 pt-2 text-xl text-gray-300 ">
                 Cursos Cadastrados
             </h1>
-            <div id="openModalBtnCourse" class="bg-gray-800 w-full h-12 text-center flex align-center justify-center">
-                <h1 class="text-center ">
+            <div id="openModalBtnCourse" class="block w-full text-lg relatives ">
+                <h1 class="text-center border-white-700 border-2 m-4 p-4 rounded text-2xl">
                     +
                 </h1>
             </div>
@@ -40,51 +37,18 @@
                         th:text="${course.courseName}"></span>
                 </a>
             </div>
-
-
-        </div>
-        <!-- Primeiro link -->
-        <div id="O-2" class="ww hidden w-32">
-            <h1 class="block w-full px-4 py-2 text-xl text-gray-300 hover:bg-gray-700">
-                Area Interesse
-            </h1>
-
-            <div id="openModalBtnCourse" class="bg-gray-800 w-full h-12 text-center flex align-center justify-center">
-                <h1 class="text-center ">
-                    +
-                </h1>
-            </div>
-
-            <div th:each="course : ${courseList}">
-                <a class="block w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 relative">
-                    <div>
-                        <img width="100%" th:src="@{/images/software-developer-6521720_640.jpg}" class="rounded-lg">
-                    </div>
-                    <span class="absolute inset-0 flex items-center justify-center text-white text-sm font-bold"
-                        th:text="${course.courseName}"></span>
-                </a>
-            </div>
-
         </div>
 
         <div th:insert="~{/fragments/modal/modal-register-course :: modal-register-course}"></div>
-
-
-        <!-- Repita o bloco acima para os outros links -->
-
     </div>
 
-
     <script>
-
         document.addEventListener("DOMContentLoaded", function () {
             // Verifica se há erro no formulário e abre o modal automaticamente
             const formErrorElement = document.querySelector('[data-form-error]');
             if (formErrorElement !== 'course') {
                 document.getElementById('modal-course').classList.add('hidden');
-
             }
-
 
             // Abrir modal
             document.getElementById('openModalBtnCourse').addEventListener('click', function () {
@@ -125,6 +89,5 @@
                 });
             }
         });
-
     </script>
 </div>

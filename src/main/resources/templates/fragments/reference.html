@@ -1,19 +1,68 @@
 <div th:fragment="reference" id="main-content" class="flex-1 ml-16 transition-all duration-300">
-    <div th:insert="~{/fragments/navbar-user :: navbar-user}"></div>
+    <div style="width: 100%;" class="w-full" th:insert="~{/fragments/navbar-user :: navbar-user}"></div>
 
-    <div class="ml-16">
+    <div class="ml-16"
+        th:if="${disciplineList != null and disciplineList.size() > 0 || academicResearchList.size() > 0 and academicResearchList != null}">
         <h1 class="my-5 font-medium">Referências</h1>
-        <div class="w-24 h-16 bg-blue-500  m-4" id="openModalBtnReference">Cadastrar</div>
-        <div
-            th:insert="~{/fragments/frags-references/reference-components :: reference-components('Ref ID: 5573','Bellamy, Alex J.(2020). World peace','Added January 27, 2022')}">
+        <div class="w-24 h-16 cursor-pointer hover:bg-blue-600 transition duration-300 bg-blue-500 mb-4  flex items-center justify-center border-2 border-blue-700 rounded"
+            id="openModalBtnReference">
+            Cadastrar
         </div>
-        <div
-            th:insert="~{/fragments/frags-references/reference-components :: reference-components('Ref ID: 5573','Bellamy, Alex J.(2020). World peace','Added January 27, 2022')}">
+        <div th:each="reference : ${referenceList}">
+            <div th:each="author : ${reference.referenceAuthors}">
+
+                <div
+                    th:insert="~{/fragments/frags-references/reference-components :: reference-components('Ref ID: '+${reference.idReference}, ${author} + '. ('+${reference.projectStartDate}+'). '+ ${reference.referenceTitle} ,'Added '+${reference.projectStartDate})}">
+                </div>
+            </div>
+
         </div>
+
 
     </div>
+    <div th:if="${courseList.size() == 0 and disciplineList.size() == 0 and academicResearchList.size() == 0}"
+        class="bg-blue-500 w-full mt-2 h-12 text-center flex align-center justify-center">
+        <h1 class="text-center ">
+            Você não possui nenhum Curso cadastrado. Selecione a aba Cursos, à esquerda, para cadastrar um novo Curso
+        </h1>
+
+    </div>
+    <div th:if="${disciplineList.size() == 0 and courseList.size() > 0 and academicResearchList.size == 0 }"
+        id="openModalBtnCourse" class="bg-gray-800 w-full mt-2 h-12 text-center flex align-center justify-center">
+        <h1 class="text-center ">
+            Você não possui nenhuma Disciplina e/ou Pesquisa cadastradas. Selecione a aba Cursos, à esquerda, para
+            cadastrar uma nova Disciplina ou Pesquisa.
+
+        </h1>
+    </div>
+
     <div th:insert="~{/fragments/modal/modal-register-reference :: modal-register-reference}"></div>
+    <div th:insert="~{/fragments/modal/modal-register-course :: modal-register-course}"></div>
+
     <script>
+
+        document.getElementById('openModalBtnCourse').addEventListener('click', function () {
+            document.getElementById('modal-course').classList.remove('hidden');
+        });
+
+        // Fechar modal ao clicar no botão de fechar
+        document.getElementById('closeModalBtnCourse').addEventListener('click', function () {
+            document.getElementById('modal-course').classList.add('hidden');
+
+        });
+
+        // Fechar modal ao clicar fora do conteúdo
+        document.getElementById('modal-course').addEventListener('click', function (e) {
+            if (e.target === this) {
+                this.classList.add('hidden');
+
+            }
+        });
+
+
+
+
+
         // Abrir modal ao clicar no botão
         document.getElementById('openModalBtnReference').addEventListener('click', function () {
             document.getElementById('modal-reference').classList.remove('hidden');

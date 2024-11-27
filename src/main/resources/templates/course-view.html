@@ -4,7 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Msivo</title>
+    <title>Curso</title>
+    <link rel="icon" th:href="@{/images/logo.ico}" type="image/x-icon">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/style-user-navbar-end-sidebar.css}">
@@ -15,7 +17,7 @@
 <body class="bg-gray-100">
     <!-- Adicione a classe bg-gray-100 aqui para o fundo do corpo -->
 
-    <div class="flex" id="tela">
+    <div class="flex w-full" id="tela">
         <div class="bg-custom-blue" th:insert="~{/fragments/sidebar :: sidebar}"></div>
 
         <div th:insert="~{/fragments/frags-course/course-components :: course-components}">

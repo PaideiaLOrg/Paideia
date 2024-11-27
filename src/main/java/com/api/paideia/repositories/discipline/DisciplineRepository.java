@@ -9,7 +9,7 @@ import com.api.paideia.domain.discipline.Discipline;
 import com.api.paideia.domain.user.User;
 
 public interface DisciplineRepository extends JpaRepository<Discipline, String> {
-    List<Course> findByUser(User user);
+    List<Discipline> findByUser(User user);
 
     List<Discipline> findByCourse(Course course);
 

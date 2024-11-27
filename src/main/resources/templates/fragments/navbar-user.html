@@ -1,48 +1,6 @@
-<div th:fragment="navbar-user" style="background-color: #9ACFEE;" class="w-full flex">
-    <a th:href="@{/aluno/home}" class="ml-12">
-        <svg width="40%" height="auto" viewBox="0 0 339 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M337.009 23.2945C272.095 16.2756 208.197 42.1978 169.63 88.345" stroke="black" stroke-width="3"
-                stroke-linecap="round" />
-            <path d="M2 23.2945C66.9135 16.2756 130.812 42.1978 169.379 88.345" stroke="black" stroke-width="3"
-                stroke-linecap="round" />
-            <path
-                d="M56.504 95.6145C58.712 95.6145 60.616 95.9985 62.216 96.7665C63.816 97.5025 65.048 98.5585 65.912 99.9345C66.808 101.311 67.256 102.959 67.256 104.879C67.256 106.831 66.808 108.495 65.912 109.871C65.048 111.247 63.816 112.319 62.216 113.087C60.616 113.823 58.712 114.191 56.504 114.191H48.392V127.295H45.992V95.6145H56.504ZM56.216 111.935C59 111.935 61.112 111.327 62.552 110.111C63.992 108.863 64.712 107.119 64.712 104.879C64.712 102.639 63.992 100.911 62.552 99.6945C61.112 98.4465 59 97.8225 56.216 97.8225H48.392V111.935H56.216ZM107.764 127.295H105.22L101.236 117.359H86.1163L82.1323 127.295H79.5883L92.2603 95.6145H95.0923L107.764 127.295ZM86.9803 115.151H100.372L93.6523 97.9665L86.9803 115.151ZM127.588 95.6145V127.295H125.188V95.6145H127.588ZM159.067 95.6145C164.123 95.6145 168.011 96.9585 170.731 99.6465C173.483 102.303 174.859 106.159 174.859 111.215C174.859 116.431 173.483 120.415 170.731 123.167C168.011 125.919 164.123 127.295 159.067 127.295H149.083V95.6145H159.067ZM159.259 125.087C163.483 125.087 166.715 123.887 168.955 121.487C171.227 119.087 172.363 115.663 172.363 111.215C172.363 106.927 171.227 103.631 168.955 101.327C166.715 98.9905 163.483 97.8225 159.259 97.8225H151.483V125.087H159.259ZM194.353 127.295V95.6145H216.001V97.8225H196.753V110.063H211.969V112.319H196.753V125.087H216.769V127.295H194.353ZM237.664 95.6145V127.295H235.264V95.6145H237.664ZM283.255 127.295H280.711L276.727 117.359H261.607L257.623 127.295H255.079L267.751 95.6145H270.583L283.255 127.295ZM262.471 115.151H275.863L269.143 97.9665L262.471 115.151Z"
-                fill="black" />
-        </svg>
+<div th:fragment="navbar-user"
+    style="background-color: #b7c4e6; height: 80px; width: 100vw; display: flex; align-items: center; justify-content: center; margin: 0; padding: 0;">
+    <a th:href="@{/aluno/home}" style="display: flex; align-items: center; justify-content: center;">
+        <img th:src="@{/images/logo.png}" style="max-height: 60px; width: auto;" alt="Logo">
     </a>
-    <a th:href="@{/aluno/perfil}">
-        <div class="flex justify-end">
-            <img th:src="@{/images/missao.png}" width="8%" class="rounded" alt="">
-        </div>
-    </a>
-    <button id="menu-toggle" class="text-white md:hidden">
-        <span class="hamburger"><i class="fas fa-bars"></i></span>
-        <span class="close hidden"><i class="fas fa-times"></i></span>
-    </button>
 </div>
-
-
-<script th:fragment="navbar-user">
-    const mainPage = document.getElementById('main-content');
-    const menuToggles = document.querySelectorAll('#menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    document.addEventListener('DOMContentLoaded', function () {
-
-        if (menuToggles && mobileMenu) {
-
-            menuToggles.forEach(toogle => {
-                toogle.addEventListener('click', function () {
-                    if (window.innerWidth <= 768) {
-                        mainPage.classList.toggle('ml-16');
-                        mobileMenu.classList.toggle('hidden');
-                        menuToggles.classList.toggle('hidden');
-                    } else if (window.innerWidth > 768) {
-                        mobileMenu.classList.remove('hidden');
-                        mainPage.classList.add('lg:ml-16');
-                    }
-
-                });
-            })
-        }
-    });
-</script>

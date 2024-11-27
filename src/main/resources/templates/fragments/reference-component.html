@@ -5,63 +5,16 @@
 
     </div>
 
-
     <div class="flex flex-wrap justify-center items-center">
-        <div
-            th:insert="~{/fragments/card-for-refers-and-notation :: card('Froud', 'Ser ou não ser', '2016', '#e6e6fa')}">
-        </div>
-        <div
-            th:insert="~{/fragments/card-for-refers-and-notation :: card('Froud', 'Ser ou não ser', '2016', '#e6e6fa')}">
-        </div>
-        <div
-            th:insert="~{/fragments/card-for-refers-and-notation :: card('Froud', 'Ser ou não ser', '2016', '#e6e6fa')}">
-        </div>
-        <div
-            th:insert="~{/fragments/card-for-refers-and-notation :: card('Froud', 'Ser ou não ser', '2016', '#e6e6fa')}">
-        </div>
-        <div
-            th:insert="~{/fragments/card-for-refers-and-notation :: card('Froud', 'Ser ou não ser', '2016', '#e6e6fa')}">
-        </div>
-        <div
-            th:insert="~{/fragments/card-for-refers-and-notation :: card('Froud', 'Ser ou não ser', '2016', '#e6e6fa')}">
-        </div>
-        <div
-            th:insert="~{/fragments/card-for-refers-and-notation :: card('Froud', 'Ser ou não ser', '2016', '#e6e6fa')}">
-        </div>
-        <div
-            th:insert="~{/fragments/card-for-refers-and-notation :: card('Froud', 'Ser ou não ser', '2016', '#e6e6fa')}">
-        </div>
-        <div
-            th:insert="~{/fragments/card-for-refers-and-notation :: card('Froud', 'Ser ou não ser', '2016', '#e6e6fa')}">
-        </div>
-        <div
-            th:insert="~{/fragments/card-for-refers-and-notation :: card('Froud', 'Ser ou não ser', '2016', '#e6e6fa')}">
-        </div>
-        <div
-            th:insert="~{/fragments/card-for-refers-and-notation :: card('Froud', 'Ser ou não ser', '2016', '#e6e6fa')}">
-        </div>
-        <div
-            th:insert="~{/fragments/card-for-refers-and-notation :: card('Froud', 'Ser ou não ser', '2016', '#e6e6fa')}">
-        </div>
-        <div
-            th:insert="~{/fragments/card-for-refers-and-notation :: card('Froud', 'Ser ou não ser', '2016', '#e6e6fa')}">
-        </div>
-        <div
-            th:insert="~{/fragments/card-for-refers-and-notation :: card('Froud', 'Ser ou não ser', '2016', '#e6e6fa')}">
-        </div>
-        <div
-            th:insert="~{/fragments/card-for-refers-and-notation :: card('Froud', 'Ser ou não ser', '2016', '#e6e6fa')}">
-        </div>
-        <div
-            th:insert="~{/fragments/card-for-refers-and-notation :: card('Froud', 'Ser ou não ser', '2016', '#e6e6fa')}">
-        </div>
-        <div
-            th:insert="~{/fragments/card-for-refers-and-notation :: card('Froud', 'Ser ou não ser', '2016', '#e6e6fa')}">
-        </div>
-        <div
-            th:insert="~{/fragments/card-for-refers-and-notation :: card('Froud', 'Ser ou não ser', '2016', '#e6e6fa')}">
-        </div>
+        <div class="flex flex-wrap justify-center items-center" th:each="reference : ${referenceList}">
+            <div th:each="author : ${reference.referenceAuthors}" class="flex flex-wrap justify-center items-center">
 
+                <div
+                    th:insert="~{/fragments/card-for-refers-and-notation :: card(${author}, ${reference.referenceTitle}, ${reference.projectStartDate}, '#e6e6fa')}">
+                </div>
+
+            </div>
+
+        </div>
     </div>
-
 </div>
