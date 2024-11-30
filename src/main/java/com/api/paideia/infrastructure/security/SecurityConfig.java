@@ -42,6 +42,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/aluno/references").permitAll()
                         .requestMatchers(HttpMethod.GET, "/aluno/course/researchesview").permitAll()
                         .requestMatchers(HttpMethod.GET, "/aluno/perfil").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/paideia/chatbot").permitAll()
 
                         .requestMatchers("/h2-console/**").permitAll()
                         .anyRequest().authenticated())

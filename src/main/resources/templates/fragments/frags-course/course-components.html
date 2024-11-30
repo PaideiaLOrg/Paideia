@@ -168,8 +168,7 @@
             // Verifica se há erro no formulário e abre o modal automaticamente
             const formErrorElement = document.querySelector('[data-form-error]');
 
-
-            if (formErrorElement === 'discipline' && formErrorElement.getAttribute('data-form-error') === 'true' && formErrorElement) {
+            if (formErrorElement && formErrorElement.getAttribute('data-form-error') === 'discipline') {
                 document.getElementById('modal-discipline').classList.remove('hidden');
             }
 
@@ -183,7 +182,6 @@
                 closeModalAndResetForm();
             });
 
-            // Fechar modal ao clicar fora do conteúdo
             // Fechar modal ao clicar fora do conteúdo
             document.getElementById('modal-discipline').addEventListener('click', function (e) {
                 if (e.target === this) {
@@ -213,7 +211,6 @@
                 });
             }
         });
-
 
 
 
