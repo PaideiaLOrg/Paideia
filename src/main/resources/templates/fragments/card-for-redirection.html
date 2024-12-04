@@ -1,0 +1,10 @@
+<div th:fragment="card(title)"
+    th:style="'z-index:-1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); background-color: ' + ${bg}"
+    class="relative h-32 w-56 mb-4 mt-0 m-2 mr-4 rounded-md text-center items-center flex flex-col justify-between shadow-3xl">
+
+    <div class="justify-center items-center flex flex-col h-full">
+        <h1 class="text-xl" th:text="${title}"></h1>
+
+    </div>
+
+</div>

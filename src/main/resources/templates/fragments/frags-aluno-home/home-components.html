@@ -10,7 +10,30 @@
         </div>
     </div>
 
-    <div class="coisa ml-16">
-        Bom vamos la
+    <div class="coisa">
+        <div class="flex flex-col ml-16 mr-16 mt-4 mb-4">
+            <div class="flex flex-col w-full ml-16 mr-16 mt-4 mb-4 ">
+                <div class="w-full p-2 drop-toggle flex flex-col rounded-xl">
+                    <h1 class="text-3xl text-black ">Cursos </h1>
+                </div>
+            </div>
+            <div class="flex flex-wrap items-center ml-24 mr-16 mt-4 mb-4">
+                <div th:insert="~{/fragments/card-for-redirection :: card('Froud')}">
+                </div>
+                <div th:insert="~{/fragments/card-for-redirection :: card('Froud')}">
+                </div>
+            </div>
+            <div class="flex flex-col ml-16 mr-16 mt-4 mb-4 ">
+                <div class="w-full p-2 drop-toggle flex flex-col rounded-xl">
+                    <h1 class="text-3xl text-black ">Disciplinas </h1>
+                </div>
+            </div>
+            <div class="flex flex-wrap items-center ml-24 mr-16 mt-4 mb-4 ">
+                <div th:insert="~{/fragments/card-for-redirection :: card('Froud')}">
+                </div>
+                <div th:insert="~{/fragments/card-for-redirection :: card('Froud')}">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
