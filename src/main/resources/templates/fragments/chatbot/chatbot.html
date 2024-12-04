@@ -1,0 +1,287 @@
+<div th:fragment="chatbot-page">
+    <div id="chat-container">
+        <style>
+            /* Estilo atualizado para o chatbot pequeno e flutuante */
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                font-family: "Poppins", sans-serif;
+                background-color: #f7f7f7;
+            }
+
+            #chat-button {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background-color: #613fe9;
+                border: none;
+                color: white;
+                font-size: 18px;
+                padding: 10px 20px;
+                border-radius: 50px;
+                cursor: pointer;
+                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .chatBot {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 350px;
+                height: 500px;
+                background: white;
+                border: 2px solid #2F8D46;
+                border-radius: 10px;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+                display: none;
+                flex-direction: column;
+            }
+
+            header {
+                background-color: #2F8D46;
+                text-align: left;
+                padding: 10px 0;
+                border-radius: 7px 7px 0 0;
+                color: white;
+                font-size: 18px;
+                left: 10px;
+
+            }
+
+            header #cross {
+                position: absolute;
+                right: 10px;
+                top: 0px;
+                cursor: pointer;
+                font-size: 40px;
+            }
+
+            .chatbox {
+                padding: 10px;
+                list-style: none;
+                overflow-y: auto;
+                flex-grow: 1;
+            }
+
+            .chatbox li {
+                margin-bottom: 10px;
+                display: flex;
+                align-items: flex-start;
+            }
+
+            .chatbox .profile-pic {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+
+            .chat p {
+                padding: 10px;
+                border-radius: 10px;
+                max-width: 70%;
+                word-wrap: break-word;
+            }
+
+            .chat-outgoing p {
+                background-color: #162887;
+                color: white;
+                margin-left: auto;
+            }
+
+            .chat-incoming p {
+                background-color: #eaeaea;
+            }
+
+            .chat-input {
+                padding: 10px;
+                border-top: 1px solid #ccc;
+                display: flex;
+                gap: 5px;
+            }
+
+            .chat-input textarea {
+                flex: 1;
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                resize: none;
+                outline: none;
+            }
+
+            #sendBTN {
+                background-color: #2F8D46;
+                border: none;
+                color: white;
+                padding: 8px 12px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            /* Estilo do indicador de "digitando..." */
+            .typing-indicator {
+                display: flex;
+                align-items: center;
+                margin: 10px 0;
+            }
+
+            .typing-indicator span {
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                margin: 0 3px;
+                background-color: #ccc;
+                border-radius: 50%;
+                animation: typing 1.5s infinite;
+            }
+
+            .typing-indicator span:nth-child(2) {
+                animation-delay: 0.3s;
+            }
+
+            .typing-indicator span:nth-child(3) {
+                animation-delay: 0.6s;
+            }
+
+            @keyframes typing {
+
+                0%,
+                80%,
+                100% {
+                    transform: scale(0);
+                }
+
+                40% {
+                    transform: scale(1);
+                }
+            }
+        </style>
+
+        <button id="chat-button">Chat</button>
+        <div class="chatBot">
+            <header>
+                <div
+                    style="display: flex; align-items: center; padding-left: 10px; list-style: none; overflow-y: auto; flex-grow: 1;">
+                    <img th:src="@{/images/logo.png}" style="width: 40px; height: 40px; margin-right: 10px;" alt="Bot"
+                        class="profile-pic">
+                    <h1 style="margin: 0;">Minerva</h1>
+                </div>
+
+                <span id="cross" onclick="toggleChat()">×</span>
+            </header>
+            <ul class="chatbox">
+                <li class="chat-incoming chat">
+                    <img th:src="@{/images/logo.png}" alt="Bot" class="profile-pic">
+                    <p>Ei! Como posso ajudá-lo hoje?</p>
+                </li>
+            </ul>
+            <div class="chat-input">
+                <textarea rows="1" placeholder="Enter a message..."></textarea>
+                <button id="sendBTN">Send</button>
+            </div>
+        </div>
+        <script>
+            const chatButton = document.getElementById("chat-button");
+            const chatBot = document.querySelector(".chatBot");
+            const sendButton = document.getElementById("sendBTN");
+            const chatbox = document.querySelector(".chatbox");
+            const textarea = document.querySelector(".chat-input textarea");
+
+            // Abrir e fechar o chatbot
+            chatButton.addEventListener("click", toggleChat);
+
+            function toggleChat() {
+                if (chatBot.style.display === "flex") {
+                    chatBot.style.display = "none";
+                    chatButton.style.display = "block";
+                } else {
+                    chatBot.style.display = "flex";
+                    chatButton.style.display = "none";
+                }
+            }
+
+            // Enviar mensagem para o servidor
+            sendButton.addEventListener("click", () => {
+                const userInput = textarea.value.trim();
+                if (!userInput) return;
+
+                // Exibe a mensagem do usuário na interface
+                appendMessage("chat-outgoing", userInput);
+                textarea.value = "";
+
+                // Enviar a mensagem ao servidor
+                fetch("/paideia/api/chatbot", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ user_input: userInput }),
+                })
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error("Erro na comunicação com o servidor.");
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+                        // Adiciona a resposta do chatbot na interface
+                        appendMessage("chat-incoming", data.response || "Resposta não encontrada.");
+                    })
+                    .catch((error) => {
+                        console.error("Erro:", error);
+                        appendMessage("chat-incoming", "Ocorreu um erro. Tente novamente mais tarde.");
+                    });
+            });
+
+            // Função para adicionar mensagens à interface
+            function appendMessage(type, message) {
+                const messageElement = document.createElement("li");
+                messageElement.classList.add(type, "chat");
+
+                if (type === "chat-incoming") {
+                    // Adiciona a foto do perfil
+                    const img = document.createElement("img");
+                    img.src = "/images/logo.png"; // Substitua pelo caminho correto da imagem
+                    img.alt = "Bot";
+                    img.classList.add("profile-pic");
+                    messageElement.appendChild(img);
+                }
+
+                const paragraph = document.createElement("p");
+                paragraph.textContent = message;
+                messageElement.appendChild(paragraph);
+                chatbox.appendChild(messageElement);
+
+                // Rolagem automática para a mensagem mais recente
+                chatbox.scrollTop = chatbox.scrollHeight;
+            }
+
+            // Função para adicionar o indicador de "digitando..."
+            function addTypingIndicator() {
+                const typingElement = document.createElement("li");
+                typingElement.classList.add("typing-indicator", "chat-incoming");
+                typingElement.innerHTML = `
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                `;
+                chatbox.appendChild(typingElement);
+                chatbox.scrollTop = chatbox.scrollHeight;
+                return typingElement;
+            }
+
+            // Função para remover o indicador de "digitando..."
+            function removeTypingIndicator(typingElement) {
+                if (typingElement && typingElement.parentNode) {
+                    typingElement.parentNode.removeChild(typingElement);
+                }
+            }
+        </script>
+    </div>
+</div>

@@ -17,7 +17,7 @@
 <body>
 
     <div th:replace="~{fragments/landing-page/navbar :: navbar}"></div>
-
+    <div th:replace="~{fragments/chatbot/chatbot :: chatbot-page}"></div>
     <div
         th:style="'background-image: url(' + '/images/stars-7249785_1280.jpg' + '); width: 100%; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; background-size: cover; background-position: center'">
         <h1 class="text-white text-3xl md:text-5xl lg:text-6xl text-center">
@@ -36,7 +36,6 @@
     <div th:replace="~{fragments/landing-page/session01 :: session01}"></div>
     <div th:replace="~{fragments/landing-page/session02 :: session02}"></div>
     <div th:replace="~{fragments/landing-page/session03 :: session03}"></div>
-
 
     <div th:replace="~{fragments/landing-page/footer :: footer}"></div>
 
