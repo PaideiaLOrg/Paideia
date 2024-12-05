@@ -26,7 +26,9 @@
     <nav th:fragment="navbar" class="bg-gray-800 p-4">
         <div class="container mx-auto flex items-center justify-between">
             <!-- Logo -->
-            <a th:href="@{/home}" class="text-white text-lg font-bold">Paideia</a>
+            <a th:href="@{/home}" class="text-white flex items-center space-x-3 rtl:space-x-reverse"> 
+                <img th:src="@{/images/logo.png}" class="h-12" alt="Paideia" /> Paideia
+            </a>
 
             <!-- Hamburger Menu Button -->
             <button id="menu-toggle" class="text-white lg:hidden">
