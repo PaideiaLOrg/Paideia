@@ -5,7 +5,7 @@
         <h1 class=" text-center  text-2xl text-black" th:text="${discipline.disciplineName}">Nome Disciplina</h1>
 
     </div>
-    <div class="border-2 border-blue-500  m-2  ml-0 w-full  flex flex-col justify-center pt-2 pb-2 pl-4 pr-4">
+    <div class="border-2 border-blue-500  m-2  ml-0 w-full rounded-md flex flex-col justify-center pt-2 pb-2 pl-4 pr-4">
         <h1 class=" text-center text-md text-black" th:text="${discipline.syllabus}">Ementa da Disciplina Ementa da
             Disciplina Ementa da Disciplina
             Ementa da Disciplina Ementa da DisciplinaEmenta da DisciplinaEmenta da DisciplinaEmenta da DisciplinaEmenta
@@ -14,7 +14,7 @@
 
     </div>
 
-    <div class="border-2 border-blue-500  w-full mb-0 m-2 ml-0 items-center justify-center flex"
+    <div class="border-2 border-blue-500 rounded-md w-full mb-0 m-2 ml-0 items-center justify-center flex"
         th:text="${discipline.disciplineStatus}">
         Status
     </div>
@@ -30,17 +30,17 @@
 
 
 <div class=" w-48 flex h-full flex-col justify-between ml-auto" th:fragment="overview-part2">
-    <div class="border-blue-500 border-2 ml-4 m-2 mr-0 flex-grow justify-center items-center flex">
+    <div class="border-blue-500 border-2 rounded-md ml-4 m-2 mr-0 flex-grow justify-center items-center flex">
         <h1 class="text-center" th:text="${discipline.disciplineProfessor}">
             Professor
         </h1>
     </div>
-    <div class="border-blue-500 border-2 ml-4 m-2 mr-0 flex-grow justify-center items-center flex">
+    <div class="border-blue-500 border-2 rounded-md ml-4 m-2 mr-0 flex-grow justify-center items-center flex">
         <h1 class="text-center" th:text="${discipline.disciplineTypeEnum}">
             Disciplina Obrigatoria
         </h1>
     </div>
-    <div class="border-blue-500 border-2 ml-4 m-2 mr-0 mb-0 flex-grow justify-center items-center flex">
+    <div class="border-blue-500 border-2 rounded-md ml-4 m-2 mr-0 mb-0 flex-grow justify-center items-center flex">
         <h1 class="text-center" th:text="${discipline.getCourse().getCourseName()}">
             Nome Curso
         </h1>

@@ -3,32 +3,35 @@
 
     <div th:insert="~{/fragments/navbar-user :: navbar-user}"></div>
 
-
-    <div class="flex flex-wrap justify-center mt-8">
-
-        <div id="openModalBtn"
-            class="border-2 border-blue-500 rounded  bg-blue-500 h-12 mr-16 ml-16 flex mb-8 border-round items-center justify-center cursor-pointer hover:bg-blue-600 transition duration-300">
-            <h1 class="text-white">Editas Pesquisa</h1>
+    <div class="flex flex-row ml-16 mt-8 rounded-md">
+        <div class="flex flex-wrap justify-center mt-8" style="gap: 6px">
+            <div id="openModalBtn"
+                class="border-2 border-blue-500 rounded w-40  bg-blue-500 h-12 flex rounded-md items-center justify-center cursor-pointer hover:bg-blue-600 transition duration-300">
+                <h1 class="text-white">Editar Pesquisa</h1>
+            </div>
+            <div id=""
+                class="border-2 border-blue-500 w-40 rounded  bg-blue-500 h-12 flex rounded-md items-center justify-center cursor-pointer hover:bg-blue-600 transition duration-300">
+                <h1 class="text-white">Excluir Pesquisa</h1>
+            </div>
         </div>
-        <div id="openModalBtnDeleteResearch"
-            class="border-2 border-blue-500 w-full rounded  bg-blue-500 h-12 mr-16 ml-16 flex mb-8 border-round items-center justify-center cursor-pointer hover:bg-blue-600 transition duration-300">
-            <h1 class="text-white">Excluir Pesquisa</h1>
-        </div>
-        <div class="border-2  border-blue-500 w-full h-12 mr-16 ml-16 flex">
+    </div>
+
+    <div class="flex flex-wrap  justify-center mt-8 rounded-md rounded-md">
+        <div class="border-2 rounded-md border-blue-500 w-full h-12 mr-16 ml-16 flex">
             <button id="overview-button"
-                class="border-r-2 w-1/2 focus:text-white active:text-white focus:bg-blue-500 active:bg-blue-700">
+                class="border-r-2 rounded-md w-1/2 focus:text-white active:text-white focus:bg-blue-500 active:bg-blue-700">
                 Visão Geral
             </button>
             <button id="reference-button"
-                class="border-r-2 w-1/2 focus:text-white active:text-white focus:bg-blue-500 active:bg-blue-700">
-                Referencias
+                class="border-r-2 rounded-md w-1/2 focus:text-white active:text-white focus:bg-blue-500 active:bg-blue-700">
+                Referências
             </button>
 
         </div>
 
-        <div class="w-full mr-16 ml-16 flex mt-2 mb-2">
+        <div class="w-full justify-between mr-16 ml-16 flex mt-2 mb-2">
 
-            <div class="overview " th:insert="~{/fragments/overview-academic-researches :: overview-part1}">
+            <div class="overview w-full" th:insert="~{/fragments/overview-academic-researches :: overview-part1}">
 
             </div>
             <div class="overview " th:insert="~{/fragments/overview-academic-researches :: overview-part2}">
