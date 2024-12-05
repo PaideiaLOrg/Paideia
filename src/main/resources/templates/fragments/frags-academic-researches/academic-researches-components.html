@@ -1,13 +1,13 @@
-<div th:fragment="academic-researches-components" id="main-content" class="flex-1 ml-16 transition-all duration-300">
+<div th:fragment="academic-researches-components" id="main-content" class="flex-1 transition-all duration-300">
 
 
     <div th:insert="~{/fragments/navbar-user :: navbar-user}"></div>
 
 
-    <div class="flex flex-wrap w-full justify-center mt-8">
+    <div class="flex flex-wrap justify-center mt-8">
 
         <div id="openModalBtn"
-            class="border-2 border-blue-500 w-full rounded  bg-blue-500 h-12 mr-16 ml-16 flex mb-8 border-round items-center justify-center cursor-pointer hover:bg-blue-600 transition duration-300">
+            class="border-2 border-blue-500 rounded  bg-blue-500 h-12 mr-16 ml-16 flex mb-8 border-round items-center justify-center cursor-pointer hover:bg-blue-600 transition duration-300">
             <h1 class="text-white">Editas Pesquisa</h1>
         </div>
         <div id="openModalBtnDeleteResearch"
@@ -26,8 +26,7 @@
 
         </div>
 
-        <div class="w-full mr-16 ml-16 flex mb-2 justify-between">
-
+        <div class="w-full mr-16 ml-16 flex mt-2 mb-2">
 
             <div class="overview " th:insert="~{/fragments/overview-academic-researches :: overview-part1}">
 

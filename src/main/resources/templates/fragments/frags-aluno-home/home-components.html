@@ -27,6 +27,18 @@
             </div>
 
         </div>
+        <div th:if="${courseList.size() == 0}"
+            class=" w-full mt-0 text-center flex flex-col items-center justify-center">
+            <div>
+                <h1 class="text-3xl text-black ">Bem vindo(a)</h1>
+            </div>
+            <img th:src="@{/images/reference.png}" alt="" style="width: 25%; margin-bottom: 1rem;">
+            <h1 class="text-center text-3xl mb-4 ">
+                Você não possui nenhum Curso cadastrado. <br> Selecione a aba Cursos, à esquerda, para cadastrar um novo
+                Curso.
+            </h1>
+        </div>
+
     </div>
 </div>
 </div>

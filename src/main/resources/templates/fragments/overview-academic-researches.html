@@ -1,80 +1,46 @@
-<div class="flex-col w-full pt-2" th:fragment="overview-part1">
+<div class="flex-col w-full" th:fragment="overview-part1">
 
 
-    <div class="w-full pt-1 pb-1  m-2 ml-0 flex flex-col justify-center rounded-md">
-        <h1 class=" text-center  text-2xl text-black" th:text="${academicResearch.researchTitle}">Titulo da Pesquisa
+    <div class="border-2 border-blue-500 w-full pt-1 pb-1  m-2 ml-0 flex flex-col justify-center rounded-md">
+        <h1 class=" text-center  text-2xl text-black" th:text="${academicResearch.researchTitle}">Nome Disciplina</h1>
+
+    </div>
+    <div class="border-2 border-blue-500  m-2  ml-0 w-full  flex flex-col justify-center pt-2 pb-2 pl-4 pr-4">
+        <h1 class=" text-center text-md text-black" th:text="${academicResearch.researchAbstract}">Ementa da Disciplina
+            Ementa da
+            Disciplina Ementa da Disciplina
+            Ementa da Disciplina Ementa da DisciplinaEmenta da DisciplinaEmenta da DisciplinaEmenta da DisciplinaEmenta
+            da DisciplinaEmenta da DisciplinaEmenta da Disciplina
         </h1>
 
     </div>
-    <div class=" m-2  ml-0 w-full  flex flex-col justify-center pt-2 pb-2 pl-4 pr-4">
-        <h1 class=" text-left text-md text-black" th:text="${academicResearch.researchAbstract}">Resumo da Pesquisa
-            Resumo da Pesquisa Resumo da
-            Hoje eu acordei com vontade de comer uma cebola verde musgo. Resumo da Pesquisa Resumo da Pesquisa Resumo da
-            Hoje eu acordei com vontade de comer uma cebola verde musgo.Resumo da Pesquisa Resumo da Pesquisa Resumo da
-            Hoje eu acordei com vontade de comer uma cebola verde musgo.
 
-        </h1>
-
+    <div class="border-2 border-blue-500  w-full mb-0 m-2 ml-0 items-center justify-center flex">
+        Status
     </div>
 
-    <div class=" w-full mb-0 m-2 ml-0 items-center justify-center flex ">
-        Palavra Chave
-    </div>
 
-    <div class=" ml-0 w-full  items-center justify-center flex flex-wrap p-2">
-        <div class="bg-gray-900  rounded-md p-2 text-white ml-2 mr-2">
-
-            <h1>
-                Cachorro
-            </h1>
-        </div>
-
-        <div class="bg-gray-900  rounded-md p-2 text-white ml-2 mr-2">
-
-            <h1>
-                Tag
-            </h1>
-        </div>
-
-        <div class="bg-gray-900  rounded-md p-2 text-white ml-2 mr-2">
-
-            <h1>
-                Tag
-            </h1>
-        </div>
-
-        <div class="bg-gray-900  rounded-md p-2 text-white ml-2 mr-2">
-
-            <h1>
-                Tag
-            </h1>
-        </div>
-
-
-
-        <div th:style="'background-color: #E4D9FF; background-size: cover; background-position: center;'"
-            class=" rounded-md p-2 text-white ml-2 mr-2">
-            <h1 class="text-lg font-bold text-white text-outline text-center ">
-                <img th:src="@{/images/plus.png}" width="20px" alt="">
-            </h1>
-        </div>
-
-    </div>
 
 </div>
 
-<div class=" w-48 flex h-full flex-col pt-3 gap-y-1 ml-auto border-l-2" th:fragment="overview-part2">
-    <div class=" ml-4 m-2 mr-0 flex">
+
+
+
+
+
+
+<div class=" w-48 flex h-full flex-col justify-between ml-auto" th:fragment="overview-part2">
+    <div class="border-blue-500 border-2 ml-4 m-2 mr-0 flex-grow justify-center items-center flex">
         <h1 class="text-center" th:text="${academicResearch.supervisor}">
-            Orientador
+            Professor
         </h1>
     </div>
-    <div class=" ml-4 m-2 mr-0 flex">
+    <div class="border-blue-500 border-2 ml-4 m-2 mr-0 flex-grow justify-center items-center flex">
         <h1 class="text-center" th:text="${academicResearch.researchSubject}">
-            Assuto
+            Disciplina Obrigatoria
         </h1>
     </div>
-    <div class=" ml-4 m-2 mr-0 mb-0 flex">
+    <div class="border-blue-500 border-2 ml-4 m-2 mr-0 mb-0 flex-grow justify-center items-center flex">
         <h1 class="text-center" th:text="${academicResearch.getCourse().getCourseName()}">
             Nome Curso
         </h1>

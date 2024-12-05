@@ -14,13 +14,13 @@
 
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 overflow-x-hidden">
     <!-- Adicione a classe bg-gray-100 aqui para o fundo do corpo -->
 
     <div class="flex">
         <div class="bg-custom-blue" th:insert="~{/fragments/sidebar :: sidebar}"></div>
 
-        <div
+        <div style="margin-left: 30px"
             th:insert="~{/fragments/frags-academic-researches/academic-researches-components :: academic-researches-components}">
 
         </div>
