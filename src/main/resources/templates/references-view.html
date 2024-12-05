@@ -11,19 +11,16 @@
     <link rel="stylesheet" th:href="@{/css/style-user-navbar-end-sidebar.css}">
 </head>
 
-<body class="bg-gray-100" style="width: 100%;">
+<body class="bg-gray-100" style="width: 100%; overflow-x: hidden;">
 
     <div class="flex w-full" style="width: 100%;" id="tela">
         <div class="bg-custom-blue" th:insert="~{/fragments/sidebar :: sidebar}"></div>
 
-        <div th:insert="~{/fragments/reference :: reference}">
-
+        <div class="flex-1 ml-10"> <!-- Adiciona margem à esquerda para afastar da sidebar -->
+            <div th:insert="~{/fragments/reference :: reference}"></div>
+        
+            <div class="" id="openModalBtnCourse"></div>
         </div>
-
-        <!-- <div class="w-full h-16 bg-blue-500 m-4 ml-32" id="openModalBtnCourse">
-            Voce precisa primeiro Cadastrar um curso, para começar <div class="text-blue">click
-                aqui</div>
-        </div> -->
 
     </div>
 
